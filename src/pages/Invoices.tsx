@@ -5,10 +5,11 @@ import { InvoiceContext } from "../App";
 
 export default function Invoices() {
   const { invoices } = useContext(InvoiceContext);
-
+  
+  
   return (
     <div className="flex flex-col justify-center items-center p-[20px] mt-[32px] bg-white">
-      <Filter />
+      <Filter invoices={invoices}/>
       {invoices.map((item) => (
         <IncomeInvoice key={item.id} item={item} />
       ))}

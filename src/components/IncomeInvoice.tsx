@@ -22,9 +22,48 @@ export default function IncomeInvoice({ item }) {
           <span className="text-skyTwo font-[500]"> {formattedDate}</span>
           <h3 className="font-bold text-black mt-[9px]">{`£ ${item.total}`}</h3>
         </div>
-        <div className="flex justify-center items-center gap-[6px]  pt-[17px] pl-[30px] pr-[30px] pb-[15px] max-w-[104px] max-h-[40px] rounded-[6px] bg-green  bg-opacity-5">
-          <div className="bg-green w-[8px] h-[8px] rounded-[50%] "></div>
-          <span className="text-green font-bold ">Paid</span>
+
+        <div
+          className={`${
+            item.status === "paid"
+              ? "bg-green  "
+              : item.status === "pending"
+              ? "bg-yellow  "
+              : item.status === "draft"
+              ? "bg-Draft "
+              : ""
+          } bg-opacity-5 flex justify-center items-center gap-[6px] pt-[17px] pl-[30px] pr-[30px] pb-[15px] max-w-[104px] max-h-[40px] rounded-[6px]`}
+        >
+          <div
+            className={`${
+              item.status === "paid"
+                ? "bg-green  "
+                : item.status === "pending"
+                ? "bg-yellow p-[4px] "
+                : item.status === "draft"
+                ? "bg-Draft p-[4px] "
+                : ""
+            }w-[8px] h-[8px] rounded-[50%]`}
+          ></div>
+          <span
+            className={`${
+              item.status === "paid"
+                ? "text-green  "
+                : item.status === "pending"
+                ? "text-yellow  "
+                : item.status === "draft"
+                ? "text-Draft "
+                : ""
+            }font-bold`}
+          >
+            {item.status === "paid"
+              ? "Paid  "
+              : item.status === "pending"
+              ? "Pending "
+              : item.status === "draft"
+              ? "Draft "
+              : ""}
+          </span>
         </div>
       </div>
     </div>
