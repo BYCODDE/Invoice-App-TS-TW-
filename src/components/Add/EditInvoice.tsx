@@ -1,6 +1,6 @@
 import  { useContext } from 'react'
 import { useForm, SubmitHandler } from "react-hook-form"
-import { CategoryContext } from '../../App'
+import { InvoiceContext } from '../../App'
 import { format } from 'date-fns';
 import InputComponent from './InputComponent';
 import InputsComponent from './InputsComponent';
@@ -19,7 +19,7 @@ type Inputs = {
     InvoiceDate:string
   }
 export default function EditInvoice() {
-const {invoices}=useContext(CategoryContext)
+const {invoices}=useContext(InvoiceContext)
 const find = invoices.find(item => item.id === "XM9141");
 
 console.log(find)
@@ -32,7 +32,7 @@ console.log(find)
       const formattedDate = format(new Date(`${find?.createdAt}`), 'dd MMM yyyy');
      
   return (
-    <div className='p-3'>
+    <div >
 
         <form className='flex flex-col items-center justify-center box-border p-3' onSubmit={handleSubmit(onSubmit)}>
         <h3 className="text-section-title-color font-league-spartan text-sm font-bold leading-4 tracking-tight w-full text-left  py-2">Bill From</h3>
