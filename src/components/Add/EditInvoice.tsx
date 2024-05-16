@@ -91,11 +91,18 @@ console.log(find)
 
 
 
+<div className='flex bg-black w-full justify-end' >
+<input
+ className="w-[96px] h-[48px] flex-shrink-0 rounded-full bg-gray-100 text-gray-700 text-center font-league-spartan text-15 font-bold leading-15 tracking-tighter"
+  value="Cancel"
+/>
     <input
   type="submit"
-  className="w-36 h-12 flex-shrink-0 bg-blue-600 text-white font-league-spartan text-sm font-bold leading-4 tracking-tight rounded-3xl"
+  className="w-[138px] h-[48px] flex-shrink-0 rounded-full bg-purple-600 text-white font-league-spartan text-15 font-bold leading-15 tracking-tighter"
   value="Save Changes"
 />
+</div>
+
         </form>
         </div>
       )
