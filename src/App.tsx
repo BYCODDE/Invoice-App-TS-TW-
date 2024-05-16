@@ -6,53 +6,48 @@ import InvoiceDetails from "./pages/InvoiceDetails";
 import { createContext, useState } from "react";
 import data from "../data.json";
 
-interface IInvoices{
+interface IInvoices {
   id: string;
-    createdAt: string;
-    paymentDue: string;
-    description: string;
-    paymentTerms: number;
-    clientName: string;
-    clientEmail: string;
-    status: string;
-    senderAddress: {
-        street: string;
-        city: string;
-        postCode: string;
-        country: string;
-    };
-    clientAddress: {
-      street:string,
-      city: string,
-      postCode: string,
-      country: string
-    };
-    items: {
-      name: string,
-      quantity: number,
-      price: number,
-      total: number
-        
-    }[];
+  createdAt: string;
+  paymentDue: string;
+  description: string;
+  paymentTerms: number;
+  clientName: string;
+  clientEmail: string;
+  status: string;
+  senderAddress: {
+    street: string;
+    city: string;
+    postCode: string;
+    country: string;
+  };
+  clientAddress: {
+    street: string;
+    city: string;
+    postCode: string;
+    country: string;
+  };
+  items: {
+    name: string;
+    quantity: number;
+    price: number;
     total: number;
-}[]
+  }[];
+  total: number;
+}
+[];
 
-export const CategoryContext = createContext<{
-  isDarkMode:boolean;
-  setIsDarkMode:React.Dispatch<React.SetStateAction<boolean>>;
-  invoices:IInvoices[];
-  setInvoices:React.Dispatch<React.SetStateAction<IInvoices[]>>;
-
+export const InvoiceContext = createContext<{
+  isDarkMode: boolean;
+  setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+  invoices: IInvoices[];
+  setInvoices: React.Dispatch<React.SetStateAction<IInvoices[]>>;
 }>({
   isDarkMode: false,
   setIsDarkMode: () => {},
   invoices: [],
   setInvoices: () => [],
-
- 
 });
-
- 
 
 const router = createBrowserRouter([
   {
@@ -75,9 +70,11 @@ function App() {
   const [invoices, setInvoices] = useState<IInvoices[]>(data);
 
   return (
-    <CategoryContext.Provider value={{ isDarkMode, setIsDarkMode, invoices, setInvoices }}>
+    <InvoiceContext.Provider
+      value={{ isDarkMode, setIsDarkMode, invoices, setInvoices }}
+    >
       <RouterProvider router={router} />
-    </CategoryContext.Provider>
+    </InvoiceContext.Provider>
   );
 }
 
