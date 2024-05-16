@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import InputComponent from "./InputComponent";
 import InputsComponent from "./InputsComponent";
 import ItemContainer from "./ItemContainer";
+import AddNewItemButton from "./AddNewItemButton";
 
 type Inputs = {
   SenderStreetAddress: string;
@@ -26,6 +27,9 @@ type Inputs = {
   itemPrice: number;
   quantity: number;
   price: number;
+  itemName2: number;
+  quantity2: number;
+  price2: number;
 };
 export default function EditInvoice() {
   const { invoices } = useContext(InvoiceContext);
@@ -158,13 +162,32 @@ export default function EditInvoice() {
           id2="price2"
         />
 
-        <div className="flex py-[20px]  w-full justify-end">
-          <button className="w-[96px] h-[48px] flex-shrink-0 rounded-full bg-gray-100 text-gray-700 text-center font-league-spartan text-15 font-bold leading-15 tracking-tighter">
+        <InputComponent
+          inputTitle="Item Name"
+          id="itemName2"
+          defaultValue={find?.items[1].name || ""}
+          register={register("itemName2")}
+        />
+
+        <ItemContainer
+          inputTitle1="Qty."
+          inputTitle2="price"
+          id1="Qty1"
+          defaultValue1={find?.items[1].quantity || 0}
+          register1={register("quantity2", { required: true })}
+          register2={register("price2", { required: true })}
+          defaultValue2={find?.items[1].price || 0}
+          id2="price2"
+        />
+        <AddNewItemButton />
+
+        <div className="flex py-[20px] gap-[10px]  w-full justify-end  ">
+          <button className="w-[96px] h-[48px] cursor-pointer flex-shrink-0 rounded-full bg-gray-100 text-gray-700 text-center font-league-spartan text-15 font-bold leading-15 tracking-tighter">
             Cancel
           </button>
           <input
             type="submit"
-            className="w-[138px] h-[48px] flex-shrink-0 rounded-full bg-purple-600 text-white font-league-spartan text-15 font-bold leading-15 tracking-tighter"
+            className="w-[138px] h-[48px] cursor-pointer flex-shrink-0 rounded-full bg-purple-600 text-white font-league-spartan text-15 font-bold leading-15 tracking-tighter"
             value="Save Changes"
           />
         </div>
