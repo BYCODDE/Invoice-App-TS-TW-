@@ -1,4 +1,5 @@
 import InvoiceStatusInfo from "../components/InvoiceStatusInfo";
+import SingleInvoiceInformation from "../components/SingleInvoiceInformation";
 import arrowLeft from "/assets/icon-arrow-left.svg";
 
 export default function InvoiceDetails() {
@@ -12,6 +13,8 @@ export default function InvoiceDetails() {
       </div>
 
       <InvoiceStatusInfo />
+
+      <SingleInvoiceInformation />
     </div>
   );
 }
