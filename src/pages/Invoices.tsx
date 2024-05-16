@@ -1,3 +1,8 @@
+import EditInvoice from "../components/Add/EditInvoice";
+
 export default function Invoices() {
-  return <div>Invoices</div>;
+  return <div>
+
+    <EditInvoice/>
+  </div>;
 }
