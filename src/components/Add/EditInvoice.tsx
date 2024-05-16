@@ -20,8 +20,9 @@ console.log(find)
       const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
    
   return (
+    <div className='p-3'>
 
-
+<h3 className="text-section-title-color font-league-spartan text-sm font-bold leading-4 tracking-tight">Bill From</h3>
         <form className='flex flex-col items-center justify-center box-border p-3' onSubmit={handleSubmit(onSubmit)}>
 
 
@@ -56,6 +57,7 @@ console.log(find)
 />
 
         </form>
+        </div>
       )
     }
   
