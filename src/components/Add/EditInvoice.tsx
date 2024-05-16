@@ -34,7 +34,7 @@ console.log(find)
   return (
     <div >
 
-        <form className='flex flex-col items-center justify-center box-border p-3' onSubmit={handleSubmit(onSubmit)}>
+        <form className='flex flex-col items-center justify-center box-border p-3 dark:bg-[#141625]' onSubmit={handleSubmit(onSubmit)}>
         <h3 className="text-section-title-color font-league-spartan text-sm font-bold leading-4 tracking-tight w-full text-left  py-2">Bill From</h3>
 
         <InputComponent 
@@ -88,6 +88,7 @@ console.log(find)
         id="InvoiceDate"
                 defaultValue={formattedDate || ""} 
                 register={register("InvoiceDate")}  />
+
 
 
     <input
