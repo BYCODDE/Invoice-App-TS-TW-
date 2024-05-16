@@ -35,7 +35,7 @@ console.log(find)
     <div >
 
         <form className='flex flex-col items-center justify-center box-border p-3 dark:bg-[#141625]' onSubmit={handleSubmit(onSubmit)}>
-        <h3 className="text-section-title-color font-league-spartan text-sm font-bold leading-4 tracking-tight w-full text-left  py-2">Bill From</h3>
+        <h3 className="text-section-title-color font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full text-left  py-2">Bill From</h3>
 
         <InputComponent 
         inputTitle="Street Address"
@@ -53,7 +53,7 @@ console.log(find)
 
 
 
-    <h3 className="text-section-title-color font-league-spartan text-sm font-bold leading-4 tracking-tight w-full text-left py-2 ">Bill To</h3>
+    <h3 className="text-section-title-color font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full text-left py-2 ">Bill To</h3>
 
 
             <InputComponent 
@@ -86,16 +86,17 @@ console.log(find)
         <InputComponent 
         inputTitle="Street Address"
         id="InvoiceDate"
+      
                 defaultValue={formattedDate || ""} 
                 register={register("InvoiceDate")}  />
 
 
 
-<div className='flex bg-black w-full justify-end' >
-<input
- className="w-[96px] h-[48px] flex-shrink-0 rounded-full bg-gray-100 text-gray-700 text-center font-league-spartan text-15 font-bold leading-15 tracking-tighter"
-  value="Cancel"
-/>
+<div className='flex py-[20px]  w-full justify-end' >
+<button
+ className="w-[96px] h-[48px] flex-shrink-0 rounded-full bg-gray-100 text-gray-700 text-center font-league-spartan text-15 font-bold leading-15 tracking-tighter">
+  
+Cancel</button>
     <input
   type="submit"
   className="w-[138px] h-[48px] flex-shrink-0 rounded-full bg-purple-600 text-white font-league-spartan text-15 font-bold leading-15 tracking-tighter"
