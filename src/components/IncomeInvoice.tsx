@@ -2,6 +2,6 @@
 
 export default function IncomeInvoice() {
   return (
-    <div>IncomeInvoice</div>
+    <div className="mt-[32px]">IncomeInvoice</div>
   )
 }
