@@ -1,0 +1,31 @@
+import React from 'react'
+import { UseFormRegisterReturn } from 'react-hook-form';
+interface CustomInputProps {
+    id1: string;
+    defaultValue1: string;
+    register1:UseFormRegisterReturn; 
+    id2: string;
+    defaultValue2: string;
+    register2:UseFormRegisterReturn; 
+    inputTitle1:string
+    inputTitle2:string
+  }
+const InputsComponent: React.FC<CustomInputProps> =({id1 , defaultValue1 , register1 , id2 , defaultValue2 , register2,inputTitle1,inputTitle2})=> {
+  return (
+    <div className='flex gap-1 p-3 box-border' >
+    <div className="flex flex-col items-start justify-center gap-3 w-152 ">
+<label className="text-custom-color font-league-spartan text-xs font-medium leading-4 tracking-tight px-3" htmlFor={id1}>{inputTitle1}</label>
+      <input className=" w-38 h-12 flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-sm font-bold leading-4 tracking-tight pl-3" id={id1}  defaultValue={defaultValue1 || ""} {...register1} />
+ </div>
+    
+
+
+ <div className="flex flex-col items-start justify-center gap-3 w-152 box-border">
+ <label className="text-custom-color font-league-spartan text-xs font-medium leading-4 tracking-tight px-3" htmlFor={id2}>{inputTitle2}</label>
+      <input className=" w-38 h-12 flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-sm font-bold leading-4 tracking-tight pl-3" id='SenderZipCode'  defaultValue={defaultValue2 || ""}{...register2} />
+  </div>    
+</div> 
+  )
+}
+
+export default InputsComponent

@@ -2,6 +2,8 @@ import  { useContext } from 'react'
 import { useForm, SubmitHandler } from "react-hook-form"
 import { CategoryContext } from '../../App'
 import { format } from 'date-fns';
+import InputComponent from './InputComponent';
+import InputsComponent from './InputsComponent';
 type Inputs = {
     SenderStreetAddress: string
     SenderCity: string
@@ -35,84 +37,59 @@ console.log(find)
         <form className='flex flex-col items-center justify-center box-border p-3' onSubmit={handleSubmit(onSubmit)}>
         <h3 className="text-section-title-color font-league-spartan text-sm font-bold leading-4 tracking-tight w-full text-left  py-2">Bill From</h3>
 
+<InputComponent 
+ inputTitle="Street Address"
+id="SenderStreetAddress"
+        defaultValue={find?.senderAddress?.street || ""} 
+        register={register("SenderStreetAddress")}  />
 
-        <div className="flex flex-col items-start justify-center gap-3 w-327 box-border"> 
-   <label className="text-custom-gray font-league-spartan text-xs font-medium leading-4 tracking-tight pl-3" htmlFor="SenderStreetAddress">StreetAddress</label>
-          <input 	
- className= "w-80 h-12 flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-sm font-bold leading-4 tracking-tight pl-3" id='SenderStreetAddress' defaultValue={find?.
-    senderAddress?.street} {...register("SenderStreetAddress")} />
-    
-    </div>  
+<InputsComponent  inputTitle1="city"  inputTitle2="Post Code" id1="SenderCity" defaultValue1={find?.senderAddress.postCode||""} register1={register("SenderCity", { required: true })}  register2={register("SenderZipCode", { required: true })}  defaultValue2={find?.senderAddress.postCode||""} id2="SenderZipCode"/>
 
-
-
-    <div className='flex gap-1 p-3 box-border' >
-        <div className="flex flex-col items-start justify-center gap-3 w-152 ">
-    <label className="text-custom-color font-league-spartan text-xs font-medium leading-4 tracking-tight px-3" htmlFor="SenderCity">City</label>
-          <input className=" w-38 h-12 flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-sm font-bold leading-4 tracking-tight pl-3" id='SenderCity' defaultValue={find?.senderAddress.city} {...register("SenderCity", { required: true })} />
-     </div>
-        
+    <InputComponent 
+    inputTitle="Country"
+    id="SenderCountry"
+        defaultValue={find?.senderAddress?.country || ""} 
+        register={register("SenderCountry")}  />
 
 
-     <div className="flex flex-col items-start justify-center gap-3 w-152 box-border">
-     <label className="text-custom-color font-league-spartan text-xs font-medium leading-4 tracking-tight px-3" htmlFor="SenderZipCode">Zip Code</label>
-          <input className=" w-38 h-12 flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-sm font-bold leading-4 tracking-tight pl-3" id='SenderZipCode' defaultValue={find?.senderAddress.postCode}{...register("SenderZipCode", { required: true })} />
-      </div>    
- </div> 
 
-<div className="flex flex-col items-start justify-center gap-3 w-327 box-border"> 
-   <label className="text-custom-gray font-league-spartan text-xs font-medium leading-4 tracking-tight pl-3" htmlFor="SenderCountry">Country</label>
-          <input 	
- className= "w-80 h-12 flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-sm font-bold leading-4 tracking-tight pl-3" id='SenderCountry' defaultValue={find?.
-    senderAddress?.country} {...register("SenderCountry")} />
-    </div>  
     <h3 className="text-section-title-color font-league-spartan text-sm font-bold leading-4 tracking-tight w-full text-left py-2 ">Bill To</h3>
 
-    <div className="flex flex-col items-start justify-center gap-3 w-327 box-border py-3"> 
-   <label className="text-custom-gray font-league-spartan text-xs font-medium leading-4 tracking-tight pl-3" htmlFor="ClientName">Client’s Name</label>
-          <input 	
- className= "w-80 h-12 flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-sm font-bold leading-4 tracking-tight pl-3" id='ClientName' defaultValue={find?.clientName} {...register("clientName")} />
-    </div> 
 
-    <div className="flex flex-col items-start justify-center gap-3 w-327 box-border py-3"> 
-   <label className="text-custom-gray font-league-spartan text-xs font-medium leading-4 tracking-tight pl-3" htmlFor="ClientEmail">Client’s Email</label>
-          <input 	
- className= "w-80 h-12 flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-sm font-bold leading-4 tracking-tight pl-3" id='ClientEmail' defaultValue={find?.clientEmail} {...register("clientEmail")} />
-    </div> 
+    <InputComponent 
+ inputTitle="Client’s Name"
+id="ClientName"
+        defaultValue={find?.clientName || ""} 
+        register={register("clientName")}  />
 
-    <div className="flex flex-col items-start justify-center gap-3 w-327 box-border py-3"> 
-   <label className="text-custom-gray font-league-spartan text-xs font-medium leading-4 tracking-tight pl-3" htmlFor="ClientStreetAddress">Street Address</label>
-          <input 	
- className= "w-80 h-12 flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-sm font-bold leading-4 tracking-tight pl-3" id='ClientStreetAddress' defaultValue={find?.clientAddress.street} {...register("ClientStreetAddress")} />
-    </div> 
+    <InputComponent 
+ inputTitle="Client’s Email"
+id="ClientEmail"
+        defaultValue={find?.clientEmail || ""} 
+        register={register("clientEmail")}  />
+
+    <InputComponent 
+ inputTitle="Street Address"
+id="ClientStreetAddress"
+        defaultValue={find?.clientAddress.street || ""} 
+        register={register("ClientStreetAddress")}  />
+
+ <InputsComponent  inputTitle1="city"  inputTitle2="Post Code" id1="clientAddressCity" defaultValue1={find?.clientAddress.city||""} register1={register("clientAddressCity", { required: true })}  register2={register("clientZipCode", { required: true })}  defaultValue2={find?.clientAddress.postCode||""} id2="clientZipCode"/>
+
+    <InputComponent 
+ inputTitle="Country"
+id="ClientCountry"
+        defaultValue={find?.clientAddress.country || ""} 
+        register={register("ClientCountryAddress")}  />
 
 
 
-    <div className='flex gap-1 p-3 box-border' >
-        <div className="flex flex-col items-start justify-center gap-3 w-152 ">
-    <label className="text-custom-color font-league-spartan text-xs font-medium leading-4 tracking-tight px-3" htmlFor="clientAddressCity">City</label>
-          <input className=" w-38 h-12 flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-sm font-bold leading-4 tracking-tight pl-3" id='clientAddressCity' defaultValue={find?.clientAddress.city} {...register("clientAddressCity", { required: true })} />
-     </div>
-        
 
-
-     <div className="flex flex-col items-start justify-center gap-3 w-152 box-border">
-     <label className="text-custom-color font-league-spartan text-xs font-medium leading-4 tracking-tight px-3" htmlFor="clientZipCode">Post Code</label>
-          <input className=" w-38 h-12 flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-sm font-bold leading-4 tracking-tight pl-3" id='clientZipCode' defaultValue={find?.clientAddress.postCode}{...register("clientZipCode", { required: true })} />
-      </div>    
- </div> 
-
- <div className="flex flex-col items-start justify-center gap-3 w-327 box-border py-3"> 
-   <label className="text-custom-gray font-league-spartan text-xs font-medium leading-4 tracking-tight pl-3" htmlFor="ClientCountry">Country</label>
-          <input 	
- className= "w-80 h-12 flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-sm font-bold leading-4 tracking-tight pl-3" id='ClientCountry' defaultValue={find?.clientAddress.country} {...register("ClientCountryAddress")} />
-    </div> 
-
-    <div className="flex flex-col items-start justify-center gap-3 w-327 box-border py-3"> 
-   <label className="text-custom-gray font-league-spartan text-xs font-medium leading-4 tracking-tight pl-3" htmlFor="InvoiceDate">Street Address</label>
-          <input 	
- className= "w-80 h-12 flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-sm font-bold leading-4 tracking-tight pl-3" id='InvoiceDate' defaultValue={formattedDate} {...register("InvoiceDate")} />
-    </div> 
+    <InputComponent 
+ inputTitle="Street Address"
+id="InvoiceDate"
+        defaultValue={formattedDate || ""} 
+        register={register("InvoiceDate")}  />
 
 
     <input
