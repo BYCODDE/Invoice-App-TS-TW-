@@ -36,10 +36,15 @@ export default function EditInvoice() {
   const find = invoices.find((item) => item.id === "XM9141");
 
   console.log(find);
-  const { register, handleSubmit } = useForm<Inputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   const formattedDate = format(new Date(`${find?.createdAt}`), "dd MMM yyyy");
   console.log(formattedDate);
+
   return (
     <div>
       <form
@@ -54,9 +59,13 @@ export default function EditInvoice() {
           inputTitle="Street Address"
           id="SenderStreetAddress"
           defaultValue={find?.senderAddress?.street || ""}
-          register={register("SenderStreetAddress")}
+          register={register("SenderStreetAddress", { required: true })}
         />
-
+        {errors.SenderStreetAddress ? (
+          <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
+            Street Address is required
+          </p>
+        ) : null}
         <InputsComponent
           inputTitle1="city"
           inputTitle2="Post Code"
@@ -67,14 +76,29 @@ export default function EditInvoice() {
           defaultValue2={find?.senderAddress.postCode || ""}
           id2="SenderZipCode"
         />
-
+        <div className="flex justify-between w-full ">
+          {errors.SenderCity ? (
+            <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
+              Please Fill City graph
+            </p>
+          ) : null}
+          {errors.SenderZipCode ? (
+            <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
+              Please Fill Zip Code
+            </p>
+          ) : null}
+        </div>
         <InputComponent
           inputTitle="Country"
           id="SenderCountry"
           defaultValue={find?.senderAddress?.country || ""}
-          register={register("SenderCountry", { required })}
+          register={register("SenderCountry", { required: true })}
         />
-
+        {errors.SenderCountry ? (
+          <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
+            Please fill Country graph
+          </p>
+        ) : null}
         <h3 className="text-section-title-color font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full text-left py-2 ">
           Bill To
         </h3>
@@ -83,23 +107,38 @@ export default function EditInvoice() {
           inputTitle="Client’s Name"
           id="ClientName"
           defaultValue={find?.clientName || ""}
-          register={register("clientName")}
+          register={register("clientName", { required: true })}
         />
-
+        {errors.clientName ? (
+          <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
+            Name is required
+          </p>
+        ) : null}
+        <h3 className="text-section-title-color font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full text-left py-2 ">
+          Bill To
+        </h3>
         <InputComponent
           inputTitle="Client’s Email"
           id="ClientEmail"
           defaultValue={find?.clientEmail || ""}
-          register={register("clientEmail")}
+          register={register("clientEmail", { required: true })}
         />
-
+        {errors.clientEmail ? (
+          <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
+            Email is required
+          </p>
+        ) : null}
         <InputComponent
           inputTitle="Street Address"
           id="ClientStreetAddress"
           defaultValue={find?.clientAddress.street || ""}
-          register={register("ClientStreetAddress")}
+          register={register("ClientStreetAddress", { required: true })}
         />
-
+        {errors.ClientStreetAddress ? (
+          <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
+            Street address is required
+          </p>
+        ) : null}
         <InputsComponent
           inputTitle1="city"
           inputTitle2="Post Code"
@@ -110,35 +149,50 @@ export default function EditInvoice() {
           defaultValue2={find?.clientAddress.postCode || ""}
           id2="clientZipCode"
         />
-
+        <div className="flex justify-between w-full ">
+          {errors.clientAddressCity ? (
+            <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
+              Please Fill City graph
+            </p>
+          ) : null}
+          {errors.clientZipCode ? (
+            <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
+              Please Fill Zip Code
+            </p>
+          ) : null}
+        </div>
         <InputComponent
           inputTitle="Country"
           id="ClientCountry"
           defaultValue={find?.clientAddress.country || ""}
-          register={register("ClientCountryAddress")}
+          register={register("ClientCountryAddress", { required: true })}
         />
-
+        {errors.ClientCountryAddress ? (
+          <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
+            Please fill Country graph
+          </p>
+        ) : null}
         <InputComponent
           inputTitle="Invoice Date"
           id="InvoiceDate"
           type="date"
           color="0.5"
           defaultValue={formattedDate || ""}
-          register={register("InvoiceDate")}
+          register={register("InvoiceDate", { required: true })}
         />
 
         <InputComponent
           inputTitle="Payment Terms"
           id="PaymentTerms"
           defaultValue={`Net ${find?.paymentTerms} Days` || ""}
-          register={register("paymentTerms")}
+          register={register("paymentTerms", { required: true })}
         />
 
         <InputComponent
           inputTitle="Project Description"
           id="ProjectDescription"
           defaultValue={find?.description || ""}
-          register={register("ProjectDescription")}
+          register={register("ProjectDescription", { required: true })}
         />
 
         <h3 className="text-[#777F98] pt-[50px] pb-[20px] font-league-spartan text-[18px] tracking-wide font-bold leading-32px  w-full text-left py-2 ">
@@ -148,7 +202,7 @@ export default function EditInvoice() {
           inputTitle="Item Name"
           id="itemName"
           defaultValue={find?.items[0].name || ""}
-          register={register("itemName")}
+          register={register("itemName", { required: true })}
         />
 
         <ItemContainer
@@ -166,7 +220,7 @@ export default function EditInvoice() {
           inputTitle="Item Name"
           id="itemName2"
           defaultValue={find?.items[1].name || ""}
-          register={register("itemName2")}
+          register={register("itemName2", { required: true })}
         />
 
         <ItemContainer
