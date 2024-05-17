@@ -11,14 +11,14 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
   return (
     <div className="text-black font-bold  text-[15px] flex justify-center items-center gap-[86px]">
       <div className="flex justify-center flex-col">
-        <span className="text-[32px]">Invoices</span>
-        <span className="text-grey text-[13px]">
+        <span className="dark:text-whiteTwo     text-[32px]">Invoices</span>
+        <span className="text-grey text-[13px] dark:text-[#DFE3FA]">
           {invoices.length} invoices
         </span>
       </div>
       <div className="flex">
         <div className="cursor-pointer  flex justify-center items-center">
-          <span>Filter</span>
+          <span className="dark:text-whiteTwo">Filter</span>
           <img className="m-[16px]" src={arrowDown} alt="arrowDown" />
         </div>
         <div className="cursor-pointer   flex justify-center items-center w-[90px]  h-[44px] rounded-[24px] bg-blue gap-[9px]">

@@ -20,7 +20,7 @@ const Invoices: React.FC<InvoiceProps> = () => {
   const { invoices } = useContext(InvoiceContext);
 
   return (
-    <div className="flex flex-col justify-center items-center p-[20px] mt-[32px] bg-white">
+    <div className=" dark:bg-[#141625]       flex flex-col justify-center items-center p-[20px] mt-[32px] bg-white">
       <Filter invoices={invoices} />
       {invoices.map((item) => (
         <IncomeInvoice key={item.id} item={item} />
