@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { InvoiceContext } from "../../App";
 
 function EditInvoicesButtons() {
+  const { setShowEditInvoice } = useContext(InvoiceContext);
   return (
     <div className="flex py-[20px] gap-[10px]  w-full justify-end  ">
-      <button className="w-[96px] h-[48px] dark:bg-[#1E2139]  dark:text-white cursor-pointer flex-shrink-0 rounded-full bg-gray-100 text-gray-700 text-center font-league-spartan text-[15px] font-bold leading-15 tracking-tighter">
+      <button
+        onClick={() => setShowEditInvoice(false)}
+        className="w-[96px] h-[48px] dark:bg-[#1E2139]  dark:text-white cursor-pointer flex-shrink-0 rounded-full bg-gray-100 text-gray-700 text-center font-league-spartan text-[15px] font-bold leading-15 tracking-tighter"
+      >
         Cancel
       </button>
       <input

@@ -282,7 +282,6 @@ export default function EditInvoice() {
             </div>
           ))}
         </div>
-        {/* ის ორი აითემი უნდა დაიმაპოს მთლიანად კომპონენტით არა  */}
 
         <AddNewItemButton />
 
