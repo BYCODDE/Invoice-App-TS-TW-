@@ -33,7 +33,7 @@ export default function InvoicePaymentInfo() {
 
       <div className="pt-[26px] px-[24px] pb-[22px] bg-[#373B53] dark:bg-[#0C0E16] rounded-b-[8px] flex justify-between items-center">
         <p className="font-medium text-[13px] leading-[18px] tracking-[-1px] text-[#FFFFFF]">
-          Grand Total
+          Amount Due
         </p>
         <h2 className="font-bold text-[24px] leading-[32px] tracking-[-0.5px]  text-[#FFFFFF]">
           £ 556.00
