@@ -39,7 +39,7 @@ export default function EditInvoice() {
         onClick={() => setShowEditInvoice(false)}
         className=" sm:flex-none  md:w-full md:right-0 md:top-0 md:left-0 md:h-[100vh] bg-[#000]  md:fixed  opacity-[0.4984]"
       ></div>
-      <div className="h-[32px] w-full text-[24px] font-bold my-[20px] ">{`Edit # ${find?.id}`}</div>
+      <div className="h-[32px] w-full text-[24px] font-bold my-[20px] dark:text-white ">{`Edit # ${find?.id}`}</div>
       <form
         className="flex md:top-[80px] md:rounded-r-3xl  md:left-0 flex-col md:w-[616px] md:absolute  md:z-20 bg-[white] items-center justify-center box-border p-3 dark:bg-[#141625]"
         onSubmit={handleSubmit(onSubmit)}
@@ -59,6 +59,7 @@ export default function EditInvoice() {
             Street Address is required
           </p>
         ) : null}
+
         <InputsComponent
           inputTitle1="city"
           inputTitle2="Post Code"
@@ -76,6 +77,10 @@ export default function EditInvoice() {
           })}
           defaultValue2={find?.senderAddress?.postCode || ""}
           id2="SenderZipCode"
+          inputTitle="Country"
+          id3="SenderCountry"
+          defaultValue3={find?.senderAddress?.country || ""}
+          register3={register("senderAddress.country", { required: true })}
         />
         <div className="flex justify-between w-full ">
           {errors.senderAddress?.city ? (
@@ -89,12 +94,7 @@ export default function EditInvoice() {
             </p>
           ) : null}
         </div>
-        <InputComponent
-          inputTitle="Country"
-          id="SenderCountry"
-          defaultValue={find?.senderAddress?.country || ""}
-          register={register("senderAddress.country", { required: true })}
-        />
+
         {errors.senderAddress?.country ? (
           <p className="text-[red] font-league-spartan text-[10px] leading-4 tracking-tight w-full text-left  py-2">
             Please fill Country graph
@@ -155,6 +155,10 @@ export default function EditInvoice() {
           })}
           defaultValue2={find?.clientAddress?.postCode || ""}
           id2="clientZipCode"
+          inputTitle="Country"
+          id3="SenderCountry"
+          defaultValue3={find?.senderAddress?.country || ""}
+          register3={register("senderAddress.country", { required: true })}
         />
         <div className="flex justify-between w-full ">
           {errors.clientAddress?.city ? (
@@ -168,12 +172,6 @@ export default function EditInvoice() {
             </p>
           ) : null}
         </div>
-        <InputComponent
-          inputTitle="Country"
-          id="ClientCountry"
-          defaultValue={find?.clientAddress?.country || ""}
-          register={register("clientAddress.country", { required: true })}
-        />
 
         <InputComponent
           inputTitle="Invoice Date"
@@ -259,7 +257,9 @@ export default function EditInvoice() {
                   </label>
                   <input
                     className=" w-[60px] h-[48px] flex  items-center  flex-shrink-0 rounded-md  bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none"
-                    defaultValue={item.total || ""}
+                    defaultValue={
+                      item.quantity > 0 ? item.price * item.quantity : 0
+                    }
                     {...register(`items.${index}.total`, { required: true })}
                   ></input>
                 </div>
