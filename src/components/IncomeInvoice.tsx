@@ -1,8 +1,9 @@
 import dateFormat from "dateformat";
-
-export default function IncomeInvoice({ item }) {
-  console.log(item);
-
+import { IInvoices } from "../pages/Invoices";
+interface IncomeInvoiceProps {
+  item: IInvoices;
+}
+const IncomeInvoice: React.FC<IncomeInvoiceProps> = ({ item }) => {
   const inputDate = item.paymentDue;
   const dateObject = new Date(inputDate);
   const formattedDate = dateFormat(dateObject, "Due d mmm yyyy");
@@ -68,4 +69,5 @@ export default function IncomeInvoice({ item }) {
       </div>
     </div>
   );
-}
+};
+export default IncomeInvoice;
