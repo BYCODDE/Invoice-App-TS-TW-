@@ -26,7 +26,7 @@ export default function InvoicePaymentInfo() {
             </p>
           </div>
           <p className="text-[#0C0E16] dark:text-[#fff] font-bold text-[15px] leading-[20px] tracking-[-0.25px]">
-            2 x £ 200.00
+            £ 400.00
           </p>
         </div>
       </div>
