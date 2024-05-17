@@ -14,13 +14,14 @@ export default {
         skyTwo: "#858BB2",
         green: "#33D69F",
         yellow: "#FF8F00",
-        Draft:"#373B53",
+        Draft: "#373B53",
       },
       fontFamily: {
         "league-spartan": ["League Spartan", "sans-serif"],
       },
       boxShadow: {
         custom: "0px 10px 10px -10px rgba(72, 84, 159, 0.10)",
+        custom2: "0px 10px 20px 0px rgba(72, 84, 159, 0.25)",
       },
     },
   },
