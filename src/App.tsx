@@ -35,7 +35,6 @@ export interface IInvoices {
   }[];
   total: number;
 }
-[];
 
 export const InvoiceContext = createContext<{
   isDarkMode: boolean;

@@ -4,43 +4,11 @@ import { IInvoices, InvoiceContext } from "../../App";
 import { format } from "date-fns";
 import InputComponent from "./InputComponent";
 import InputsComponent from "./InputsComponent";
-import ItemContainer from "./ItemContainer";
+
 import AddNewItemButton from "./AddNewItemButton";
 import EditInvoicesButtons from "./EditInvoicesButtons";
 // import AddInvoicesButtons from "./AddInvoicesButtons";
 
-type Inputs = {
-  id: number;
-  createdAt: string;
-  paymentDue: StreamPipeOptions;
-  description: string;
-  status: string;
-  clientAddress: string;
-  items: string;
-  total: number;
-  SenderStreetAddress: string;
-  SenderCity: string;
-  SenderZipCode: string;
-  senderAddress: string;
-  SenderCountry: string;
-  clientName: string;
-  clientEmail: string;
-  ClientStreetAddress: string;
-  clientAddressCity: string;
-  clientZipCode: string;
-  ClientCountryAddress: string;
-  InvoiceDate: string;
-  paymentTerms: number;
-  ProjectDescription: string;
-  itemName: string;
-  itemQuantity: number | string | undefined;
-  itemPrice: number;
-  quantity: number;
-  price: number;
-  itemName2: number;
-  quantity2: number;
-  price2: number;
-};
 export default function EditInvoice() {
   const { invoices, setInvoices, setShowEditInvoice } =
     useContext(InvoiceContext);
@@ -49,23 +17,27 @@ export default function EditInvoice() {
   const {
     register,
     handleSubmit,
-    reset,
+    // reset,
     formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const editedData = data;
-    setInvoices<IInvoices[]>([...invoices, editedData]);
-    console.log(invoices);
+  } = useForm<IInvoices>();
+  const onSubmit: SubmitHandler<IInvoices> = (data) => {
+    // const editedData = data;
+    data.id = find?.id;
+    const index = invoices.findIndex((item) => item.id === "XM9141");
+    invoices[index] = data;
+    setInvoices([...invoices]);
+    console.log(data);
   };
-
+  //   console.log(invoices);
+  console.log(errors);
   const formattedDate = format(new Date(`${find?.createdAt}`), "dd MMM yyyy");
   console.log(formattedDate);
   const handleBinClick = () => {
-    reset({ quantity: 0 });
+    // reset({ quantity: 0 });
   };
-  const handleSecondItemBinClick = () => {
-    reset({ quantity2: 0 });
-  };
+  // const handleSecondItemBinClick = () => {
+  //   // reset({ quantity2: 0 });
+  // };
 
   return (
     <div>
@@ -78,7 +50,7 @@ export default function EditInvoice() {
         className="flex md:top-[80px] md:rounded-r-3xl  md:left-0 flex-col md:w-[616px] md:absolute  md:z-20 bg-[white] items-center justify-center box-border p-3 dark:bg-[#141625]"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <h3 className="text-section-title-color font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full md:w-[504px] text-left  py-2">
+        <h3 className="text-section-title-color py-[20px] font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full md:w-[504px] text-left  py-2">
           Bill From
         </h3>
 
@@ -86,9 +58,9 @@ export default function EditInvoice() {
           inputTitle="Street Address"
           id="SenderStreetAddress"
           defaultValue={find?.senderAddress?.street || ""}
-          register={register("SenderStreetAddress", { required: true })}
+          register={register("senderAddress.street", { required: true })}
         />
-        {errors.SenderStreetAddress ? (
+        {errors.senderAddress?.street ? (
           <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
             Street Address is required
           </p>
@@ -97,29 +69,29 @@ export default function EditInvoice() {
           inputTitle1="city"
           inputTitle2="Post Code"
           id1="SenderCity"
-          defaultValue1={find?.senderAddress.postCode || ""}
-          register1={register("SenderCity", {
+          defaultValue1={find?.senderAddress?.postCode || ""}
+          register1={register("senderAddress.city", {
             required: "Please Fill City graph",
           })}
-          register2={register("SenderZipCode", {
+          register2={register("senderAddress.postCode", {
             required: " Please Fill Zip Code",
             minLength: {
               value: 5,
               message: "Length must be 5",
             },
           })}
-          defaultValue2={find?.senderAddress.postCode || ""}
+          defaultValue2={find?.senderAddress?.postCode || ""}
           id2="SenderZipCode"
         />
         <div className="flex justify-between w-full ">
-          {errors.SenderCity ? (
+          {errors.senderAddress?.city ? (
             <p className="text-[red] text-[10px] font-league-spartan leading-4 tracking-tight w-full text-left py-2">
-              {errors.SenderCity.message}
+              {errors.senderAddress?.city?.message}
             </p>
           ) : null}
-          {errors.SenderZipCode ? (
+          {errors.senderAddress?.postCode ? (
             <p className="text-[red] font-league-spartan text-[10px] leading-4 tracking-tight w-full text-left  py-2">
-              {errors.SenderZipCode.message}
+              {errors.senderAddress?.postCode?.message}
             </p>
           ) : null}
         </div>
@@ -127,14 +99,14 @@ export default function EditInvoice() {
           inputTitle="Country"
           id="SenderCountry"
           defaultValue={find?.senderAddress?.country || ""}
-          register={register("SenderCountry", { required: true })}
+          register={register("senderAddress.country", { required: true })}
         />
-        {errors.SenderCountry ? (
+        {errors.senderAddress?.country ? (
           <p className="text-[red] font-league-spartan text-[10px] leading-4 tracking-tight w-full text-left  py-2">
             Please fill Country graph
           </p>
         ) : null}
-        <h3 className="text-section-title-color font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full md:w-[504px] text-left py-2 ">
+        <h3 className="text-section-title-color font-league-spartan text-[15px] font-bold leading-4  tracking-tight w-full md:w-[504px] text-left py-[20px] ">
           Bill To
         </h3>
 
@@ -149,9 +121,7 @@ export default function EditInvoice() {
             Name is required
           </p>
         ) : null}
-        <h3 className="text-section-title-color font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full md:w-[504px] text-left py-2 ">
-          Bill To
-        </h3>
+
         <InputComponent
           inputTitle="Client’s Email"
           id="ClientEmail"
@@ -166,10 +136,10 @@ export default function EditInvoice() {
         <InputComponent
           inputTitle="Street Address"
           id="ClientStreetAddress"
-          defaultValue={find?.clientAddress.street || ""}
-          register={register("ClientStreetAddress", { required: true })}
+          defaultValue={find?.clientAddress?.street || ""}
+          register={register("clientAddress.street", { required: true })}
         />
-        {errors.ClientStreetAddress ? (
+        {errors.clientAddress?.street ? (
           <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
             Street address is required
           </p>
@@ -178,50 +148,46 @@ export default function EditInvoice() {
           inputTitle1="city"
           inputTitle2="Post Code"
           id1="clientAddressCity"
-          defaultValue1={find?.clientAddress.city || ""}
-          register1={register("clientAddressCity", {
+          defaultValue1={find?.clientAddress?.city || ""}
+          register1={register("clientAddress.city", {
             required: "Please Fill City graph",
           })}
-          register2={register("clientZipCode", {
+          register2={register("clientAddress.postCode", {
             required: " Please Fill Zip Code",
             minLength: {
               value: 5,
               message: "Length must be 5",
             },
           })}
-          defaultValue2={find?.clientAddress.postCode || ""}
+          defaultValue2={find?.clientAddress?.postCode || ""}
           id2="clientZipCode"
         />
         <div className="flex justify-between w-full ">
-          {errors.clientAddressCity ? (
+          {errors.clientAddress?.city ? (
             <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
-              {errors.clientAddressCity.message}
+              {errors.clientAddress?.city.message}
             </p>
           ) : null}
-          {errors.clientZipCode ? (
+          {errors.clientAddress?.postCode ? (
             <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full md:w-[504px] text-left  py-2">
-              {errors.clientZipCode.message}
+              {errors.clientAddress.postCode?.message}
             </p>
           ) : null}
         </div>
         <InputComponent
           inputTitle="Country"
           id="ClientCountry"
-          defaultValue={find?.clientAddress.country || ""}
-          register={register("ClientCountryAddress", { required: true })}
+          defaultValue={find?.clientAddress?.country || ""}
+          register={register("clientAddress.country", { required: true })}
         />
-        {errors.ClientCountryAddress ? (
-          <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full md:w-[504px] text-left  py-2">
-            Please fill Country graph
-          </p>
-        ) : null}
+
         <InputComponent
           inputTitle="Invoice Date"
           id="InvoiceDate"
           type="date"
           color="0.5"
           defaultValue={formattedDate || ""}
-          register={register("InvoiceDate", { required: true })}
+          register={register("createdAt", { required: true })}
         />
 
         <InputComponent
@@ -239,49 +205,86 @@ export default function EditInvoice() {
           inputTitle="Project Description"
           id="ProjectDescription"
           defaultValue={find?.description || ""}
-          register={register("ProjectDescription")}
+          register={register("description")}
         />
 
-        <h3 className="text-[#777F98] pt-[50px] pb-[20px] font-league-spartan text-[18px] tracking-wide font-bold leading-32px  w-full md:w-[504px] text-left py-2 ">
+        <h3 className="text-[#777F98] pt-[62px] pb-[20px] font-league-spartan text-[18px] tracking-wide font-bold leading-32px  w-full md:w-[504px] text-left py-2 ">
           item List
         </h3>
-        <InputComponent
-          inputTitle="Item Name"
-          id="itemName"
-          defaultValue={find?.items[0].name || ""}
-          register={register("itemName")}
-        />
 
-        <ItemContainer
-          inputTitle1="Qty."
-          inputTitle2="price"
-          id1="Qty1"
-          handleBinClick={handleBinClick}
-          defaultValue1={find?.items[0].quantity || 0}
-          register1={register("quantity", { required: true })}
-          register2={register("price", { required: true })}
-          defaultValue2={find?.items[0].price || 0}
-          id2="price2"
-        />
+        <div className="flex flex-col gap-[50px] pb-[50px] box-border">
+          {find?.items.map((item, index) => (
+            <div key={index}>
+              <div className="flex flex-col items-start justify-center gap-[20px] w-[327px] md:w-[504px]  box-border py-[10px] ">
+                <label
+                  className="text-label-text-color  font-league-spartan text-[13px] font-medium leading-4 tracking-tight pl-[5px]"
+                  htmlFor={`items.${index}.name`}
+                >
+                  Item Name
+                </label>
+                <input
+                  className={`w-[327px] h-[48px] rounded-md border border-gray-300 bg-white md:w-[504px]  font-league-spartan text-[13px] font-bold leading-4 tracking-tight px-[20px] dark:bg-[#1E2139] dark:text-white dark:border-none`}
+                  id={item.name}
+                  defaultValue={item.name || ""}
+                  {...register(`items.${index}.name`, { required: true })}
+                />
+              </div>
+              <div className="flex  items-start  gap-[20px]  w-[64px] h-[48px] pt-[30px] pb-[50px] ">
+                <div className="flex flex-col items-start justify-center gap-[10px] w-[100px] h-[48px] box-border ">
+                  {" "}
+                  <label
+                    className="text-label-text-color cursor-pointer font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
+                    htmlFor={`items.${index}.quantity`}
+                  >
+                    Quantity
+                  </label>
+                  <input
+                    className="  w-[64px] h-[48px] flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none"
+                    id={`items.${index}.quantity`}
+                    defaultValue={item.quantity || ""}
+                    {...register(`items.${index}.quantity`, { required: true })}
+                  />
+                </div>
+                <div className="flex flex-col items-start justify-center gap-[10px] w-[100px] h-[48px] box-border">
+                  <label
+                    className="cursor-pointer text-label-text-color text-custom-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
+                    htmlFor={`items.${index}.price`}
+                  >
+                    Price
+                  </label>
+                  <input
+                    className=" w-[100px] h-[48px] flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none"
+                    id="SenderZipCode "
+                    defaultValue={item.price || ""}
+                    {...register(`items.${index}.price`, { required: true })}
+                  />
+                </div>
+                <div className="flex flex-col items-start justify-center gap-[10px] w-[80px] h-[48px] box-border">
+                  <label className="cursor-pointer text-label-text-color text-custom-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3">
+                    Total
+                  </label>
+                  <p className=" w-[60px] h-[48px] flex  items-center  flex-shrink-0 rounded-md  bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none">
+                    {item.quantity * item.price}
+                  </p>
+                </div>
+                <div className="w-[30px] h-[48px] flex items-center  ">
+                  <div
+                    className=" flex w-[12px] h-[16px] items-center pt-[14px]"
+                    onClick={handleBinClick}
+                  >
+                    <img
+                      className=" w-[12px] h-[16px] flex cursor-pointer"
+                      src="/assets/icon-delete.svg"
+                      alt="bin"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* ის ორი აითემი უნდა დაიმაპოს მთლიანად კომპონენტით არა  */}
 
-        <InputComponent
-          inputTitle="Item Name"
-          id="itemName2"
-          defaultValue={find?.items[1].name || ""}
-          register={register("itemName2", { required: true })}
-        />
-
-        <ItemContainer
-          inputTitle1="Qty."
-          inputTitle2="price"
-          id1="Qty1"
-          handleBinClick={handleSecondItemBinClick}
-          defaultValue1={find?.items[1].quantity || 0}
-          register1={register("quantity2", { required: true })}
-          register2={register("price2", { required: true })}
-          defaultValue2={find?.items[1].price || 0}
-          id2="price2"
-        />
         <AddNewItemButton />
 
         <div className="w-full h-[40px]  bg-gradient-to-bottom "></div>

@@ -28,7 +28,6 @@ const CustomInput: React.FC<CustomInputProps> = ({
         {inputTitle}
       </label>
       <input
-        // type={type ? type : "text"}
         style={{ opacity: color }}
         className={`w-[327px] h-[48px] rounded-md border border-gray-300 bg-white md:w-[504px]  font-league-spartan text-[13px] font-bold leading-4 tracking-tight px-[20px] dark:bg-[#1E2139] dark:text-white dark:border-none`}
         id={id}
