@@ -1,8 +1,9 @@
 import InvoicePaymentInfo from "./InvoicePaymentInfo";
+import InvoicePaymentInfoLarger from "./InvoicePaymentInfoLarger";
 
 export default function SingleInvoiceInformation() {
   return (
-    <div className="mt-[16px] pt-[25px] px-[24px] pb-[24px] bg-[#FFF] dark:bg-[#1E2139] rounded-[8px]">
+    <div className="mt-[16px] pt-[25px] px-[24px] pb-[24px] bg-[#FFF] dark:bg-[#1E2139] rounded-[8px] md:p-[48px]">
       <div className="md:flex md:justify-between">
         <div>
           <p className="text-[#7E88C3] dark:text-[#858BB2] font-bold text-[15px] leading-[15px] tracking-[-0.25px]">
@@ -32,7 +33,7 @@ export default function SingleInvoiceInformation() {
         </div>
       </div>
 
-      <div className="md:flex md:gap-[117px] md:[21px]">
+      <div className="md:flex md:gap-[117px] md:mt-[21px]">
         <div className="mt-[31px] flex gap-[61px] md:gap-[117px] md:m-0">
           <div>
             <p className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-[18px] tracking-[-0.1px]">
@@ -80,11 +81,13 @@ export default function SingleInvoiceInformation() {
         </div>
       </div>
 
-      <div>
+      <div className="block md:hidden">
         <InvoicePaymentInfo />
       </div>
 
-      <div></div>
+      <div className="hidden md:block">
+        <InvoicePaymentInfoLarger />
+      </div>
     </div>
   );
 }
