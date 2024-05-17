@@ -9,6 +9,7 @@ interface CustomInputProps {
   register2: UseFormRegisterReturn;
   inputTitle1: string;
   inputTitle2: string;
+  handleBinClick: () => void;
 }
 const ItemContainer: React.FC<CustomInputProps> = ({
   id1,
@@ -19,8 +20,8 @@ const ItemContainer: React.FC<CustomInputProps> = ({
   register2,
   inputTitle1,
   inputTitle2,
+  handleBinClick,
 }) => {
-  const handleBinClick = () => {};
   console.log(defaultValue1);
   return (
     <div className="flex gap-[20px] py-[30px] box-border">

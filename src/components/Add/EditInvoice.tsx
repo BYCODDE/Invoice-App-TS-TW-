@@ -39,11 +39,18 @@ export default function EditInvoice() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   const formattedDate = format(new Date(`${find?.createdAt}`), "dd MMM yyyy");
   console.log(formattedDate);
+  const handleBinClick = () => {
+    reset({ quantity: 0 });
+  };
+  const handleSecondItemBinClick = () => {
+    reset({ quantity2: 0 });
+  };
 
   return (
     <div>
@@ -71,20 +78,28 @@ export default function EditInvoice() {
           inputTitle2="Post Code"
           id1="SenderCity"
           defaultValue1={find?.senderAddress.postCode || ""}
-          register1={register("SenderCity", { required: true })}
-          register2={register("SenderZipCode", { required: true })}
+          register1={register("SenderCity", {
+            required: "Please Fill City graph",
+          })}
+          register2={register("SenderZipCode", {
+            required: " Please Fill Zip Code",
+            minLength: {
+              value: 5,
+              message: "Length must be 5",
+            },
+          })}
           defaultValue2={find?.senderAddress.postCode || ""}
           id2="SenderZipCode"
         />
         <div className="flex justify-between w-full ">
           {errors.SenderCity ? (
-            <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
-              Please Fill City graph
+            <p className="text-[red] text-[10px] font-league-spartan leading-4 tracking-tight w-full text-left py-2">
+              {errors.SenderCity.message}
             </p>
           ) : null}
           {errors.SenderZipCode ? (
-            <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
-              Please Fill Zip Code
+            <p className="text-[red] font-league-spartan text-[10px] leading-4 tracking-tight w-full text-left  py-2">
+              {errors.SenderZipCode.message}
             </p>
           ) : null}
         </div>
@@ -95,7 +110,7 @@ export default function EditInvoice() {
           register={register("SenderCountry", { required: true })}
         />
         {errors.SenderCountry ? (
-          <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
+          <p className="text-[red] font-league-spartan text-[10px] leading-4 tracking-tight w-full text-left  py-2">
             Please fill Country graph
           </p>
         ) : null}
@@ -144,20 +159,28 @@ export default function EditInvoice() {
           inputTitle2="Post Code"
           id1="clientAddressCity"
           defaultValue1={find?.clientAddress.city || ""}
-          register1={register("clientAddressCity", { required: true })}
-          register2={register("clientZipCode", { required: true })}
+          register1={register("clientAddressCity", {
+            required: "Please Fill City graph",
+          })}
+          register2={register("clientZipCode", {
+            required: " Please Fill Zip Code",
+            minLength: {
+              value: 5,
+              message: "Length must be 5",
+            },
+          })}
           defaultValue2={find?.clientAddress.postCode || ""}
           id2="clientZipCode"
         />
         <div className="flex justify-between w-full ">
           {errors.clientAddressCity ? (
             <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
-              Please Fill City graph
+              {errors.clientAddressCity.message}
             </p>
           ) : null}
           {errors.clientZipCode ? (
             <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
-              Please Fill Zip Code
+              {errors.clientZipCode.message}
             </p>
           ) : null}
         </div>
@@ -187,12 +210,16 @@ export default function EditInvoice() {
           defaultValue={`Net ${find?.paymentTerms} Days` || ""}
           register={register("paymentTerms", { required: true })}
         />
-
+        {errors.paymentTerms ? (
+          <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
+            Payment Terms is required
+          </p>
+        ) : null}
         <InputComponent
           inputTitle="Project Description"
           id="ProjectDescription"
           defaultValue={find?.description || ""}
-          register={register("ProjectDescription", { required: true })}
+          register={register("ProjectDescription")}
         />
 
         <h3 className="text-[#777F98] pt-[50px] pb-[20px] font-league-spartan text-[18px] tracking-wide font-bold leading-32px  w-full text-left py-2 ">
@@ -202,13 +229,14 @@ export default function EditInvoice() {
           inputTitle="Item Name"
           id="itemName"
           defaultValue={find?.items[0].name || ""}
-          register={register("itemName", { required: true })}
+          register={register("itemName")}
         />
 
         <ItemContainer
           inputTitle1="Qty."
           inputTitle2="price"
           id1="Qty1"
+          handleBinClick={handleBinClick}
           defaultValue1={find?.items[0].quantity || 0}
           register1={register("quantity", { required: true })}
           register2={register("price", { required: true })}
@@ -227,6 +255,7 @@ export default function EditInvoice() {
           inputTitle1="Qty."
           inputTitle2="price"
           id1="Qty1"
+          handleBinClick={handleSecondItemBinClick}
           defaultValue1={find?.items[1].quantity || 0}
           register1={register("quantity2", { required: true })}
           register2={register("price2", { required: true })}
@@ -234,7 +263,7 @@ export default function EditInvoice() {
           id2="price2"
         />
         <AddNewItemButton />
-
+        <div className="w-full h-[40px] bg-gradient-to-bottom "></div>
         <div className="flex py-[20px] gap-[10px]  w-full justify-end  ">
           <button className="w-[96px] h-[48px] dark:bg-[#1E2139]  dark:text-white cursor-pointer flex-shrink-0 rounded-full bg-gray-100 text-gray-700 text-center font-league-spartan text-[15px] font-bold leading-15 tracking-tighter">
             Cancel
