@@ -17,7 +17,7 @@ export default function EditInvoice() {
   const {
     register,
     handleSubmit,
-    // reset,
+    setValue,
     formState: { errors },
   } = useForm<IInvoices>();
   const onSubmit: SubmitHandler<IInvoices> = (data) => {
@@ -32,12 +32,6 @@ export default function EditInvoice() {
   console.log(errors);
   const formattedDate = format(new Date(`${find?.createdAt}`), "dd MMM yyyy");
   console.log(formattedDate);
-  const handleBinClick = () => {
-    // reset({ quantity: 0 });
-  };
-  // const handleSecondItemBinClick = () => {
-  //   // reset({ quantity2: 0 });
-  // };
 
   return (
     <div>
@@ -254,7 +248,7 @@ export default function EditInvoice() {
                   </label>
                   <input
                     className=" w-[100px] h-[48px] flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none"
-                    id="SenderZipCode "
+                    id="SenderZipCode"
                     defaultValue={item.price || ""}
                     {...register(`items.${index}.price`, { required: true })}
                   />
@@ -263,14 +257,19 @@ export default function EditInvoice() {
                   <label className="cursor-pointer text-label-text-color text-custom-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3">
                     Total
                   </label>
-                  <p className=" w-[60px] h-[48px] flex  items-center  flex-shrink-0 rounded-md  bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none">
-                    {item.quantity * item.price}
-                  </p>
+                  <input
+                    className=" w-[60px] h-[48px] flex  items-center  flex-shrink-0 rounded-md  bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none"
+                    defaultValue={item.total || ""}
+                    {...register(`items.${index}.total`, { required: true })}
+                  ></input>
                 </div>
                 <div className="w-[30px] h-[48px] flex items-center  ">
                   <div
                     className=" flex w-[12px] h-[16px] items-center pt-[14px]"
-                    onClick={handleBinClick}
+                    onClick={() => {
+                      setValue(`items.${index}.quantity`, 0);
+                      setValue(`items.${index}.total`, 0);
+                    }}
                   >
                     <img
                       className=" w-[12px] h-[16px] flex cursor-pointer"
