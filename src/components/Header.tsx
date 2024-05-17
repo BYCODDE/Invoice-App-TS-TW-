@@ -10,7 +10,7 @@ export default function Header() {
   const { setIsDarkMode, isDarkMode } = useContext(InvoiceContext);
 
   return (
-    <div className="flex justify-between pr-[24px] items-center w-full h-[72px] bg-[#373B53] dark:bg-[#1E2139] md:h-[80px] xl:flex-col xl:h-[100vh] xl:w-[103px] xl:pr-[0px] xl:pb-[24px] xl:rounded-r-[20px]">
+    <div className="flex justify-between pr-[24px] md:absolute z-40 items-center w-full h-[72px] bg-[#373B53] dark:bg-[#1E2139] md:h-[80px] xl:flex-col xl:h-[100vh] xl:w-[103px] xl:pr-[0px] xl:pb-[24px] xl:rounded-r-[20px]">
       <div className="w-[72px] h-full bg-[#7C5DFA] flex justify-center items-center rounded-r-[20px] md:w-[80px] xl:w-full xl:h-[103px]">
         <img
           src={logo}

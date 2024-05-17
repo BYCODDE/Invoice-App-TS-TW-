@@ -7,7 +7,7 @@ import InputsComponent from "./InputsComponent";
 import ItemContainer from "./ItemContainer";
 import AddNewItemButton from "./AddNewItemButton";
 import EditInvoicesButtons from "./EditInvoicesButtons";
-import AddInvoicesButtons from "./AddInvoicesButtons";
+// import AddInvoicesButtons from "./AddInvoicesButtons";
 
 type Inputs = {
   id: number;
@@ -42,7 +42,8 @@ type Inputs = {
   price2: number;
 };
 export default function EditInvoice() {
-  const { invoices, setInvoices } = useContext(InvoiceContext);
+  const { invoices, setInvoices, setShowEditInvoice } =
+    useContext(InvoiceContext);
   const find = invoices.find((item) => item.id === "XM9141");
 
   const {
@@ -68,11 +69,16 @@ export default function EditInvoice() {
 
   return (
     <div>
+      <div
+        onClick={() => setShowEditInvoice(false)}
+        className=" sm:flex-none  md:w-full md:right-0 md:top-0 md:left-0 md:h-[100vh] bg-[#000]  md:fixed  opacity-[0.4984]"
+      ></div>
+      <div className="h-[32px] w-full text-[24px] font-bold my-[20px] ">{`Edit # ${find?.id}`}</div>
       <form
-        className="flex flex-col items-center justify-center box-border p-3 dark:bg-[#141625]"
+        className="flex md:top-[80px] md:rounded-r-3xl  md:left-0 flex-col md:w-[616px] md:absolute  md:z-20 bg-[white] items-center justify-center box-border p-3 dark:bg-[#141625]"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <h3 className="text-section-title-color font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full text-left  py-2">
+        <h3 className="text-section-title-color font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full md:w-[504px] text-left  py-2">
           Bill From
         </h3>
 
@@ -128,7 +134,7 @@ export default function EditInvoice() {
             Please fill Country graph
           </p>
         ) : null}
-        <h3 className="text-section-title-color font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full text-left py-2 ">
+        <h3 className="text-section-title-color font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full md:w-[504px] text-left py-2 ">
           Bill To
         </h3>
 
@@ -143,7 +149,7 @@ export default function EditInvoice() {
             Name is required
           </p>
         ) : null}
-        <h3 className="text-section-title-color font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full text-left py-2 ">
+        <h3 className="text-section-title-color font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full md:w-[504px] text-left py-2 ">
           Bill To
         </h3>
         <InputComponent
@@ -193,7 +199,7 @@ export default function EditInvoice() {
             </p>
           ) : null}
           {errors.clientZipCode ? (
-            <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
+            <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full md:w-[504px] text-left  py-2">
               {errors.clientZipCode.message}
             </p>
           ) : null}
@@ -205,7 +211,7 @@ export default function EditInvoice() {
           register={register("ClientCountryAddress", { required: true })}
         />
         {errors.ClientCountryAddress ? (
-          <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
+          <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full md:w-[504px] text-left  py-2">
             Please fill Country graph
           </p>
         ) : null}
@@ -225,7 +231,7 @@ export default function EditInvoice() {
           register={register("paymentTerms", { required: true })}
         />
         {errors.paymentTerms ? (
-          <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
+          <p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full md:w-[504px] text-left  py-2">
             Payment Terms is required
           </p>
         ) : null}
@@ -236,7 +242,7 @@ export default function EditInvoice() {
           register={register("ProjectDescription")}
         />
 
-        <h3 className="text-[#777F98] pt-[50px] pb-[20px] font-league-spartan text-[18px] tracking-wide font-bold leading-32px  w-full text-left py-2 ">
+        <h3 className="text-[#777F98] pt-[50px] pb-[20px] font-league-spartan text-[18px] tracking-wide font-bold leading-32px  w-full md:w-[504px] text-left py-2 ">
           item List
         </h3>
         <InputComponent
@@ -278,8 +284,8 @@ export default function EditInvoice() {
         />
         <AddNewItemButton />
 
-        <div className="w-full h-[40px] bg-gradient-to-bottom "></div>
-        <AddInvoicesButtons />
+        <div className="w-full h-[40px]  bg-gradient-to-bottom "></div>
+        {/* <AddInvoicesButtons /> */}
         <EditInvoicesButtons />
       </form>
     </div>
