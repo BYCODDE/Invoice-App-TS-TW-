@@ -3,7 +3,7 @@ import InvoicePaymentInfoLarger from "./InvoicePaymentInfoLarger";
 
 export default function SingleInvoiceInformation() {
   return (
-    <div className="mt-[16px] pt-[25px] px-[24px] pb-[24px] bg-[#FFF] dark:bg-[#1E2139] rounded-[8px] md:p-[48px]">
+    <div className="mt-[16px] pt-[25px] px-[24px] pb-[24px] bg-[#FFF] dark:bg-[#1E2139] rounded-[8px] md:p-[32px]">
       <div className="md:flex md:justify-between">
         <div>
           <p className="text-[#7E88C3] dark:text-[#858BB2] font-bold text-[15px] leading-[15px] tracking-[-0.25px]">
