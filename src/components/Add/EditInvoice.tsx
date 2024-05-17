@@ -1,13 +1,23 @@
 import { useContext } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { InvoiceContext } from "../../App";
+import { IInvoices, InvoiceContext } from "../../App";
 import { format } from "date-fns";
 import InputComponent from "./InputComponent";
 import InputsComponent from "./InputsComponent";
 import ItemContainer from "./ItemContainer";
 import AddNewItemButton from "./AddNewItemButton";
+import EditInvoicesButtons from "./EditInvoicesButtons";
+import AddInvoicesButtons from "./AddInvoicesButtons";
 
 type Inputs = {
+  id: number;
+  createdAt: string;
+  paymentDue: StreamPipeOptions;
+  description: string;
+  status: string;
+  clientAddress: string;
+  items: string;
+  total: number;
   SenderStreetAddress: string;
   SenderCity: string;
   SenderZipCode: string;
@@ -32,17 +42,21 @@ type Inputs = {
   price2: number;
 };
 export default function EditInvoice() {
-  const { invoices } = useContext(InvoiceContext);
+  const { invoices, setInvoices } = useContext(InvoiceContext);
   const find = invoices.find((item) => item.id === "XM9141");
 
-  console.log(find);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const editedData = data;
+    setInvoices<IInvoices[]>([...invoices, editedData]);
+    console.log(invoices);
+  };
+
   const formattedDate = format(new Date(`${find?.createdAt}`), "dd MMM yyyy");
   console.log(formattedDate);
   const handleBinClick = () => {
@@ -263,17 +277,10 @@ export default function EditInvoice() {
           id2="price2"
         />
         <AddNewItemButton />
+
         <div className="w-full h-[40px] bg-gradient-to-bottom "></div>
-        <div className="flex py-[20px] gap-[10px]  w-full justify-end  ">
-          <button className="w-[96px] h-[48px] dark:bg-[#1E2139]  dark:text-white cursor-pointer flex-shrink-0 rounded-full bg-gray-100 text-gray-700 text-center font-league-spartan text-[15px] font-bold leading-15 tracking-tighter">
-            Cancel
-          </button>
-          <input
-            type="submit"
-            className="w-[138px] h-[48px] cursor-pointer flex-shrink-0 rounded-full bg-purple-600 text-white font-league-spartan text-[15px] font-bold leading-15 tracking-tighter"
-            value="Save Changes"
-          />
-        </div>
+        <AddInvoicesButtons />
+        <EditInvoicesButtons />
       </form>
     </div>
   );
