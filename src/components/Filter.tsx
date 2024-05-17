@@ -1,6 +1,6 @@
 import arrowDown from "/public/assets/icon-arrow-down.svg";
 import plus from "/public/assets/icon-plus.svg";
-
+import check from "/public/assets/icon-check.svg"
 import { IInvoices } from "../pages/Invoices";
 import { useState } from "react";
 
@@ -13,7 +13,6 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
 
   const handleFilter = function () {
     setFiltered(!filtered);
-    console.log(filtered);
   };
 
   return (
@@ -41,14 +40,45 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
             }       top-[85px] gap-[19px] flex p-[24px] pr-[60px] absolute  max-w-[192px] max-h-[128px] rounded-[8px] bg-whiteTwo shadow-custom2`}
           >
             <div className="cursor-pointer    gap-[11px]  flex justify-center flex-col">
-              <input  className="cursor-pointer"   type="checkbox" name="Draft" id="1" />
-              <input  className="cursor-pointer"  type="checkbox" name="Pending" id="2" />
-              <input  className="cursor-pointer"  type="checkbox" name="Paid" id="3" />
-            </div>
-            <div className="    flex  flex-col ">
-              <label  className="cursor-pointer"htmlFor="1">Draft</label>
-              <label  className="cursor-pointer" htmlFor="2">Pending</label>
-              <label  className="cursor-pointer" htmlFor="3">Paid</label>
+            <label className="relative cursor-pointer flex items-center gap-[8px]">
+                <input
+                  type="checkbox"
+                  className="appearance-none w-[16px] h-[16px] border border-solid border-blue rounded-[2px] cursor-pointer checked:bg-blue"
+                  id="draft"
+                />
+                <img
+                  className="absolute w-[10px] h-[10px] top-[7px] left-[3px] pointer-events-none"
+                  src={check}
+                  alt="check"
+                />
+                <span>Draft</span>
+              </label>
+              <label className="relative cursor-pointer flex items-center gap-[8px]">
+                <input
+                  type="checkbox"
+                  className="appearance-none w-[16px] h-[16px] border border-solid border-blue rounded-[2px] cursor-pointer checked:bg-blue"
+                  id="pending"
+                />
+                <img
+                  className="absolute w-[10px] h-[10px] top-[7px] left-[3px] pointer-events-none"
+                  src={check}
+                  alt="check"
+                />
+                <span>Pending</span>
+              </label>
+              <label className="relative cursor-pointer flex items-center gap-[8px]">
+                <input
+                  type="checkbox"
+                  className="appearance-none w-[16px] h-[16px] border border-solid border-blue rounded-[2px] cursor-pointer checked:bg-blue"
+                  id="paid"
+                />
+                <img
+                  className="absolute w-[10px] h-[10px] top-[7px] left-[3px] pointer-events-none"
+                  src={check}
+                  alt="check"
+                />
+                <span>Paid</span>
+              </label>
             </div>
           </div>
         </div>
