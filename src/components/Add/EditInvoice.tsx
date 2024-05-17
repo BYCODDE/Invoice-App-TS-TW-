@@ -72,7 +72,7 @@ export default function EditInvoice() {
           inputTitle="Country"
           id="SenderCountry"
           defaultValue={find?.senderAddress?.country || ""}
-          register={register("SenderCountry")}
+          register={register("SenderCountry", { required })}
         />
 
         <h3 className="text-section-title-color font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full text-left py-2 ">
