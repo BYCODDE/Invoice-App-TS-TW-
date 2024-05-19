@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
-
+import DatePicker from "react-datepicker";
+import { startOfMonth, endOfMonth } from "date-fns";
 interface CustomInputProps {
 	id1: string;
 	defaultValue1: string;
@@ -10,23 +11,39 @@ interface CustomInputProps {
 	register2: UseFormRegisterReturn;
 	inputTitle1: string;
 	inputTitle2: string;
-	color: string;
+
+	setSelectedDate: React.Dispatch<React.SetStateAction<string>>;
+	selectedDate: string;
 }
 const DateTerms: React.FC<CustomInputProps> = ({
 	id1,
 	// defaultValue1,
 	register1,
 	id2,
-	defaultValue2,
-	register2,
+	// defaultValue2,
+	// register2,
 	inputTitle1,
 	inputTitle2,
-	color,
+
+	setSelectedDate,
+	selectedDate,
 }) => {
 	const termsArray = ["Net 1 Day", "Net 7 Days", "Net 14 Days", "Net 30 Days"];
 	const [term, setTerm] = useState("Net 30 Days");
 	const [showTerms, setShowTerms] = useState(false);
+
+	const handleDateChange = (date: string) => {
+		setSelectedDate(date);
+	};
 	console.log(term);
+	const minDate = startOfMonth(new Date(selectedDate));
+	const maxDate = endOfMonth(new Date(selectedDate));
+	const datePickerRef = useRef<DatePicker | null>(null);
+	const handleIconClick = () => {
+		console.log(datePickerRef);
+
+		datePickerRef.current?.setOpen(true);
+	};
 	return (
 		<div>
 			<div className="flex md:flex-row flex-col gap-[40px] py-[30px] box-border w-full">
@@ -37,13 +54,34 @@ const DateTerms: React.FC<CustomInputProps> = ({
 					>
 						{inputTitle2}
 					</label>
-					<input
+
+					{/* <input
 						style={{ opacity: color }}
 						className="w-[327px] md:w-[240px] h-[48px] flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-[20px] dark:bg-[#1E2139]  dark:text-white dark:border-none"
 						id={id2}
 						defaultValue={defaultValue2 || ""}
 						{...register2}
-					/>
+					/> */}
+					<div className="relative w-[304px]">
+						<span
+							onClick={handleIconClick}
+							className="absolute z-50 top-[15px] right-[10px]"
+						>
+							<img src="public/assets/icon-calendar.svg" alt="" />
+						</span>
+						<DatePicker
+							selected={selectedDate}
+							placeholderText="Click to select a date"
+							onChange={handleDateChange}
+							dateFormat="d MMM yyyy"
+							className=" border  border-gray-300 p-2 rounded w-[327px] md:w-[240px] h-[48px]  bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-[20px] dark:bg-[#1E2139]  dark:text-white dark:border-none"
+							calendarClassName="w-240 h-243 flex-shrink-0"
+							fixedHeight
+							minDate={minDate}
+							maxDate={maxDate}
+							ref={datePickerRef}
+						/>
+					</div>
 				</div>
 
 				<div className="flex flex-col gap-[20px] relative">

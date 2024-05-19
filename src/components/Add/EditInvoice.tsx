@@ -1,13 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { IInvoices, InvoiceContext } from "../../App";
 import { format } from "date-fns";
+
 import InputComponent from "./InputComponent";
 import InputsComponent from "./InputsComponent";
 
 import AddNewItemButton from "./AddNewItemButton";
 import EditInvoicesButtons from "./EditInvoicesButtons";
-import DateTerms from "./Date/Date_Terms";
+import DateTerms from "./Date_Terms";
+
 // import AddInvoicesButtons from "./AddInvoicesButtons";
 
 export default function EditInvoice() {
@@ -21,19 +23,19 @@ export default function EditInvoice() {
 		setValue,
 		formState: { errors },
 	} = useForm<IInvoices>();
+
 	const onSubmit: SubmitHandler<IInvoices> = (data) => {
-		// const editedData = data;
-		data.id = find?.id;
-		const index = invoices.findIndex((item) => item.id === "XM9141");
-		invoices[index] = data;
-		setInvoices([...invoices]);
 		console.log(data);
+		// // const editedData = data;
+		// console.log("ki");
+		// data.id = find?.id;
+		// const index = invoices.findIndex((item) => item.id === "XM9141");
+		// invoices[index] = data;
+		// setInvoices([...invoices]);
 	};
-	//   console.log(invoices);
-	console.log(errors);
 	const formattedDate = format(new Date(`${find?.createdAt}`), "dd MMM yyyy");
 	console.log(formattedDate);
-
+	const [selectedDate, setSelectedDate] = useState(formattedDate);
 	return (
 		<div>
 			<div
@@ -183,14 +185,14 @@ export default function EditInvoice() {
 				/>
 
 				<DateTerms
+					selectedDate={selectedDate}
+					setSelectedDate={setSelectedDate}
 					inputTitle1="Payment Terms"
 					id1="PaymentTerms"
 					defaultValue1={`Net ${find?.paymentTerms} Days` || ""}
 					register1={register("paymentTerms", { required: true })}
 					inputTitle2="Invoice Date"
 					id2="InvoiceDate"
-					//   type="date"
-					color="0.5"
 					defaultValue2={formattedDate || ""}
 					register2={register("createdAt", { required: true })}
 				/>
@@ -301,7 +303,6 @@ export default function EditInvoice() {
 
 				<AddNewItemButton />
 
-				{/* <div className="w-full h-[40px] lg:hidden  bg-gradient-to-bottom "></div> */}
 				{/* <AddInvoicesButtons /> */}
 				<EditInvoicesButtons />
 			</form>
