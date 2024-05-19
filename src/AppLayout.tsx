@@ -5,7 +5,7 @@ import { useContext } from "react";
 import DeleteModal from "./components/DeleteModal";
 
 export default function AppLayout() {
-  const { isDarkMode } = useContext(InvoiceContext);
+  const { isDarkMode, isDeleteOpen } = useContext(InvoiceContext);
   return (
     <div className={`${isDarkMode ? "dark" : ""}`}>
       <div className="flex flex-col items-center xl:flex-row xl:items-start bg-[#F8F8FB] dark:bg-[#141625] relative">
@@ -14,7 +14,7 @@ export default function AppLayout() {
           <Outlet />
         </main>
 
-        <DeleteModal />
+        {isDeleteOpen && <DeleteModal />}
       </div>
     </div>
   );
