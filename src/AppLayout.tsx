@@ -12,7 +12,7 @@ export default function AppLayout() {
       } flex flex-col items-center xl:flex-row xl:items-start `}
     >
       <Header />
-      <main className="     xl:flex xl:justify-center w-full ">
+      <main className="  xl:flex xl:justify-center w-full ">
         <Outlet />
       </main>
     </div>

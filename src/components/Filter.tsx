@@ -19,17 +19,31 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
   };
 
   return (
-    <div className="    text-black font-bold  text-[15px] flex justify-center items-center gap-[86px]">
+    <div className="w-[100%]      justify-between   text-black font-bold  text-[15px] flex  items-center ">
       <div className="flex justify-center flex-col">
-        <span className="dark:text-whiteTwo     text-[32px]">Invoices</span>
-        <span className="text-grey text-[13px] dark:text-[#DFE3FA]">
+        <span className=" md:text-[35px]    dark:text-whiteTwo text-[32px] font-bold">
+          Invoices
+        </span>
+        <span className="md:hidden   text-grey text-[13px] dark:text-[#DFE3FA] font-medium ">
           {invoices.length} invoices
+        </span>
+        <span className="md:block   text-grey text-[13px] dark:text-[#DFE3FA] hidden font-medium">
+          There are {invoices.length} total invoices
         </span>
       </div>
       <div className="flex">
-        <div className="       cursor-pointer  flex justify-center items-center">
-          <span onClick={handleFilter} className="dark:text-whiteTwo">
+        <div className="      cursor-pointer  flex justify-center items-center">
+          <span
+            onClick={handleFilter}
+            className="block md:hidden dark:text-whiteTwo"
+          >
             Filter
+          </span>
+          <span
+            onClick={handleFilter}
+            className="hidden md:block dark:text-whiteTwo"
+          >
+            Filter by status
           </span>
           <img
             onClick={handleFilter}
@@ -40,7 +54,7 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
           <div
             className={` ${
               filtered ? "block" : "hidden"
-            }  dark:bg-blackTwo   top-[85px] gap-[19px] flex p-[24px] pr-[60px] absolute  max-w-[192px] max-h-[128px] rounded-[8px] bg-whiteTwo shadow-custom2`}
+            }  dark:bg-blackTwo   top-[22%] gap-[19px] flex p-[24px] pr-[60px] absolute  max-w-[192px] max-h-[128px] rounded-[8px] bg-whiteTwo shadow-custom2`}
           >
             <div className="cursor-pointer    gap-[11px]  flex justify-center flex-col">
               <label className="relative cursor-pointer flex items-center gap-[8px]">
@@ -97,11 +111,12 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
             </div>
           </div>
         </div>
-        <div className="cursor-pointer   flex justify-center items-center w-[90px]  h-[44px] rounded-[24px] bg-blue gap-[9px]">
+        <div className="   md:w-[150px]     cursor-pointer   flex justify-center items-center w-[90px]  h-[44px] rounded-[24px] bg-blue gap-[9px]">
           <div className="w-[32px] h-[32px] rounded-[50%] bg-white flex justify-center items-center">
             <img className="w-[10px] h-[10px]" src={plus} alt="plus" />
           </div>
-          <span className="text-white">New</span>
+          <span className="text-white md:hidden block">New</span>
+          <span className="text-white  md:block    hidden">New Invoice</span>
         </div>
       </div>
     </div>
