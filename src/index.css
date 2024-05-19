@@ -28,7 +28,13 @@ html {
 	font-weight: 700;
 	line-height: 15px;
 	letter-spacing: -0.25px;
+	@apply dark:bg-[#252945];
+	@apply dark:text-white;
+	@media screen and (min-width: 768px) {
+		width: 240px;
+	}
 }
+
 .react-datepicker__day-names {
 	display: none;
 }
@@ -41,24 +47,43 @@ html {
 	font-weight: 700;
 	line-height: 15px;
 	letter-spacing: -0.25px;
+	@apply dark:bg-[#252945];
+	@apply dark:text-white;
 }
 .react-datepicker__header {
+	@apply dark:bg-[#252945];
 	border-bottom: none;
 	background-color: #fff;
+	padding-bottom: 15px;
 }
 .react-datepicker__month {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+	@apply dark:text-white;
 }
 .react-datepicker__week {
+	@apply dark:text-[#fff];
 	display: flex;
 	justify-content: center;
 	gap: 20px;
+	@media screen and (min-width: 768px) {
+		gap: 12px;
+	}
 }
 .react-datepicker__day:hover {
-	color: 9277FF;
+	color: #9277ff;
 }
 .react-datepicker__navigation-icon {
 	top: 8px;
 }
+.react-datepicker__day {
+	@apply dark:text-white;
+}
+/* .react-datepicker__day--today {
+	all: unset;
+	background-color: transparent !important;
+	color: inherit !important;
+	font-weight: normal !important;
+	font-size: 30px;
+} */

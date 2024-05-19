@@ -24,14 +24,25 @@ export default function EditInvoice() {
 		formState: { errors },
 	} = useForm<IInvoices>();
 
+	// const onSubmit: SubmitHandler<IInvoices> = (data) => {
+	// 	console.log(data);
+	// 	// const editedData = data;
+	// 	console.log("ki");
+	// 	data.id = find?.id;
+	// 	const index = invoices.findIndex((item) => item.id === "XM9141");
+	// 	invoices[index] = data;
+	// 	setInvoices([...invoices]);
+	// };
+
 	const onSubmit: SubmitHandler<IInvoices> = (data) => {
 		console.log(data);
-		// // const editedData = data;
-		// console.log("ki");
-		// data.id = find?.id;
-		// const index = invoices.findIndex((item) => item.id === "XM9141");
-		// invoices[index] = data;
-		// setInvoices([...invoices]);
+		if (find) {
+			const updatedInvoices = invoices.map((invoice) =>
+				invoice.id === find.id ? { ...invoice, ...data } : invoice,
+			);
+			setInvoices(updatedInvoices);
+			setShowEditInvoice(false);
+		}
 	};
 	const formattedDate = format(new Date(`${find?.createdAt}`), "dd MMM yyyy");
 	console.log(formattedDate);
@@ -189,11 +200,10 @@ export default function EditInvoice() {
 					setSelectedDate={setSelectedDate}
 					inputTitle1="Payment Terms"
 					id1="PaymentTerms"
-					defaultValue1={`Net ${find?.paymentTerms} Days` || ""}
+					// defaultValue1={`Net ${find?.paymentTerms} Days` || ""}
 					register1={register("paymentTerms", { required: true })}
 					inputTitle2="Invoice Date"
 					id2="InvoiceDate"
-					defaultValue2={formattedDate || ""}
 					register2={register("createdAt", { required: true })}
 				/>
 
