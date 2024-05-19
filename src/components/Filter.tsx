@@ -1,6 +1,6 @@
 import arrowDown from "/public/assets/icon-arrow-down.svg";
 import plus from "/public/assets/icon-plus.svg";
-import check from "/public/assets/icon-check.svg"
+import check from "/public/assets/icon-check.svg";
 import { IInvoices } from "../pages/Invoices";
 import { useState } from "react";
 
@@ -10,6 +10,15 @@ interface FilterProps {
 
 const Filter: React.FC<FilterProps> = ({ invoices }) => {
   const [filtered, setFiltered] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked2, setIsChecked2] = useState(false);
+  const [isChecked3, setIsChecked3] = useState(false);
+
+  // const handleCheck = function () {
+  //   setIsChecked(!isChecked);
+  //   setIsChecked2(!isChecked2);
+  //   setIsChecked3(!isChecked3);
+  // };
 
   const handleFilter = function () {
     setFiltered(!filtered);
@@ -37,16 +46,20 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
           <div
             className={` ${
               filtered ? "block" : "hidden"
-            }       top-[85px] gap-[19px] flex p-[24px] pr-[60px] absolute  max-w-[192px] max-h-[128px] rounded-[8px] bg-whiteTwo shadow-custom2`}
+            }  dark:bg-blackTwo     top-[85px] gap-[19px] flex p-[24px] pr-[60px] absolute  max-w-[192px] max-h-[128px] rounded-[8px] bg-whiteTwo shadow-custom2`}
           >
             <div className="cursor-pointer    gap-[11px]  flex justify-center flex-col">
-            <label className="relative cursor-pointer flex items-center gap-[8px]">
+              <label className="relative cursor-pointer flex items-center gap-[8px]">
                 <input
                   type="checkbox"
                   className="appearance-none w-[16px] h-[16px] border border-solid border-blue rounded-[2px] cursor-pointer checked:bg-blue"
                   id="draft"
+                  onChange={() => setIsChecked(!isChecked)}
                 />
                 <img
+                  style={{
+                    display: isChecked ? "block" : "none",
+                  }}
                   className="absolute w-[10px] h-[10px] top-[7px] left-[3px] pointer-events-none"
                   src={check}
                   alt="check"
@@ -58,8 +71,12 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
                   type="checkbox"
                   className="appearance-none w-[16px] h-[16px] border border-solid border-blue rounded-[2px] cursor-pointer checked:bg-blue"
                   id="pending"
+                  onChange={() => setIsChecked2(!isChecked2)}
                 />
                 <img
+                  style={{
+                    display: isChecked2 ? "block" : "none",
+                  }}
                   className="absolute w-[10px] h-[10px] top-[7px] left-[3px] pointer-events-none"
                   src={check}
                   alt="check"
@@ -71,9 +88,13 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
                   type="checkbox"
                   className="appearance-none w-[16px] h-[16px] border border-solid border-blue rounded-[2px] cursor-pointer checked:bg-blue"
                   id="paid"
+                  onChange={() => setIsChecked3(!isChecked3)}
                 />
                 <img
-                  className="absolute w-[10px] h-[10px] top-[7px] left-[3px] pointer-events-none"
+                  style={{
+                    display: isChecked3 ? "block" : "none",
+                  }}
+                  className="       absolute w-[10px] h-[10px] top-[7px] left-[3px] pointer-events-none"
                   src={check}
                   alt="check"
                 />
