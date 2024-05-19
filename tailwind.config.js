@@ -5,10 +5,12 @@ export default {
     extend: {
       colors: {
         black: "#0C0E16",
-        blackTwo:"#252945",
+        blackTwo: "#252945",
+        blackThree: "#1E2139",
         grey: "#888EB0",
         white: " #F8F8FB",
         whiteTwo: "#FFF",
+        whiteThree: "#DFE3FA",
         blue: "#7C5DFA",
         whiter: "#FFF",
         sky: "#7E88C3",

@@ -46,13 +46,13 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
           <div
             className={` ${
               filtered ? "block" : "hidden"
-            }  dark:bg-blackTwo     top-[85px] gap-[19px] flex p-[24px] pr-[60px] absolute  max-w-[192px] max-h-[128px] rounded-[8px] bg-whiteTwo shadow-custom2`}
+            }  dark:bg-blackTwo   top-[85px] gap-[19px] flex p-[24px] pr-[60px] absolute  max-w-[192px] max-h-[128px] rounded-[8px] bg-whiteTwo shadow-custom2`}
           >
             <div className="cursor-pointer    gap-[11px]  flex justify-center flex-col">
               <label className="relative cursor-pointer flex items-center gap-[8px]">
                 <input
                   type="checkbox"
-                  className="appearance-none w-[16px] h-[16px] border border-solid border-blue rounded-[2px] cursor-pointer checked:bg-blue"
+                  className="   appearance-none w-[16px] h-[16px] border hover:border-solid hover:border-blue rounded-[2px] cursor-pointer checked:bg-blue  border-none bg-whiteThree dark:bg-blackThree dark:checked:bg-blue"
                   id="draft"
                   onChange={() => setIsChecked(!isChecked)}
                 />
@@ -64,12 +64,12 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
                   src={check}
                   alt="check"
                 />
-                <span>Draft</span>
+                <span className="dark:text-whiteTwo">Draft</span>
               </label>
               <label className="relative cursor-pointer flex items-center gap-[8px]">
                 <input
                   type="checkbox"
-                  className="appearance-none w-[16px] h-[16px] border border-solid border-blue rounded-[2px] cursor-pointer checked:bg-blue"
+                  className="dark:bg-blackThree dark:checked:bg-blue  appearance-none w-[16px] h-[16px] border hover:border-solid hover:border-blue rounded-[2px] cursor-pointer checked:bg-blue  border-none bg-whiteThree  "
                   id="pending"
                   onChange={() => setIsChecked2(!isChecked2)}
                 />
@@ -81,12 +81,12 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
                   src={check}
                   alt="check"
                 />
-                <span>Pending</span>
+                <span className="dark:text-whiteTwo">Pending</span>
               </label>
               <label className="relative cursor-pointer flex items-center gap-[8px]">
                 <input
                   type="checkbox"
-                  className="appearance-none w-[16px] h-[16px] border border-solid border-blue rounded-[2px] cursor-pointer checked:bg-blue"
+                  className="  dark:bg-blackThree dark:checked:bg-blue  appearance-none w-[16px] h-[16px] border hover:border-solid hover:border-blue rounded-[2px] cursor-pointer checked:bg-blue  border-none bg-whiteThree "
                   id="paid"
                   onChange={() => setIsChecked3(!isChecked3)}
                 />
@@ -98,7 +98,7 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
                   src={check}
                   alt="check"
                 />
-                <span>Paid</span>
+                <span className="dark:text-whiteTwo">Paid</span>
               </label>
             </div>
           </div>
