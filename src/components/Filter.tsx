@@ -14,18 +14,12 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
   const [isChecked2, setIsChecked2] = useState(false);
   const [isChecked3, setIsChecked3] = useState(false);
 
-  // const handleCheck = function () {
-  //   setIsChecked(!isChecked);
-  //   setIsChecked2(!isChecked2);
-  //   setIsChecked3(!isChecked3);
-  // };
-
   const handleFilter = function () {
     setFiltered(!filtered);
   };
 
   return (
-    <div className="text-black font-bold  text-[15px] flex justify-center items-center gap-[86px]">
+    <div className="    text-black font-bold  text-[15px] flex justify-center items-center gap-[86px]">
       <div className="flex justify-center flex-col">
         <span className="dark:text-whiteTwo     text-[32px]">Invoices</span>
         <span className="text-grey text-[13px] dark:text-[#DFE3FA]">
