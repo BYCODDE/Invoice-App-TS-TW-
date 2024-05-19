@@ -4,12 +4,12 @@ import { InvoiceContext } from "../../App";
 function AddNewItemButton() {
   const { setShowAddInvoice } = useContext(InvoiceContext);
   return (
-    <div className=" cursor-pointer w-[327px] h-[48px] bg-[#F9FAFE] dark:bg-[#1E2139] flex  items-center justify-center rounded-full mt-[15px] mb-[50px]">
+    <div className=" cursor-pointer md:w-[504px] w-[327px] md:p-[15px] h-[48px] bg-[#F9FAFE] dark:bg-[#1E2139] flex  items-center justify-center rounded-full mt-[15px] mb-[50px]">
       <button
         onClick={() => setShowAddInvoice(true)}
-        className="text-[#7E88C3] text-[15px] font-bold"
+        className="text-[#7E88C3] text-[15px]  dark:text-white font-bold"
       >
-        <span className="px-[9px]">+</span>Add New Item
+        <span className="px-[9px]   dark:text-white">+</span>Add New Item
       </button>
     </div>
   );
