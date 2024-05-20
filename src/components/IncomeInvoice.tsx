@@ -22,7 +22,7 @@ const IncomeInvoice: React.FC<IncomeInvoiceProps> = ({ item }) => {
       </div>
       <div className="flex  justify-between">
         <div className="">
-          <span className="dark:text-[#DFE3FA]  text-skyTwo font-[500]">
+          <span className="   dark:text-[#DFE3FA]  text-skyTwo font-[500]">
             {" "}
             {formattedDate}
           </span>
