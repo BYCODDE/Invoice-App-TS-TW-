@@ -98,10 +98,12 @@ export default function EditInvoice() {
 						) : null}
 					</div>
 					<InputsComponent
-						errors={errors}
+						error1={errors.senderAddress?.city}
+						// senderPostCodeError={errors.senderAddress?.postCode}
+						// senderCountryError={errors.senderAddress?.country}
 						inputTitle1="city"
 						inputTitle2="Post Code"
-						id1="SenderCity"
+						id1="senderAddress.city"
 						defaultValue1={find?.senderAddress?.postCode || ""}
 						register1={register("senderAddress.city", {
 							required: "Please Fill City graph",
@@ -186,7 +188,10 @@ export default function EditInvoice() {
 					) : null}
 				</div>
 				<InputsComponent
-					errors={errors}
+					error1={errors.clientAddress?.city}
+					// clientPostCodeError={errors.clientAddress?.postCode}
+					// clientCountryError={errors.clientAddress?.country}
+					// errors={errors}
 					inputTitle1="city"
 					inputTitle2="Post Code"
 					id1="clientAddressCity"
