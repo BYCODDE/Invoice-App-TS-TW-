@@ -62,7 +62,7 @@ const InputsComponent: React.FC<CustomInputProps> = ({
 						{inputTitle1}
 					</label>
 					<input
-						className="cursor-pointer w-[152px] h-[48px] flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139] dark:text-white dark:border-none"
+						className="cursor-pointer w-[152px] h-[48px] flex-shrink-0 rounded-md border-[1px] border-solid border-[#DFE3FA] bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139] dark:text-white dark:border-none"
 						id={id1}
 						defaultValue={defaultValue1 || ""}
 						{...register1}
@@ -77,7 +77,7 @@ const InputsComponent: React.FC<CustomInputProps> = ({
 						{inputTitle2}
 					</label>
 					<input
-						className="w-[152px] cursor-pointer h-[48px] flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none"
+						className="w-[152px] cursor-pointer h-[48px] flex-shrink-0 rounded-md border-[1px] border-solid border-[#DFE3FA] bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none"
 						id={id2}
 						defaultValue={defaultValue2 || ""}
 						{...register2}
@@ -95,7 +95,7 @@ const InputsComponent: React.FC<CustomInputProps> = ({
 					{inputTitle}
 				</label>
 				<input
-					className="cursor-pointer md:w-[152px] w-[327px] h-[48px] rounded-md border border-gray-300 bg-white font-league-spartan text-[13px] font-bold leading-4 tracking-tight px-[20px] dark:bg-[#1E2139] dark:text-white dark:border-none"
+					className="cursor-pointer md:w-[152px] w-[327px] h-[48px] rounded-md border-[1px] border-solid border-[#DFE3FA] bg-white font-league-spartan text-[13px] font-bold leading-4 tracking-tight px-[20px] dark:bg-[#1E2139] dark:text-white dark:border-none"
 					id={id3}
 					defaultValue={defaultValue3 || ""}
 					{...register3}

@@ -69,7 +69,7 @@ export default function EditInvoice() {
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<div className="h-[32px] md:w-[504px] w-full     text-[24px] font-bold my-[20px] dark:text-white ">{`Edit # ${find?.id}`}</div>
-				<h3 className="text-section-title-color py-[20px] md:pl-[0]  pl-[15px] font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full md:w-[504px] text-left  ">
+				<h3 className="text-[#7C5DFA] py-[20px] md:pl-[0]  pl-[15px] font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full md:w-[504px] text-left  ">
 					Bill From
 				</h3>
 
@@ -132,7 +132,7 @@ export default function EditInvoice() {
 						</p>
 					) : null}
 				</div>
-				<h3 className="text-section-title-color   font-league-spartan text-[15px] font-bold leading-4 md:pl-[0]  pl-[15px] tracking-tight w-full md:w-[504px] text-left py-[20px] ">
+				<h3 className="text-[#7C5DFA]   font-league-spartan text-[15px] font-bold leading-4 md:pl-[0]  pl-[15px] tracking-tight w-full md:w-[504px] text-left py-[20px] ">
 					Bill To
 				</h3>
 
@@ -276,7 +276,7 @@ export default function EditInvoice() {
 									Item Name
 								</label>
 								<input
-									className={`w-[327px] md:w-[214px] h-[48px] rounded-md border border-gray-300 bg-white   font-league-spartan text-[13px] font-bold leading-4 tracking-tight px-[20px] dark:bg-[#1E2139] dark:text-white dark:border-none`}
+									className={`w-[327px] md:w-[214px] h-[48px] rounded-md border-[1px] border-solid border-[#DFE3FA] bg-white   font-league-spartan text-[13px] font-bold leading-4 tracking-tight px-[20px] dark:bg-[#1E2139] dark:text-white dark:border-none`}
 									id={item.name}
 									defaultValue={item.name || ""}
 									{...register(`items.${index}.name`, { required: true })}
@@ -292,7 +292,7 @@ export default function EditInvoice() {
 										Quantity
 									</label>
 									<input
-										className="  w-[64px] h-[48px] flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none"
+										className="  w-[64px] h-[48px] flex-shrink-0 rounded-md border-[1px] border-solid border-[#DFE3FA] bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none"
 										id={`items.${index}.quantity`}
 										defaultValue={item.quantity || ""}
 										{...register(`items.${index}.quantity`, {
@@ -308,7 +308,7 @@ export default function EditInvoice() {
 										Price
 									</label>
 									<input
-										className=" w-[100px] h-[48px] flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-[13px] 
+										className=" w-[100px] h-[48px] flex-shrink-0 rounded-md border-[1px] border-solid border-[#DFE3FA] bg-white text-custom-color font-league-spartan text-[13px] 
                                         cursor-pointer font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none"
 										id="SenderZipCode"
 										defaultValue={item.price || ""}

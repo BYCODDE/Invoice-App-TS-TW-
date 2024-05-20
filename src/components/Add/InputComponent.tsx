@@ -17,7 +17,6 @@ const CustomInput: React.FC<CustomInputProps> = ({
 	register,
 	inputTitle,
 	//   type,
-	color,
 }) => {
 	return (
 		<div className="flex flex-col cursor-pointer  items-start justify-center gap-[20px] w-[327px] md:w-[504px]  box-border py-[10px] ">
@@ -29,8 +28,8 @@ const CustomInput: React.FC<CustomInputProps> = ({
 			</label>
 
 			<input
-				style={{ opacity: color }}
-				className={`w-[327px] cursor-pointer h-[48px] rounded-md border border-gray-300 bg-white md:w-[504px]  font-league-spartan text-[13px] font-bold leading-4 tracking-tight px-[20px] dark:bg-[#1E2139] dark:text-white dark:border-none`}
+				// style={{ opacity: 0.5 }}
+				className={`w-[327px] cursor-pointer h-[48px] rounded-md border-[1px] border-solid border-[#DFE3FA] bg-white md:w-[504px]  font-league-spartan text-[13px] font-bold leading-4 tracking-tight px-[20px] dark:bg-[#1E2139] dark:text-white dark:border-none`}
 				id={id}
 				defaultValue={defaultValue || ""}
 				{...register}
