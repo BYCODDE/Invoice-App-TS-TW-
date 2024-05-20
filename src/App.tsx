@@ -45,6 +45,8 @@ export const InvoiceContext = createContext<{
 	showAddInvoice: boolean;
 	showEditInvoice: boolean;
 	setShowEditInvoice: React.Dispatch<React.SetStateAction<boolean>>;
+	isDeleteOpen: boolean;
+	setIsDeleteOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }>({
 	isDarkMode: false,
 	setIsDarkMode: () => {},
@@ -54,6 +56,8 @@ export const InvoiceContext = createContext<{
 	showAddInvoice: false,
 	showEditInvoice: false,
 	setShowEditInvoice: () => {},
+	isDeleteOpen: false,
+	setIsDeleteOpen: () => {},
 });
 
 const router = createBrowserRouter([
@@ -77,6 +81,7 @@ function App() {
 	const [invoices, setInvoices] = useState<IInvoices[]>(data);
 	const [showAddInvoice, setShowAddInvoice] = useState(false);
 	const [showEditInvoice, setShowEditInvoice] = useState(false);
+	const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
 
 	return (
 		<InvoiceContext.Provider
@@ -89,6 +94,8 @@ function App() {
 				showAddInvoice,
 				setShowEditInvoice,
 				showEditInvoice,
+				isDeleteOpen,
+				setIsDeleteOpen,
 			}}
 		>
 			<RouterProvider router={router} />
