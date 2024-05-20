@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useFieldArray, useForm, SubmitHandler } from "react-hook-form";
 import { IInvoices, InvoiceContext } from "../../App";
 import { format } from "date-fns";
 
@@ -23,7 +23,16 @@ export default function EditInvoice() {
 		setValue,
 		control,
 		formState: { errors },
-	} = useForm<IInvoices>();
+	} = useForm<IInvoices>({
+		defaultValues: {
+			items: find?.items || [],
+		},
+	});
+
+	const { fields, append, remove } = useFieldArray({
+		control,
+		name: "items",
+	});
 
 	const onSubmit: SubmitHandler<IInvoices> = (data) => {
 		console.log(data);
@@ -35,7 +44,8 @@ export default function EditInvoice() {
 		setInvoices([...invoices]);
 	};
 
-	const formattedDate = format(new Date(`${find?.createdAt}`), "dd MMM yyyy");
+	const formattedDate = format(new Date(find?.createdAt || ""), "dd MMM yyyy");
+
 	console.log(formattedDate);
 
 	const validateGmail = (value: string) => {
@@ -45,6 +55,7 @@ export default function EditInvoice() {
 		return true;
 	};
 	const [selectedDate, setSelectedDate] = useState<Date | null | string>(null);
+
 	return (
 		<div>
 			<div
@@ -243,7 +254,7 @@ export default function EditInvoice() {
 					</div>
 				</div>
 				<div className="flex flex-col gap-[50px] md:px-[35px] md:self-start md:gap-[0px] pb-[50px] box-border">
-					{find?.items.map((item, index) => (
+					{fields.map((item, index) => (
 						<div
 							className="md:flex gap-[20px] md:items-baseline xl:pl-[20px] "
 							key={index}
@@ -307,14 +318,9 @@ export default function EditInvoice() {
 									></input>
 								</div>
 								<div className="w-[30px] h-[48px] flex items-center  ">
-									<div
-										className=" flex w-[12px] h-[16px] items-center md:pt-[0px] pt-[14px]"
-										onClick={() => {
-											setValue(`items.${index}.quantity`, 0);
-											setValue(`items.${index}.total`, 0);
-										}}
-									>
+									<div className=" flex w-[12px] h-[16px] items-center md:pt-[0px] pt-[14px]">
 										<img
+											onClick={() => remove(index)}
 											className=" w-[12px] h-[16px] flex cursor-pointer"
 											src="/assets/icon-delete.svg"
 											alt="bin"
@@ -326,7 +332,7 @@ export default function EditInvoice() {
 					))}
 				</div>
 
-				<AddNewItemButton />
+				<AddNewItemButton append={append} />
 				<div className="w-full mb-[20px]">
 					{Object.keys(errors).length !== 0 && (
 						<p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full md:w-[504px] text-left  py-2">

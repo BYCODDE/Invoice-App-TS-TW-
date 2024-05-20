@@ -26,8 +26,8 @@ interface CustomInputProps {
 }
 const DateTerms: React.FC<CustomInputProps> = ({
 	id1,
-	defaultValue1,
-	register2,
+	// defaultValue1,
+	// register2,
 	defaultValue2,
 	register1,
 	id2,
@@ -132,7 +132,7 @@ const DateTerms: React.FC<CustomInputProps> = ({
 								<div
 									onClick={() => setTerm(item)}
 									key={index}
-									className=" h-[48px] cursor-pointer hover:text-[#7C5DFA] text-[15px] py-[18px] pl-[20px] tracking-[-0.25px] font-bold leading-[15px] cursor-pointer border-b-[1px] border-b-[#DFE3FA] "
+									className=" h-[48px] hover:text-[#7C5DFA] text-[15px] py-[18px] pl-[20px] tracking-[-0.25px] font-bold leading-[15px] cursor-pointer border-b-[1px] border-b-[#DFE3FA] "
 								>
 									{item}
 								</div>
