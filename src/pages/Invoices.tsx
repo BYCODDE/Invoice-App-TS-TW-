@@ -21,7 +21,7 @@ const Invoices: React.FC = () => {
 
   const filteredInvoices = invoices.filter((invoice) => {
     if (info.length === 0) return true;
-    return info.includes(invoice.status.toLowerCase());
+    return info.includes(invoice.status);
   });
 
   return (
