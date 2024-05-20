@@ -27,7 +27,7 @@ const ItemContainer: React.FC<CustomInputProps> = ({
 		<div className="flex gap-[20px] py-[30px] box-border">
 			<div className="flex flex-col items-start justify-center gap-[10px]  w-[64px] h-[48px] ">
 				<label
-					className="text-label-text-color cursor-pointer font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
+					className="text-[#7E88C3] cursor-pointer font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
 					htmlFor={id1}
 				>
 					{inputTitle1}
@@ -42,7 +42,7 @@ const ItemContainer: React.FC<CustomInputProps> = ({
 
 			<div className="flex flex-col items-start justify-center gap-[10px] w-[100px] h-[48px] box-border">
 				<label
-					className=" cursor-pointer text-label-text-color text-custom-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
+					className=" cursor-pointer text-[#7E88C3] text-custom-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
 					htmlFor={id2}
 				>
 					{inputTitle2}
@@ -55,7 +55,7 @@ const ItemContainer: React.FC<CustomInputProps> = ({
 				/>
 			</div>
 			<div className="flex flex-col items-start justify-center gap-[10px] w-[80px] h-[48px] box-border">
-				<label className="cursor-pointer text-label-text-color text-custom-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3">
+				<label className="cursor-pointer text-[#7E88C3] text-custom-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3">
 					Total
 				</label>
 				<p className=" w-[80px] h-[48px] flex  items-center  flex-shrink-0 rounded-md  bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none">

@@ -8,7 +8,7 @@ import {
 	UseFormSetValue,
 	Control,
 } from "react-hook-form";
-import { IInvoices } from "../../App";
+import { IInvoices } from "../../types/types";
 
 interface CustomInputProps {
 	id1: string;
@@ -68,7 +68,7 @@ const DateTerms: React.FC<CustomInputProps> = ({
 			<div className="flex md:flex-row flex-col gap-[40px] py-[30px] box-border w-full">
 				<div className="flex flex-col  items-start justify-center gap-[10px] w-[327px] md:w-[240px] h-[48px] ">
 					<label
-						className="text-label-text-color cursor-pointer font-league-spartan text-[13px] py-3 font-medium leading-4 tracking-tight px-3"
+						className="text-[#7E88C3] cursor-pointer font-league-spartan text-[13px] py-3 font-medium leading-4 tracking-tight px-3"
 						htmlFor={id2}
 					>
 						{inputTitle2}
@@ -114,7 +114,7 @@ const DateTerms: React.FC<CustomInputProps> = ({
 						className="flex flex-col items-start justify-center gap-[10px] w-[327px] md:w-[240px] h-[48px] box-border"
 					>
 						<label
-							className=" text-label-text-color cursor-pointer py-3 text-custom-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
+							className=" text-[#7E88C3] cursor-pointer py-3 text-custom-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
 							htmlFor={id1}
 						>
 							{inputTitle1}

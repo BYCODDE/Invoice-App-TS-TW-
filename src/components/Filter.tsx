@@ -69,7 +69,7 @@ function Filter({ invoices, setInfo }: FilterProps) {
 						}  dark:bg-blackTwo top-[50px] gap-[19px] flex p-[24px] pr-[60px] absolute w-[170px] md:max-w-[192px] max-h-[128px] rounded-[8px] bg-whiteTwo shadow-custom2`}
 					>
 						<div className="cursor-pointer    gap-[11px]  flex justify-center flex-col">
-							<label className="relative cursor-pointer flex items-center gap-[8px]">
+							<label className="relative text-[#7E88C3] cursor-pointer flex items-center gap-[8px]">
 								<input
 									type="checkbox"
 									className="   appearance-none w-[16px] h-[16px] border hover:border-solid hover:border-blue rounded-[2px] cursor-pointer checked:bg-blue  border-none bg-whiteThree dark:bg-blackThree dark:checked:bg-blue"
@@ -87,7 +87,7 @@ function Filter({ invoices, setInfo }: FilterProps) {
 								/>
 								<span className="dark:text-whiteTwo">Draft</span>
 							</label>
-							<label className="relative cursor-pointer flex items-center gap-[8px]">
+							<label className="relative text-[#7E88C3] cursor-pointer flex items-center gap-[8px]">
 								<input
 									type="checkbox"
 									className="dark:bg-blackThree dark:checked:bg-blue  appearance-none w-[16px] h-[16px] border hover:border-solid hover:border-blue rounded-[2px] cursor-pointer checked:bg-blue  border-none bg-whiteThree  "
@@ -105,7 +105,7 @@ function Filter({ invoices, setInfo }: FilterProps) {
 								/>
 								<span className="dark:text-whiteTwo">Pending</span>
 							</label>
-							<label className="relative cursor-pointer flex items-center gap-[8px]">
+							<label className="relative text-[#7E88C3] cursor-pointer flex items-center gap-[8px]">
 								<input
 									type="checkbox"
 									className="  dark:bg-blackThree dark:checked:bg-blue  appearance-none w-[16px] h-[16px] border hover:border-solid hover:border-blue rounded-[2px] cursor-pointer checked:bg-blue  border-none bg-whiteThree "

@@ -4,7 +4,6 @@ export default {
   theme: {
     extend: {
       "section-title-color": "var(--01, #7C5DFA)",
-      "label-text-color": "var(--07, #7E88C3)",
     },
     backgroundImage: {
       "gradient-to-bottom":

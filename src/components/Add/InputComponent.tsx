@@ -22,7 +22,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
 	return (
 		<div className="flex flex-col cursor-pointer  items-start justify-center gap-[20px] w-[327px] md:w-[504px]  box-border py-[10px] ">
 			<label
-				className="text-label-text-color cursor-pointer font-league-spartan text-[13px] font-medium leading-4 tracking-tight pl-[5px]"
+				className="text-[#7E88C3] cursor-pointer font-league-spartan text-[13px] font-medium leading-4 tracking-tight pl-[5px]"
 				htmlFor={id}
 			>
 				{inputTitle}

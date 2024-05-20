@@ -13,7 +13,7 @@ function EditInvoicesButtons() {
 			</button>
 			<button
 				type="submit"
-				className="w-[138px] h-[48px] cursor-pointer flex-shrink-0 rounded-full bg-purple-600 text-white font-league-spartan text-[15px] font-bold leading-15 tracking-tighter"
+				className="w-[138px] h-[48px] cursor-pointer flex-shrink-0 rounded-full bg-[#7C5DFA] text-white font-league-spartan text-[15px] font-bold leading-15 tracking-tighter"
 			>
 				Save Changes
 			</button>

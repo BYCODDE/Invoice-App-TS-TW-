@@ -14,7 +14,7 @@ import { IInvoices } from "../../types/types";
 // import AddInvoicesButtons from "./AddInvoicesButtons";
 
 export default function EditInvoice() {
-	const { invoices, setInvoices, setShowEditInvoice, showEditInvoice } =
+	const { invoices, setInvoices, setShowEditInvoice } =
 		useContext(InvoiceContext);
 	const find = invoices.find((item) => item.id === "XM9141");
 	console.log(find);
@@ -242,7 +242,7 @@ export default function EditInvoice() {
 				<h3 className="text-[#777F98] md:pl-[0]  pl-[15px] md:pt-[15px] pt-[62px] pb-[20px] font-league-spartan text-[18px] tracking-wide font-bold leading-32px  w-full md:w-[504px] text-left py-2 ">
 					Item List
 				</h3>
-				<div className="md:flex w-[505px] gap-[20px] mb-[-15px] hidden text-label-text-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight">
+				<div className="md:flex w-[505px] gap-[20px] mb-[-15px] hidden text-[#7E88C3] font-league-spartan text-[13px] font-medium leading-4 tracking-tight">
 					{" "}
 					<div className="w-[214px] ">
 						{" "}
@@ -269,7 +269,7 @@ export default function EditInvoice() {
 						>
 							<div className="flex flex-col  items-start justify-center gap-[20px] w-[327px] md:w-[214px]  box-border py-[10px] ">
 								<label
-									className="text-label-text-color md:hidden  
+									className="text-[#7E88C3] md:hidden  
                                     cursor-pointer font-league-spartan text-[13px] font-medium leading-4 tracking-tight pl-[5px]"
 									htmlFor={`items.${index}.name`}
 								>
@@ -286,7 +286,7 @@ export default function EditInvoice() {
 								<div className="flex flex-col items-start justify-center gap-[10px] w-[100px] h-[48px] box-border ">
 									{" "}
 									<label
-										className="text-label-text-color md:hidden cursor-pointer font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
+										className="text-[#7E88C3] md:hidden cursor-pointer font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
 										htmlFor={`items.${index}.quantity`}
 									>
 										Quantity
@@ -302,7 +302,7 @@ export default function EditInvoice() {
 								</div>
 								<div className="flex flex-col items-start justify-center gap-[10px] w-[100px] h-[48px] box-border">
 									<label
-										className="cursor-pointer md:hidden text-label-text-color text-custom-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
+										className="cursor-pointer md:hidden text-[#7E88C3] text-custom-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
 										htmlFor={`items.${index}.price`}
 									>
 										Price
@@ -318,7 +318,7 @@ export default function EditInvoice() {
 									/>
 								</div>
 								<div className="flex flex-col items-start justify-center gap-[10px] w-[80px] h-[48px] box-border">
-									<label className="cursor-pointer md:hidden text-label-text-color text-custom-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3">
+									<label className="cursor-pointer md:hidden text-[#7E88C3] text-custom-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3">
 										Total
 									</label>
 									<input

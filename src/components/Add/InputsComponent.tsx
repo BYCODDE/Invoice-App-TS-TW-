@@ -1,9 +1,5 @@
 import React from "react";
-import {
-	// FieldError,
-	FieldErrors,
-	UseFormRegisterReturn,
-} from "react-hook-form";
+import { UseFormRegisterReturn } from "react-hook-form";
 // import { IInvoices } from "../../App";
 
 interface CustomInputProps {
@@ -60,7 +56,7 @@ const InputsComponent: React.FC<CustomInputProps> = ({
 				>
 					{error1 && <p>{error1.message}</p>}
 					<label
-						className="text-label-text-color cursor-pointer font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
+						className="text-[#7E88C3] cursor-pointer font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
 						htmlFor={id1}
 					>
 						{inputTitle1}
@@ -75,7 +71,7 @@ const InputsComponent: React.FC<CustomInputProps> = ({
 
 				<div className="flex flex-col items-start justify-center gap-[10px] w-[152px] h-[48px]">
 					<label
-						className="text-label-text-color cursor-pointer text-custom-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
+						className="text-[#7E88C3] cursor-pointer text-custom-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
 						htmlFor={id2}
 					>
 						{inputTitle2}
@@ -93,7 +89,7 @@ const InputsComponent: React.FC<CustomInputProps> = ({
 				className={`flex flex-col items-start justify-center gap-[10px] w-[327px] md:w-[152px]  box-border py-[10px] `}
 			>
 				<label
-					className="text-label-text-color font-league-spartan text-[13px] font-medium leading-4 tracking-tight pl-[5px]"
+					className="text-[#7E88C3] font-league-spartan text-[13px] font-medium leading-4 tracking-tight pl-[5px]"
 					htmlFor={id3}
 				>
 					{inputTitle}
