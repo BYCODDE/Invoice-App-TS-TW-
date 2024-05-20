@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.0",
+    "@uidotdev/usehooks": "^2.4.1",
     "antd": "^5.17.3",
     "date-fns": "^3.6.0",
     "dateformat": "^5.0.3",

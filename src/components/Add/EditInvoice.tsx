@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useFieldArray, useForm, SubmitHandler } from "react-hook-form";
-import { IInvoices, InvoiceContext } from "../../App";
+import { InvoiceContext } from "../../App";
 import { format } from "date-fns";
 
 import InputComponent from "./InputComponent";
@@ -9,11 +9,12 @@ import InputsComponent from "./InputsComponent";
 import AddNewItemButton from "./AddNewItemButton";
 import EditInvoicesButtons from "./EditInvoicesButtons";
 import DateTerms from "./Date_Terms";
+import { IInvoices } from "../../types/types";
 
 // import AddInvoicesButtons from "./AddInvoicesButtons";
 
 export default function EditInvoice() {
-	const { invoices, setInvoices, setShowEditInvoice } =
+	const { invoices, setInvoices, setShowEditInvoice, showEditInvoice } =
 		useContext(InvoiceContext);
 	const find = invoices.find((item) => item.id === "XM9141");
 	console.log(find);
@@ -120,7 +121,9 @@ export default function EditInvoice() {
 						inputTitle="Country"
 						id3="SenderCountry"
 						defaultValue3={find?.senderAddress?.country || ""}
-						register3={register("senderAddress.country", { required: true })}
+						register3={register("senderAddress.country", {
+							required: true,
+						})}
 					/>
 
 					{errors.senderAddress?.country ? (
@@ -292,7 +295,9 @@ export default function EditInvoice() {
 										className="  w-[64px] h-[48px] flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none"
 										id={`items.${index}.quantity`}
 										defaultValue={item.quantity || ""}
-										{...register(`items.${index}.quantity`, { required: true })}
+										{...register(`items.${index}.quantity`, {
+											required: true,
+										})}
 									/>
 								</div>
 								<div className="flex flex-col items-start justify-center gap-[10px] w-[100px] h-[48px] box-border">
@@ -307,7 +312,9 @@ export default function EditInvoice() {
                                         cursor-pointer font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none"
 										id="SenderZipCode"
 										defaultValue={item.price || ""}
-										{...register(`items.${index}.price`, { required: true })}
+										{...register(`items.${index}.price`, {
+											required: true,
+										})}
 									/>
 								</div>
 								<div className="flex flex-col items-start justify-center gap-[10px] w-[80px] h-[48px] box-border">
@@ -319,7 +326,9 @@ export default function EditInvoice() {
 										defaultValue={
 											item.quantity > 0 ? item.price * item.quantity : 0
 										}
-										{...register(`items.${index}.total`, { required: true })}
+										{...register(`items.${index}.total`, {
+											required: true,
+										})}
 									></input>
 								</div>
 								<div className="w-[30px] h-[48px] flex items-center  ">

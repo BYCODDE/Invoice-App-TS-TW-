@@ -5,36 +5,8 @@ import Invoices from "./pages/Invoices";
 import InvoiceDetails from "./pages/InvoiceDetails";
 import { createContext, useState } from "react";
 import data from "../data.json";
-
-export interface IInvoices {
-	id?: string;
-	createdAt?: string | Date;
-	paymentDue?: string;
-	description?: string;
-	paymentTerms?: number;
-	clientName: string;
-	clientEmail: string;
-	status?: string;
-	senderAddress: {
-		street: string;
-		city: string;
-		postCode: string;
-		country: string;
-	};
-	clientAddress: {
-		street: string;
-		city: string;
-		postCode: string;
-		country: string;
-	};
-	items: {
-		name: string;
-		quantity: number;
-		price: number;
-		total: number;
-	}[];
-	total: number;
-}
+import { IInvoices } from "./types/types";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 export const InvoiceContext = createContext<{
 	isDarkMode: boolean;
@@ -47,6 +19,9 @@ export const InvoiceContext = createContext<{
 	setShowEditInvoice: React.Dispatch<React.SetStateAction<boolean>>;
 	isDeleteOpen: boolean;
 	setIsDeleteOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	isSmallDevice: boolean;
+	showInvoiceDetails: boolean;
+	setShowInvoiceDetails: React.Dispatch<React.SetStateAction<boolean>>;
 }>({
 	isDarkMode: false,
 	setIsDarkMode: () => {},
@@ -58,6 +33,9 @@ export const InvoiceContext = createContext<{
 	setShowEditInvoice: () => {},
 	isDeleteOpen: false,
 	setIsDeleteOpen: () => {},
+	isSmallDevice: false,
+	showInvoiceDetails: false,
+	setShowInvoiceDetails: () => {},
 });
 
 const router = createBrowserRouter([
@@ -83,6 +61,11 @@ function App() {
 	const [showEditInvoice, setShowEditInvoice] = useState(false);
 	const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
 
+	const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
+
+	const [showInvoiceDetails, setShowInvoiceDetails] =
+		useState<boolean>(isSmallDevice);
+
 	return (
 		<InvoiceContext.Provider
 			value={{
@@ -96,6 +79,9 @@ function App() {
 				showEditInvoice,
 				isDeleteOpen,
 				setIsDeleteOpen,
+				isSmallDevice,
+				showInvoiceDetails,
+				setShowInvoiceDetails,
 			}}
 		>
 			<RouterProvider router={router} />
