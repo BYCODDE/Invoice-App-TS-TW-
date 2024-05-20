@@ -1,7 +1,16 @@
+import { IInvoices } from "../App";
 import InvoicePaymentInfo from "./InvoicePaymentInfo";
 import InvoicePaymentInfoLarger from "./InvoicePaymentInfoLarger";
 
-export default function SingleInvoiceInformation() {
+import dateFormat from "dateformat";
+
+interface SingleInvoiceInformationProps {
+  choosenInvoice: IInvoices | null;
+}
+
+export default function SingleInvoiceInformation({
+  choosenInvoice,
+}: SingleInvoiceInformationProps) {
   return (
     <div className="mt-[16px] pt-[25px] px-[24px] pb-[24px] bg-[#FFF] dark:bg-[#1E2139] rounded-[8px] md:p-[32px] xl:pt-[50px] xl:px-[48px] xl:pb-[48px]">
       <div className="md:flex md:justify-between">
@@ -9,26 +18,26 @@ export default function SingleInvoiceInformation() {
           <p className="text-[#7E88C3] dark:text-[#858BB2] font-bold text-[15px] leading-[15px] tracking-[-0.25px]">
             #
             <span className="text-[#0C0E16] dark:text-[#fff] font-bold text-[15px] leading-[15px] tracking-[-0.25px]">
-              XM9141
+              {choosenInvoice?.id}
             </span>
           </p>
           <p className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-[15px] tracking-[-0.1px] mt-[4px]">
-            Graphic Design
+            {choosenInvoice?.description}
           </p>
         </div>
 
         <div className="mt-[30px] flex flex-col gap-[4px] md:mt-0">
           <p className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-[18px] tracking-[-0.1px]">
-            19 Union Terrace
+            {choosenInvoice?.senderAddress.street}
           </p>
           <p className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-[18px] tracking-[-0.1px]">
-            London
+            {choosenInvoice?.senderAddress.city}
           </p>
           <p className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-[18px] tracking-[-0.1px]">
-            E1 3EZ
+            {choosenInvoice?.senderAddress.postCode}
           </p>
           <p className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-[18px] tracking-[-0.1px]">
-            United Kingdom
+            {choosenInvoice?.senderAddress.country}
           </p>
         </div>
       </div>
@@ -40,13 +49,13 @@ export default function SingleInvoiceInformation() {
               Invoice Date
             </p>
             <p className="text-[#0C0E16] dark:text-[#fff] font-bold text-[15px] leading-[20px] tracking-[-0.25px] mt-[13px]">
-              21 Aug 2021
+              {dateFormat(choosenInvoice?.createdAt, "d mmm yyyy")}
             </p>
             <p className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-[18px] tracking-[-0.1px] mt-[31px]">
               Payment Due
             </p>
             <p className="text-[#0C0E16] dark:text-[#fff] font-bold text-[15px] leading-[20px] tracking-[-0.25px] mt-[13px]">
-              20 Sep 2021
+              {dateFormat(choosenInvoice?.paymentDue, "d mmm yyyy")}
             </p>
           </div>
           <div>
@@ -54,19 +63,19 @@ export default function SingleInvoiceInformation() {
               Bill To
             </p>
             <p className="text-[#0C0E16] dark:text-[#fff] font-bold text-[15px] leading-[20px] tracking-[-0.25px] mt-[13px]">
-              Alex Grim
+              {choosenInvoice?.clientName}
             </p>
             <p className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-[18px] tracking-[-0.1px] mt-[7px]">
-              84 Church Way
+              {choosenInvoice?.clientAddress.street}
             </p>
             <p className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-[18px] tracking-[-0.1px] mt-[4px]">
-              Bradford
+              {choosenInvoice?.clientAddress.city}
             </p>
             <p className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-[18px] tracking-[-0.1px] mt-[4px]">
-              BD1 9PB
+              {choosenInvoice?.clientAddress.postCode}
             </p>
             <p className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[13px] leading-[18px] tracking-[-0.1px] mt-[4px]">
-              United Kingdom
+              {choosenInvoice?.clientAddress.country}
             </p>
           </div>
         </div>
@@ -76,7 +85,7 @@ export default function SingleInvoiceInformation() {
             Sent to
           </p>
           <p className="text-[#0C0E16] dark:text-[#fff] font-bold text-[15px] leading-[20px] tracking-[-0.25px]">
-            alexgrim@mail.com
+            {choosenInvoice?.clientEmail}
           </p>
         </div>
       </div>

@@ -31,7 +31,7 @@ export default function InvoiceDetails() {
         </div>
 
         <InvoiceStatusInfo choosenInvoice={choosenInvoice} />
-        <SingleInvoiceInformation />
+        <SingleInvoiceInformation choosenInvoice={choosenInvoice} />
       </div>
       <div className="md:hidden">
         <InvoiceDetailsButtons />

@@ -1,7 +1,7 @@
 export default function InvoicePaymentInfo() {
   return (
     <div>
-      <div className="bg-[#F9FAFE] dark:bg-[#252945] pt-[25px] px-[24px] pb-[23px] rounded-t-[8px] flex flex-col gap-[24px]">
+      <div className="bg-[#F9FAFE] dark:bg-[#252945] pt-[25px] px-[24px] pb-[23px] rounded-t-[8px] flex flex-col gap-[24px] mt-[38px]">
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-[8px]">
             <p className="text-[#0C0E16] dark:text-[#fff] font-bold text-[15px] leading-[20px] tracking-[-0.25px]">
