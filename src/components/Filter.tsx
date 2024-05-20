@@ -2,17 +2,29 @@ import arrowDown from "/public/assets/icon-arrow-down.svg";
 import plus from "/public/assets/icon-plus.svg";
 import check from "/public/assets/icon-check.svg";
 import { IInvoices } from "../pages/Invoices";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 interface FilterProps {
   invoices: IInvoices[];
+  setInfo: React.Dispatch<React.SetStateAction<(never | string)[]>>;
 }
 
-const Filter: React.FC<FilterProps> = ({ invoices }) => {
+const Filter: React.FC<FilterProps> = ({ invoices, setInfo }) => {
   const [filtered, setFiltered] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [isChecked3, setIsChecked3] = useState(false);
+
+  const handleInvoice = (
+    event: ChangeEvent<HTMLInputElement>,
+    status: string
+  ) => {
+    if (event.target.checked) {
+      setInfo((info) => [...info, status]);
+    } else {
+      setInfo((info) => info.filter((item) => item !== status));
+    }
+  };
 
   const handleFilter = function () {
     setFiltered(!filtered);
@@ -62,7 +74,8 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
                   type="checkbox"
                   className="   appearance-none w-[16px] h-[16px] border hover:border-solid hover:border-blue rounded-[2px] cursor-pointer checked:bg-blue  border-none bg-whiteThree dark:bg-blackThree dark:checked:bg-blue"
                   id="draft"
-                  onChange={() => setIsChecked(!isChecked)}
+                  onClick={() => setIsChecked(!isChecked)}
+                  onChange={(event) => handleInvoice(event, "draft")}
                 />
                 <img
                   style={{
@@ -79,7 +92,8 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
                   type="checkbox"
                   className="dark:bg-blackThree dark:checked:bg-blue  appearance-none w-[16px] h-[16px] border hover:border-solid hover:border-blue rounded-[2px] cursor-pointer checked:bg-blue  border-none bg-whiteThree  "
                   id="pending"
-                  onChange={() => setIsChecked2(!isChecked2)}
+                  onClick={() => setIsChecked2(!isChecked2)}
+                  onChange={(event) => handleInvoice(event, "pending")}
                 />
                 <img
                   style={{
@@ -96,7 +110,8 @@ const Filter: React.FC<FilterProps> = ({ invoices }) => {
                   type="checkbox"
                   className="  dark:bg-blackThree dark:checked:bg-blue  appearance-none w-[16px] h-[16px] border hover:border-solid hover:border-blue rounded-[2px] cursor-pointer checked:bg-blue  border-none bg-whiteThree "
                   id="paid"
-                  onChange={() => setIsChecked3(!isChecked3)}
+                  onClick={() => setIsChecked3(!isChecked3)}
+                  onChange={(event) => handleInvoice(event, "paid")}
                 />
                 <img
                   style={{
