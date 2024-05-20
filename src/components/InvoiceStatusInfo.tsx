@@ -1,6 +1,14 @@
+import { IInvoices } from "../App";
 import InvoiceDetailsButtons from "./InvoiceDetailsButtons";
 
-export default function InvoiceStatusInfo() {
+interface InvoiseStatusInfoProps {
+  choosenInvoice: IInvoices | null;
+}
+
+export default function InvoiceStatusInfo({
+  choosenInvoice,
+}: InvoiseStatusInfoProps) {
+  console.log(choosenInvoice);
   return (
     <div className="md:flex md:justify-between md:bg-[#FFFFFF] md:dark:bg-[#1E2139] md:mt-[31px] md:py-[20px] md:px-[32px] md:rounded-[8px]">
       <div className="bg-[#FFFFFF] dark:bg-[#1E2139] pt-[24px] pb-[27px] px-[24px] mt-[31px] flex justify-between items-center rounded-[8px] md:justify-start md:p-0 md:m-0 md:gap-[20px]">

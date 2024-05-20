@@ -6,7 +6,7 @@ import InvoiceDetails from "./pages/InvoiceDetails";
 import { createContext, useState } from "react";
 import data from "../data.json";
 
-interface IInvoices {
+export interface IInvoices {
   id: string;
   createdAt: string;
   paymentDue: string;
