@@ -91,11 +91,11 @@ export default function SingleInvoiceInformation({
       </div>
 
       <div className="block md:hidden">
-        <InvoicePaymentInfo />
+        <InvoicePaymentInfo choosenInvoice={choosenInvoice} />
       </div>
 
       <div className="hidden md:block">
-        <InvoicePaymentInfoLarger />
+        <InvoicePaymentInfoLarger choosenInvoice={choosenInvoice} />
       </div>
     </div>
   );
