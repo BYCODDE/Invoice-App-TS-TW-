@@ -87,3 +87,7 @@ html {
 	font-weight: normal !important;
 	font-size: 30px;
 } */
+
+.error input {
+	background-color: #ffcccc; /* Change to your desired red color */
+}

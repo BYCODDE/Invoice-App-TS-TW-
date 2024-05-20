@@ -8,7 +8,7 @@ import data from "../data.json";
 
 export interface IInvoices {
 	id?: string;
-	createdAt?: string;
+	createdAt?: string | Date;
 	paymentDue?: string;
 	description?: string;
 	paymentTerms?: number;
