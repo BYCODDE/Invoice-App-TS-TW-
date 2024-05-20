@@ -19,7 +19,10 @@ export default function Header() {
         />
       </div>
       <div className="flex items-center gap-[24px] md:gap-[32px] xl:flex-col xl:gap-[24px]">
-        <div className="w-[20px] h-[20px]">
+        <div
+          className="w-[20px] h-[20px] cursor-pointer
+"
+        >
           {!isDarkMode ? (
             <img
               src={moon}
