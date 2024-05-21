@@ -10,13 +10,16 @@ import AddNewItemButton from "./AddNewItemButton";
 import EditInvoicesButtons from "./EditInvoicesButtons";
 import DateTerms from "./Date_Terms";
 import { IInvoices } from "../../types/types";
+import { useParams } from "react-router-dom";
 
 // import AddInvoicesButtons from "./AddInvoicesButtons";
 
 export default function EditInvoice() {
 	const { invoices, setInvoices, setShowEditInvoice } =
 		useContext(InvoiceContext);
-	const find = invoices.find((item) => item.id === "XM9141");
+	const { id } = useParams();
+
+	const find = invoices.find((item) => item.id === id);
 	console.log(find);
 	const {
 		register,
@@ -57,6 +60,7 @@ export default function EditInvoice() {
 	};
 	const [selectedDate, setSelectedDate] = useState<Date | null | string>(null);
 	console.log("errors", errors);
+
 	return (
 		<div>
 			<div
@@ -65,7 +69,9 @@ export default function EditInvoice() {
 			></div>
 
 			<form
-				className="flex xl:top-[0px] md:h-screen md:overflow-y-auto md:overflow-x-hidden  xl:w-[719px] xl:pl-[70px] md:top-[80px] md:pt-[750px] md:rounded-r-3xl  md:left-0 flex-col md:w-[616px] md:absolute  md:z-20 bg-[white] items-center justify-center box-border p-3 dark:bg-[#141625]"
+				className="flex xl:top-[0px] md:h-screen   md:overflow-y-auto md:overflow-x-hidden  xl:w-[719px] xl:pl-[70px] md:top-[80px]  md:rounded-r-3xl  md:left-0 flex-col md:w-[616px] md:pt-[750px] md:absolute  md:z-20 bg-[white] items-center justify-center box-border p-3 dark:bg-[#141625]
+                
+                "
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<div className="h-[32px] md:w-[504px] w-full     text-[24px] font-bold my-[20px] dark:text-white ">{`Edit # ${find?.id}`}</div>
