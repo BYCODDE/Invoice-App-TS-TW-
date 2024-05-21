@@ -1,8 +1,23 @@
 import { useContext } from "react";
 import { InvoiceContext } from "../App";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function InvoiceDetailsButtons() {
-	const { setIsDeleteOpen, setShowEditInvoice } = useContext(InvoiceContext);
+	const { setIsDeleteOpen, setShowEditInvoice, setInvoices, invoices } =
+		useContext(InvoiceContext);
+
+	const { id } = useParams();
+
+	const navigate = useNavigate();
+
+	console.log(invoices);
+
+	function handleMarkPaid() {
+		const readIndex = invoices.findIndex((invoice) => invoice.id === id);
+		invoices[readIndex].status = "paid";
+		setInvoices([...invoices]);
+		navigate("/");
+	}
 
 	return (
 		<div className=" pt-[21px] px-[24px] pb-[22px] bg-[#FFFFFF] dark:bg-[#1E2139] flex items-center justify-center gap-[8px] mt-[56px] md:p-0 md:m-0 ">
@@ -18,7 +33,10 @@ export default function InvoiceDetailsButtons() {
 			>
 				Delete
 			</button>
-			<button className="pt-[18px] px-[28px] pb-[15px] bg-[#7C5DFA] text-[#FFFFFF] rounded-[24px] text-[15px] font-bold leading-[15px] tracking-[-0.25px] xl:hover:bg-[#9277FF]">
+			<button
+				className="pt-[18px] px-[28px] pb-[15px] bg-[#7C5DFA] text-[#FFFFFF] rounded-[24px] text-[15px] font-bold leading-[15px] tracking-[-0.25px] xl:hover:bg-[#9277FF]"
+				onClick={handleMarkPaid}
+			>
 				Mark as Paid
 			</button>
 		</div>

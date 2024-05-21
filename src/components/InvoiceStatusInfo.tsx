@@ -8,7 +8,7 @@ interface InvoiseStatusInfoProps {
 export default function InvoiceStatusInfo({
   choosenInvoice,
 }: InvoiseStatusInfoProps) {
-  console.log(choosenInvoice);
+
 
   const statusColorBackground =
     choosenInvoice?.status === "paid"
