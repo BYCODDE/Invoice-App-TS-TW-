@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import InvoiceDetailsButtons from "../components/InvoiceDetailsButtons";
 import InvoiceStatusInfo from "../components/InvoiceStatusInfo";
 import SingleInvoiceInformation from "../components/SingleInvoiceInformation";
@@ -30,6 +30,8 @@ export default function InvoiceDetails() {
 	const { invoices, showEditInvoice } = useContext(InvoiceContext);
 	const isMobile = useIsMobile();
 
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		const foundInvoice = invoices.find((invoice) => invoice.id === id);
 		if (foundInvoice) {
@@ -42,11 +44,14 @@ export default function InvoiceDetails() {
 	}
 
 	return (
-		<div className="w-full max-w-[500px] m-auto md:max-w-[688px] md:w-[688px] md:m-auto xl:w-[730px] xl:max-w-[730px] relative">
+		<div className="w-full max-w-[500px] m-auto md:max-w-[688px] md:w-[688px] md:m-auto xl:w-[730px] xl:max-w-[730px] relative md:mt-[100px] xl:m-0">
 			<div className=" pt-[33px] px-[24px]">
 				<div className="flex items-center gap-[23px] xl:cursor-pointer">
 					<img src={arrowLeft} alt="left-arrow" className="xl:mb-[2px]" />
-					<p className="font-bold text-[15px] leading-[15px] tracking-[-0.25px] text-[#0C0E16] dark:text-[#FFFFFF] xl:hover:text-[#7E88C3]">
+					<p
+						className="font-bold text-[15px] leading-[15px] tracking-[-0.25px] text-[#0C0E16] dark:text-[#FFFFFF] xl:hover:text-[#7E88C3]"
+						onClick={() => navigate(-1)}
+					>
 						Go back
 					</p>
 				</div>
