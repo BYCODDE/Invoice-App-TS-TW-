@@ -31,16 +31,18 @@ function Filter({ invoices, setInfo }: FilterProps) {
 	};
 
 	return (
-		<div className="w-[100%] justify-between   text-black font-bold  text-[15px] flex  items-center ">
-			<div className="flex justify-center flex-col">
-				<span className=" md:text-[35px]    dark:text-whiteTwo text-[32px] font-bold">
+		<div className="xl:p-[20px]	xl:max-w-[720px] w-[100%] justify-between  mt-[60px] text-black font-bold  text-[15px] flex  items-center ">
+			<div className="flex justify-center flex-col ">
+				<span className="     md:text-[35px]    dark:text-whiteTwo text-[32px] font-bold">
 					Invoices
 				</span>
 				<span className="md:hidden   text-grey text-[13px] dark:text-[#DFE3FA] font-medium ">
 					{invoices.length} invoices
 				</span>
 				<span className="md:block   text-grey text-[13px] dark:text-[#DFE3FA] hidden font-medium">
-					There are {invoices.length} total invoices
+					{invoices.length > 0
+						? `There are ${invoices.length} total invoices`
+						: `No invoices`}
 				</span>
 			</div>
 			<div className="flex">
@@ -85,7 +87,7 @@ function Filter({ invoices, setInfo }: FilterProps) {
 									src={check}
 									alt="check"
 								/>
-								<span className="dark:text-whiteTwo">Draft</span>
+								<span className="dark:text-whiteTwo  text-black">Draft</span>
 							</label>
 							<label className="relative text-[#7E88C3] cursor-pointer flex items-center gap-[8px]">
 								<input
@@ -103,7 +105,7 @@ function Filter({ invoices, setInfo }: FilterProps) {
 									src={check}
 									alt="check"
 								/>
-								<span className="dark:text-whiteTwo">Pending</span>
+								<span className="dark:text-whiteTwo text-black">Pending</span>
 							</label>
 							<label className="relative text-[#7E88C3] cursor-pointer flex items-center gap-[8px]">
 								<input
@@ -121,7 +123,7 @@ function Filter({ invoices, setInfo }: FilterProps) {
 									src={check}
 									alt="check"
 								/>
-								<span className="dark:text-whiteTwo">Paid</span>
+								<span className="dark:text-whiteTwo text-black">Paid</span>
 							</label>
 						</div>
 					</div>
