@@ -1,9 +1,12 @@
 import dateFormat from "dateformat";
 import { IInvoices } from "../types/types";
-
+import { useMediaQuery } from "@uidotdev/usehooks";
+import IncomeInvoiceStatus from "./IncomeInvoiceStatus";
+import arrowRight from "/public/assets/icon-arrow-right.svg";
 interface IncomeInvoiceProps {
 	item: IInvoices;
 }
+
 const IncomeInvoice: React.FC<IncomeInvoiceProps> = ({ item }) => {
 	const inputDate = item.paymentDue;
 	const dateObject = inputDate ? new Date(inputDate) : new Date();
@@ -14,73 +17,61 @@ const IncomeInvoice: React.FC<IncomeInvoiceProps> = ({ item }) => {
 		currency: "GBP",
 	}).format(item.total);
 
-	return (
-		<div className="dark:bg-[#1E2139]  flex flex-col  p-[24px]  w-[100%] h-[100%] rounded-[8px] mt-[32px] bg-whiteTwo">
-			<div className="font-bold flex justify-between">
-				<div className="mb-[24px] dark:text-whiteTwo">
-					<span className="text-sky">#</span>
-					{item.id}
-				</div>
+	const isMd = useMediaQuery("(min-width: 768px)");
 
-				<span className="dark:text-whiteTwo text-skyTwo font-[500]">
-					{item.clientName}
-				</span>
-			</div>
-			<div className="flex  justify-between">
-				<div className="">
-					<span className="dark:text-[#DFE3FA]  text-skyTwo font-[500]">
+	return (
+		<div
+			className={`	xl:max-w-[720px]	ml:max-h-[72px]	md:justify-between md:items-center	md:max-h-[72px] md:flex-row dark:bg-[#1E2139] 	text-[15px]		flex flex-col p-[24px] w-[100%] h-[100%] rounded-[8px] mt-[32px] bg-whiteTwo`}
+		>
+			{!isMd ? (
+				<>
+					<div className="font-bold flex justify-between">
+						<div className="mb-[24px] dark:text-whiteTwo">
+							<span className="text-sky">#</span>
+							{item.id}
+						</div>
+						<span className="dark:text-whiteTwo text-skyTwo font-[500]">
+							{item.clientName}
+						</span>
+					</div>
+					<div className="flex justify-between ">
+						<div>
+							<span className="dark:text-[#DFE3FA] text-skyTwo font-[500]">
+								{" "}
+								{formattedDate}
+							</span>
+							<h3 className="dark:text-whiteTwo font-bold text-black mt-[9px]">
+								{formattedAmount}
+							</h3>
+						</div>
+
+						<IncomeInvoiceStatus item={item} />
+					</div>
+				</>
+			) : (
+				<>
+					<div className="font-bold dark:text-whiteTwo">
+						<span className="text-sky dark:text-grey">#</span>
+						{item.id}
+					</div>
+					<span className="dark:text-[#DFE3FA] text-skyTwo font-[500]">
 						{" "}
 						{formattedDate}
 					</span>
-					<h3 className="dark:text-whiteTwo font-bold text-black mt-[9px]">
+					<span className="dark:text-whiteTwo text-skyTwo font-[500]">
+						{item.clientName}
+					</span>
+					<h3 className="dark:text-whiteTwo font-bold text-black ">
 						{formattedAmount}
 					</h3>
-				</div>
-
-				<div
-					className={`${
-						item.status === "paid"
-							? "bg-green  "
-							: item.status === "pending"
-								? "bg-yellow  "
-								: item.status === "draft"
-									? "bg-Draft dark:bg-[#292C44]"
-									: ""
-					}       bg-opacity-5 flex justify-center items-center gap-[6px] pt-[17px] pl-[30px] pr-[30px] pb-[15px] max-w-[104px] max-h-[40px] rounded-[6px]`}
-				>
-					<div
-						className={`${
-							item.status === "paid"
-								? "bg-green  "
-								: item.status === "pending"
-									? "bg-yellow p-[4px] "
-									: item.status === "draft"
-										? "bg-Draft p-[4px] dark:bg-[#DFE3FA] "
-										: ""
-						}w-[8px] h-[8px] rounded-[50%]`}
-					></div>
-					<span
-						className={`${
-							item.status === "paid"
-								? "text-green  "
-								: item.status === "pending"
-									? "text-yellow  "
-									: item.status === "draft"
-										? " dark:text-[#DFE3FA]   text-Draft "
-										: ""
-						}font-bold`}
-					>
-						{item.status === "paid"
-							? "Paid  "
-							: item.status === "pending"
-								? "Pending "
-								: item.status === "draft"
-									? "Draft "
-									: ""}
-					</span>
-				</div>
-			</div>
+					<div className="flex justify-center items-center gap-[20px]">
+						<IncomeInvoiceStatus item={item} />
+						<img src={arrowRight} alt="arrow-right" />
+					</div>
+				</>
+			)}
 		</div>
 	);
 };
+
 export default IncomeInvoice;
