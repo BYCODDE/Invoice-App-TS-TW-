@@ -5,89 +5,88 @@ import Invoices from "./pages/Invoices";
 import InvoiceDetails from "./pages/InvoiceDetails";
 import { createContext, useState } from "react";
 import data from "../data.json";
-
-export interface IInvoices {
-  id: string;
-  createdAt: string;
-  paymentDue: string;
-  description: string;
-  paymentTerms: number;
-  clientName: string;
-  clientEmail: string;
-  status: string;
-  senderAddress: {
-    street: string;
-    city: string;
-    postCode: string;
-    country: string;
-  };
-  clientAddress: {
-    street: string;
-    city: string;
-    postCode: string;
-    country: string;
-  };
-  items: {
-    name: string;
-    quantity: number;
-    price: number;
-    total: number;
-  }[];
-  total: number;
-}
-[];
+import { IInvoices } from "./types/types";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 export const InvoiceContext = createContext<{
-  isDarkMode: boolean;
-  setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
-  invoices: IInvoices[];
-  setInvoices: React.Dispatch<React.SetStateAction<IInvoices[]>>;
-  isDeleteOpen: boolean;
-  setIsDeleteOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	isDarkMode: boolean;
+	setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+	invoices: IInvoices[];
+	setInvoices: React.Dispatch<React.SetStateAction<IInvoices[]>>;
+	setShowAddInvoice: React.Dispatch<React.SetStateAction<boolean>>;
+	showAddInvoice: boolean;
+	showEditInvoice: boolean;
+	setShowEditInvoice: React.Dispatch<React.SetStateAction<boolean>>;
+	isDeleteOpen: boolean;
+	setIsDeleteOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	isSmallDevice: boolean;
+	showInvoiceDetails: boolean;
+	setShowInvoiceDetails: React.Dispatch<React.SetStateAction<boolean>>;
 }>({
-  isDarkMode: false,
-  setIsDarkMode: () => {},
-  invoices: [],
-  setInvoices: () => {},
-  isDeleteOpen: false,
-  setIsDeleteOpen: () => {},
+	isDarkMode: false,
+	setIsDarkMode: () => {},
+	invoices: [],
+	setInvoices: () => {},
+	setShowAddInvoice: () => {},
+	showAddInvoice: false,
+	showEditInvoice: false,
+	setShowEditInvoice: () => {},
+	isDeleteOpen: false,
+	setIsDeleteOpen: () => {},
+	isSmallDevice: false,
+	showInvoiceDetails: false,
+	setShowInvoiceDetails: () => {},
 });
 
 const router = createBrowserRouter([
-  {
-    element: <AppLayout />,
-    children: [
-      {
-        element: <Invoices />,
-        path: "/",
-      },
-      {
-        element: <InvoiceDetails />,
-        path: "/:id/invoiceDetails",
-      },
-    ],
-  },
+	{
+		element: <AppLayout />,
+		children: [
+			{
+				element: <Invoices />,
+				path: "/",
+			},
+			{
+				element: <InvoiceDetails />,
+				path: "/:id/invoiceDetails",
+			},
+		],
+	},
 ]);
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [invoices, setInvoices] = useState<IInvoices[]>(data);
-  const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
+	const [isDarkMode, setIsDarkMode] = useState(false);
+	const [invoices, setInvoices] = useState<IInvoices[]>(data);
+	const [showAddInvoice, setShowAddInvoice] = useState(false);
+	const [showEditInvoice, setShowEditInvoice] = useState(false);
+	const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
 
-  return (
-    <InvoiceContext.Provider
-      value={{
-        isDarkMode,
-        setIsDarkMode,
-        invoices,
-        setInvoices,
-        isDeleteOpen,
-        setIsDeleteOpen,
-      }}
-    >
-      <RouterProvider router={router} />
-    </InvoiceContext.Provider>
-  );
+	const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
+
+	const [showInvoiceDetails, setShowInvoiceDetails] =
+		useState<boolean>(isSmallDevice);
+
+	return (
+		<InvoiceContext.Provider
+			value={{
+				isDarkMode,
+				setIsDarkMode,
+				invoices,
+				setInvoices,
+				setShowAddInvoice,
+				showAddInvoice,
+				setShowEditInvoice,
+				showEditInvoice,
+				isDeleteOpen,
+				setIsDeleteOpen,
+				isSmallDevice,
+				showInvoiceDetails,
+				setShowInvoiceDetails,
+			}}
+		>
+			<RouterProvider router={router} />
+		</InvoiceContext.Provider>
+	);
 }
 
 export default App;
