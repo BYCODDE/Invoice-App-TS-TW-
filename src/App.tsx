@@ -3,7 +3,7 @@ import "./App.css";
 import AppLayout from "./AppLayout";
 import Invoices from "./pages/Invoices";
 import InvoiceDetails from "./pages/InvoiceDetails";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import data from "../data.json";
 import { IInvoices } from "./types/types";
 import { useMediaQuery } from "@uidotdev/usehooks";
@@ -66,6 +66,12 @@ function App() {
 	const [showInvoiceDetails, setShowInvoiceDetails] =
 		useState<boolean>(isSmallDevice);
 
+	// useEffect(() => {
+	// 	if (showAddInvoice) {
+	// 		setShowEditInvoice(true);
+	// 	}
+	// }, [showAddInvoice]);
+	console.log(showAddInvoice);
 	return (
 		<InvoiceContext.Provider
 			value={{

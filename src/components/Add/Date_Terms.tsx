@@ -73,7 +73,7 @@ const DateTerms: React.FC<CustomInputProps> = ({
 					>
 						{inputTitle2}
 					</label>
-					<div className="relative">
+					<div className="relative ">
 						<span
 							className="absolute cursor-pointer z-50 top-[15px] right-[10px]"
 							onClick={handleIconClick}
@@ -101,7 +101,7 @@ const DateTerms: React.FC<CustomInputProps> = ({
 										ref={datePickerRef}
 										dateFormat="d MMM yyyy"
 										placeholderText="Click to select a date"
-										className="border cursor-pointer border-gray-300 p-2 rounded flex flex-col items-start justify-center gap-[10px] w-[327px] md:w-[240px] h-[48px] font-league-spartan text-[15px] font-bold leading-4 tracking-tight pl-[20px] dark:bg-[#1E2139] dark:text-white dark:border-none"
+										className="cursor-pointer border-[1px] border-solid border-[#DFE3FA] p-2 rounded flex flex-col items-start justify-center gap-[10px] w-[327px] md:w-[240px] h-[48px] font-league-spartan text-[15px] font-bold leading-4 tracking-tight pl-[20px] dark:bg-[#1E2139] dark:text-white dark:border-none"
 									/>
 								)}
 							/>
@@ -120,7 +120,7 @@ const DateTerms: React.FC<CustomInputProps> = ({
 							{inputTitle1}
 						</label>
 						<input
-							className="w-[327px] cursor-pointer md:w-[240px] h-[48px] flex-shrink-0 rounded-md border border-gray-300 bg-white text-custom-color  font-league-spartan text-[15px] font-bold leading-4 tracking-tight pl-[20px] dark:bg-[#1E2139]  dark:text-white dark:border-none"
+							className="w-[327px] cursor-pointer md:w-[240px] h-[48px] flex-shrink-0 rounded-md border-[1px] border-solid border-[#DFE3FA] bg-white text-custom-color  font-league-spartan text-[15px] font-bold leading-4 tracking-tight pl-[20px] dark:bg-[#1E2139]  dark:text-white dark:border-none"
 							id={id1}
 							value={term || ""}
 							{...register1}
@@ -132,7 +132,7 @@ const DateTerms: React.FC<CustomInputProps> = ({
 								<div
 									onClick={() => setTerm(item)}
 									key={index}
-									className=" h-[48px] hover:text-[#7C5DFA] text-[15px] py-[18px] pl-[20px] tracking-[-0.25px] font-bold leading-[15px] cursor-pointer border-b-[1px] border-b-[#DFE3FA] "
+									className=" h-[48px] hover:text-[#7C5DFA]  dark:text-white text-[15px] py-[18px] pl-[20px] tracking-[-0.25px] font-bold leading-[15px] cursor-pointer border-b-[1px] border-b-[#DFE3FA]  dark:border-b-[#1E2139] dark:bg-[#252945]"
 								>
 									{item}
 								</div>

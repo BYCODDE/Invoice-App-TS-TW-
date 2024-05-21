@@ -1,5 +1,5 @@
 import React from "react";
-import { UseFormRegisterReturn } from "react-hook-form";
+import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 
 interface CustomInputProps {
 	id: string;
@@ -9,6 +9,7 @@ interface CustomInputProps {
 	textColor?: string;
 	type?: string;
 	color?: string;
+	optimalError: FieldError | undefined;
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -16,21 +17,27 @@ const CustomInput: React.FC<CustomInputProps> = ({
 	defaultValue,
 	register,
 	inputTitle,
-	//   type,
-	color,
+
+	optimalError,
 }) => {
 	return (
 		<div className="flex flex-col cursor-pointer  items-start justify-center gap-[20px] w-[327px] md:w-[504px]  box-border py-[10px] ">
-			<label
-				className="text-[#7E88C3] cursor-pointer font-league-spartan text-[13px] font-medium leading-4 tracking-tight pl-[5px]"
-				htmlFor={id}
-			>
-				{inputTitle}
-			</label>
-
+			<div className="flex w-full justify-between">
+				<label
+					className={`text-[#7E88C3] ${optimalError && "text-[red]"} cursor-pointer font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3`}
+					htmlFor={id}
+				>
+					{inputTitle}
+				</label>
+				{optimalError && (
+					<p className="text-[red]  font-league-spartan text-[10px] leading-4 tracking-tight  text-left  py-1">
+						{optimalError.message}
+					</p>
+				)}
+			</div>
 			<input
-				style={{ opacity: color }}
-				className={`w-[327px] cursor-pointer h-[48px] rounded-md border border-gray-300 bg-white md:w-[504px]  font-league-spartan text-[13px] font-bold leading-4 tracking-tight px-[20px] dark:bg-[#1E2139] dark:text-white dark:border-none`}
+				// style={{ opacity: 0.5 }}
+				className={`cursor-pointer ${optimalError && "border-[1px] border-solid border-[red]"}  w-full h-[48px] flex-shrink-0 rounded-md border-[1px] border-solid border-[#DFE3FA] bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139] dark:text-white dark:border-none`}
 				id={id}
 				defaultValue={defaultValue || ""}
 				{...register}
