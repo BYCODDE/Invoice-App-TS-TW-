@@ -74,19 +74,22 @@ export default function EditInvoice() {
 				</h3>
 
 				<InputComponent
+					optimalError={errors.senderAddress?.street}
 					inputTitle="Street Address"
 					id="senderAddress.street"
 					defaultValue={find?.senderAddress?.street || ""}
-					register={register("senderAddress.street", { required: true })}
+					register={register("senderAddress.street", {
+						required: "can't be empty",
+					})}
 				/>
-				{errors.senderAddress?.street ? (
+				{/* {errors.senderAddress?.street ? (
 					<p className="text-[red]  md:pl-[50px]  font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
 						Street Address is required
 					</p>
-				) : null}
+				) : null} */}
 
 				<div>
-					<div className="flex justify-between w-full ">
+					{/* <div className="flex justify-between w-full ">
 						{errors.senderAddress?.city ? (
 							<p className="text-[red] ]  text-[10px] font-league-spartan leading-4 tracking-tight md:w-[152px]  w-full text-left py-1">
 								{errors.senderAddress?.city?.message}
@@ -97,7 +100,7 @@ export default function EditInvoice() {
 								{errors.senderAddress?.postCode?.message}
 							</p>
 						) : null}
-					</div>
+					</div> */}
 					<InputsComponent
 						cityError={errors.senderAddress?.city}
 						postCodeError={errors.senderAddress?.postCode}
@@ -126,23 +129,24 @@ export default function EditInvoice() {
 						})}
 					/>
 
-					{errors.senderAddress?.country ? (
+					{/* {errors.senderAddress?.country ? (
 						<p className="text-[red]    font-league-spartan text-[10px] leading-4 tracking-tight w-full text-left  md:w-[152px]  py-2">
 							Please fill Country graph
 						</p>
-					) : null}
+					) : null} */}
 				</div>
 				<h3 className="text-[#7C5DFA]   font-league-spartan text-[15px] font-bold leading-4 md:pl-[0]  pl-[15px] tracking-tight w-full md:w-[504px] text-left py-[20px] ">
 					Bill To
 				</h3>
 
 				<InputComponent
+					optimalError={errors.clientName}
 					inputTitle="Client’s Name"
 					id="ClientName"
 					defaultValue={find?.clientName || ""}
 					register={register("clientName", { required: "can't be empty" })}
 				/>
-				{errors.clientName ? (
+				{/* {errors.clientName ? (
 					<div className="flex justify-between md:w-[500px]  w-full">
 						<p className="text-[red]  md:pr-[50px]  font-league-spartan text-[10px]  leading-4 tracking-tight   w-full text-left px-2 py-2">
 							Client's Name
@@ -151,9 +155,10 @@ export default function EditInvoice() {
 							can't be empty
 						</p>
 					</div>
-				) : null}
+				) : null} */}
 
 				<InputComponent
+					optimalError={errors.clientEmail}
 					inputTitle="Client’s Email"
 					id="ClientEmail"
 					defaultValue={find?.clientEmail || ""}
@@ -162,12 +167,13 @@ export default function EditInvoice() {
 						validate: validateGmail,
 					})}
 				/>
-				{errors.clientEmail ? (
+				{/* {errors.clientEmail ? (
 					<p className="text-[red]   font-league-spartan text-[10px]  leading-4 tracking-tight w-full  md:w-[500px] text-left  py-2">
 						{errors.clientEmail?.message}
 					</p>
-				) : null}
+				) : null} */}
 				<InputComponent
+					optimalError={errors.clientAddress?.street}
 					inputTitle="Street Address"
 					id="ClientStreetAddress"
 					defaultValue={find?.clientAddress?.street || ""}
@@ -175,12 +181,12 @@ export default function EditInvoice() {
 						required: "can't be empty",
 					})}
 				/>
-				{errors.clientAddress?.street ? (
+				{/* {errors.clientAddress?.street ? (
 					<p className="text-[red]  md:pl-[50px]  font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
 						Street address is required
 					</p>
-				) : null}
-				<div className="flex justify-between w-full ">
+				) : null} */}
+				{/* <div className="flex justify-between w-full ">
 					{errors.clientAddress?.city ? (
 						<p className="text-[red]  md:pl-[50px]  font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
 							{errors.clientAddress?.city.message}
@@ -191,15 +197,11 @@ export default function EditInvoice() {
 							{errors.clientAddress.postCode?.message}
 						</p>
 					) : null}
-				</div>
+				</div> */}
 				<InputsComponent
 					cityError={errors.clientAddress?.city}
 					postCodeError={errors.clientAddress?.postCode}
 					CountryError={errors.clientAddress?.country}
-					// clientPostCodeError={errors.clientAddress?.postCode}
-					// clientCountryError={errors.clientAddress?.country}
-					// errors={errors}
-
 					inputTitle1="city"
 					inputTitle2="Post Code"
 					id1="clientAddressCity"
@@ -225,6 +227,7 @@ export default function EditInvoice() {
 				/>
 
 				<InputComponent
+					optimalError={errors.description}
 					inputTitle="Project Description"
 					id="ProjectDescription"
 					defaultValue={find?.description || ""}
@@ -358,7 +361,7 @@ export default function EditInvoice() {
 				<AddNewItemButton append={append} />
 				<div className="w-full mb-[20px]">
 					{Object.keys(errors).length !== 0 && (
-						<p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full md:w-[504px] text-left  py-2">
+						<p className="text-[red] font-league-spartan text-[10px]  leading-4 tracking-tight w-full md:w-[504px] xl:ml-[70px] text-left  py-2">
 							{" "}
 							- All fields must be added
 						</p>
