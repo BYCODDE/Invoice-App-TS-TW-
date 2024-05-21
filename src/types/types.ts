@@ -6,7 +6,10 @@ export interface IInvoices {
 	paymentTerms?: number;
 	clientName: string;
 	clientEmail: string;
-	status?: string;
+	status?: {
+		id: number;
+		name: string;
+	};
 	senderAddress: {
 		street: string;
 		city: string;

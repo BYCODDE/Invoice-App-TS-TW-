@@ -11,10 +11,9 @@ const Invoices: React.FC = () => {
 
 	const filteredInvoices = invoices.filter((invoice) => {
 		if (info.length === 0) return true;
-		return info.includes(invoice.status ?? "");
+		return info.includes(invoice.status?.name ?? "");
 	});
- 
-	
+
 	return (
 		<div className="w-[100%] dark:bg-[#141625] flex flex-col justify-center items-center p-[20px] mt-[32px] bg-white">
 			<Filter invoices={invoices} setInfo={setInfo} />

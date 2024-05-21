@@ -4,7 +4,7 @@ import AppLayout from "./AppLayout";
 import Invoices from "./pages/Invoices";
 import InvoiceDetails from "./pages/InvoiceDetails";
 import { createContext, useEffect, useState } from "react";
-import data from "../data.json";
+
 import { IInvoices } from "./types/types";
 import { useMediaQuery } from "@uidotdev/usehooks";
 
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
 
 function App() {
 	const [isDarkMode, setIsDarkMode] = useState(false);
-	const [invoices, setInvoices] = useState<IInvoices[]>(data);
+	const [invoices, setInvoices] = useState<IInvoices[]>([]);
 	const [showAddInvoice, setShowAddInvoice] = useState(false);
 	const [showEditInvoice, setShowEditInvoice] = useState(false);
 	const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
@@ -71,6 +71,26 @@ function App() {
 	// 		setShowEditInvoice(true);
 	// 	}
 	// }, [showAddInvoice]);
+
+	useEffect(() => {
+		async function getData() {
+			try {
+				const response = await fetch(
+					"https://invoice-project-team-5.onrender.com/api/invoice/",
+				);
+
+				if (!response.ok) {
+					throw new Error("Failed to fetch data from the server");
+				}
+				const data = await response.json();
+				setInvoices(data);
+				console.log(data);
+			} catch (error) {
+				// console.log(error.message);
+			}
+		}
+		getData();
+	}, []);
 	console.log(showAddInvoice);
 	return (
 		<InvoiceContext.Provider
