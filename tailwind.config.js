@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      height: {
+        modal: "calc(100vh - 80px)",
+      },
       "section-title-color": "var(--01, #7C5DFA)",
     },
     backgroundImage: {

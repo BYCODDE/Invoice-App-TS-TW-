@@ -1,8 +1,9 @@
 import arrowDown from "/public/assets/icon-arrow-down.svg";
 import plus from "/public/assets/icon-plus.svg";
 import check from "/public/assets/icon-check.svg";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { IInvoices } from "../types/types";
+import { InvoiceContext } from "../App";
 
 interface FilterProps {
 	invoices: IInvoices[];
@@ -30,6 +31,7 @@ function Filter({ invoices, setInfo }: FilterProps) {
 		setFiltered(!filtered);
 	};
 
+	const { setShowAddInvoice } = useContext(InvoiceContext);
 	return (
 		<div className="w-[100%] justify-between   text-black font-bold  text-[15px] flex  items-center ">
 			<div className="flex justify-center flex-col">
@@ -130,8 +132,19 @@ function Filter({ invoices, setInfo }: FilterProps) {
 					<div className="w-[32px] h-[32px] rounded-[50%] bg-white flex justify-center items-center">
 						<img className="w-[10px] h-[10px]" src={plus} alt="plus" />
 					</div>
-					<span className="text-white md:hidden block">New</span>
-					<span className="text-white  md:block    hidden">New Invoice</span>
+
+					<span
+						onClick={() => setShowAddInvoice(true)}
+						className="text-white md:hidden block"
+					>
+						New
+					</span>
+					<span
+						onClick={() => setShowAddInvoice(true)}
+						className="text-white  md:block    hidden"
+					>
+						New Invoice
+					</span>
 				</div>
 			</div>
 		</div>

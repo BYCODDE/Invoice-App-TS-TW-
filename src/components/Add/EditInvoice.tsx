@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useFieldArray, useForm, SubmitHandler } from "react-hook-form";
 import { InvoiceContext } from "../../App";
 import { format } from "date-fns";
@@ -15,7 +15,7 @@ import { useParams } from "react-router-dom";
 // import AddInvoicesButtons from "./AddInvoicesButtons";
 
 export default function EditInvoice() {
-	const { invoices, setInvoices, setShowEditInvoice } =
+	const { invoices, setInvoices, setShowEditInvoice, showAddInvoice } =
 		useContext(InvoiceContext);
 	const { id } = useParams();
 
@@ -25,10 +25,13 @@ export default function EditInvoice() {
 		register,
 		handleSubmit,
 		setValue,
+
 		control,
+		reset,
 		formState: { errors },
 	} = useForm<IInvoices>({
 		defaultValues: {
+			...find,
 			items: find?.items || [],
 		},
 	});
@@ -43,12 +46,14 @@ export default function EditInvoice() {
 		// const editedData = data;
 		console.log("ki");
 		data.id = find?.id;
-		const index = invoices.findIndex((item) => item.id === "XM9141");
+		const index = invoices.findIndex((item) => item.id === id);
 		invoices[index] = data;
 		setInvoices([...invoices]);
 	};
 
-	const formattedDate = format(new Date(find?.createdAt || ""), "dd MMM yyyy");
+	const formattedDate = find
+		? format(new Date(find?.createdAt || ""), "dd MMM yyyy")
+		: "";
 
 	console.log(formattedDate);
 
@@ -61,12 +66,50 @@ export default function EditInvoice() {
 	const [selectedDate, setSelectedDate] = useState<Date | null | string>(null);
 	console.log("errors", errors);
 
+	useEffect(() => {
+		if (showAddInvoice) {
+			console.log("Shemovida");
+
+			handleAddNewItem();
+		}
+	}, [showAddInvoice]);
+	const handleAddNewItem = () => {
+		reset({
+			createdAt: "", // Add default date here if needed
+			paymentDue: "", // Add default paymentDue here if needed
+			description: "", // Add default description here if needed
+			paymentTerms: 0, // Add default paymentTerms here if needed
+			clientName: "",
+			clientEmail: "",
+			status: "", // Add default status here if needed
+			senderAddress: {
+				street: "",
+				city: "",
+				postCode: "",
+				country: "",
+			},
+			clientAddress: {
+				street: "",
+				city: "",
+				postCode: "",
+				country: "",
+			},
+			items: [
+				{
+					name: "",
+					quantity: 0,
+					price: 0,
+					total: 0,
+				},
+			],
+			total: 0, // Add default total here if needed
+		});
+	};
+
+	console.log(showAddInvoice);
 	return (
 		<div>
-			<div
-				onClick={() => setShowEditInvoice(false)}
-				className="flex mt-[25px] items-center gap-[23px] xl:cursor-pointer  md:flex-none"
-			>
+			<div className="flex mt-[25px] items-center gap-[23px] xl:cursor-pointer  md:hidden">
 				<img src="/assets/icon-arrow-left.svg" alt="go back" />
 				<span className="font-bold text-[15px] leading-[15px] tracking-[-0.25px] text-[#0C0E16] dark:text-[#FFFFFF] xl:hover:text-[#7E88C3]">
 					Go back
@@ -78,12 +121,12 @@ export default function EditInvoice() {
 			></div>
 
 			<form
-				className="flex xl:top-[0px] md:h-screen   md:overflow-y-auto md:overflow-x-hidden  xl:w-[719px] xl:pl-[70px] md:top-[80px]  md:rounded-r-3xl  md:left-0 flex-col md:w-[616px] md:pt-[750px] md:absolute  md:z-20 bg-[white] items-center justify-center box-border p-3 dark:bg-[#141625]
+				className="flex xl:top-[0px]  h-modal md:overflow-y-scroll md:overflow-x-hidden  xl:w-[719px] xl:pl-[70px] md:top-[80px]  md:rounded-r-3xl  md:left-0 flex-col md:w-[616px]  md:absolute  md:z-20 bg-[white] items-center justify-center box-border p-3 dark:bg-[#141625]
                 
                 "
 				onSubmit={handleSubmit(onSubmit)}
 			>
-				<div className="h-[32px] md:w-[504px] w-full     text-[24px] font-bold my-[20px] dark:text-white ">{`Edit # ${find?.id}`}</div>
+				<div className="h-[32px] md:w-[504px] w-full     text-[24px] font-bold my-[20px] dark:text-white ">{`Edit # ${find?.id || ""}`}</div>
 				<h3 className="text-[#7C5DFA] py-[20px] md:pl-[0]  pl-[15px] font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full md:w-[504px] text-left  ">
 					Bill From
 				</h3>
@@ -97,25 +140,8 @@ export default function EditInvoice() {
 						required: "can't be empty",
 					})}
 				/>
-				{/* {errors.senderAddress?.street ? (
-					<p className="text-[red]  md:pl-[50px]  font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
-						Street Address is required
-					</p>
-				) : null} */}
 
 				<div>
-					{/* <div className="flex justify-between w-full ">
-						{errors.senderAddress?.city ? (
-							<p className="text-[red] ]  text-[10px] font-league-spartan leading-4 tracking-tight md:w-[152px]  w-full text-left py-1">
-								{errors.senderAddress?.city?.message}
-							</p>
-						) : null}
-						{errors.senderAddress?.postCode ? (
-							<p className="text-[red]    font-league-spartan text-[10px] leading-4 tracking-tight md:w-[152px]  w-full text-left  py-1">
-								{errors.senderAddress?.postCode?.message}
-							</p>
-						) : null}
-					</div> */}
 					<InputsComponent
 						cityError={errors.senderAddress?.city}
 						postCodeError={errors.senderAddress?.postCode}
@@ -143,12 +169,6 @@ export default function EditInvoice() {
 							required: "can't be empty",
 						})}
 					/>
-
-					{/* {errors.senderAddress?.country ? (
-						<p className="text-[red]    font-league-spartan text-[10px] leading-4 tracking-tight w-full text-left  md:w-[152px]  py-2">
-							Please fill Country graph
-						</p>
-					) : null} */}
 				</div>
 				<h3 className="text-[#7C5DFA]   font-league-spartan text-[15px] font-bold leading-4 md:pl-[0]  pl-[15px] tracking-tight w-full md:w-[504px] text-left py-[20px] ">
 					Bill To
@@ -161,16 +181,6 @@ export default function EditInvoice() {
 					defaultValue={find?.clientName || ""}
 					register={register("clientName", { required: "can't be empty" })}
 				/>
-				{/* {errors.clientName ? (
-					<div className="flex justify-between md:w-[500px]  w-full">
-						<p className="text-[red]  md:pr-[50px]  font-league-spartan text-[10px]  leading-4 tracking-tight   w-full text-left px-2 py-2">
-							Client's Name
-						</p>
-						<p className="text-[red]    font-league-spartan px-2 text-[10px]  leading-4 tracking-tight w-full text-right  py-2">
-							can't be empty
-						</p>
-					</div>
-				) : null} */}
 
 				<InputComponent
 					optimalError={errors.clientEmail}
@@ -182,11 +192,7 @@ export default function EditInvoice() {
 						validate: validateGmail,
 					})}
 				/>
-				{/* {errors.clientEmail ? (
-					<p className="text-[red]   font-league-spartan text-[10px]  leading-4 tracking-tight w-full  md:w-[500px] text-left  py-2">
-						{errors.clientEmail?.message}
-					</p>
-				) : null} */}
+
 				<InputComponent
 					optimalError={errors.clientAddress?.street}
 					inputTitle="Street Address"
@@ -196,23 +202,7 @@ export default function EditInvoice() {
 						required: "can't be empty",
 					})}
 				/>
-				{/* {errors.clientAddress?.street ? (
-					<p className="text-[red]  md:pl-[50px]  font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
-						Street address is required
-					</p>
-				) : null} */}
-				{/* <div className="flex justify-between w-full ">
-					{errors.clientAddress?.city ? (
-						<p className="text-[red]  md:pl-[50px]  font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
-							{errors.clientAddress?.city.message}
-						</p>
-					) : null}
-					{errors.clientAddress?.postCode ? (
-						<p className="text-[red]  md:pl-[50px]  font-league-spartan text-[10px]  leading-4 tracking-tight w-full md:w-[504px] text-left  py-2">
-							{errors.clientAddress.postCode?.message}
-						</p>
-					) : null}
-				</div> */}
+
 				<InputsComponent
 					cityError={errors.clientAddress?.city}
 					postCodeError={errors.clientAddress?.postCode}

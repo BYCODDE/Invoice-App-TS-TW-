@@ -6,7 +6,7 @@ import DeleteModal from "./components/DeleteModal";
 import EditInvoice from "./components/Add/EditInvoice";
 
 export default function AppLayout() {
-	const { isDarkMode, isDeleteOpen, showEditInvoice } =
+	const { isDarkMode, isDeleteOpen, showAddInvoice, showEditInvoice } =
 		useContext(InvoiceContext);
 
 	return (
@@ -21,6 +21,7 @@ export default function AppLayout() {
 			</main>
 			{isDeleteOpen && <DeleteModal />}
 			{showEditInvoice && <EditInvoice />}
+			{showAddInvoice && <EditInvoice />}
 		</div>
 	);
 }
