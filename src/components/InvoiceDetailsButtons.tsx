@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import { InvoiceContext } from "../App";
 import { useNavigate, useParams } from "react-router-dom";
-
-export default function InvoiceDetailsButtons() {
+import { IInvoices } from "../types/types";
+interface InvoiceDetailsButtonsProps {
+	choosenInvoice: IInvoices | null;
+}
+export default function InvoiceDetailsButtons({
+	choosenInvoice,
+}: InvoiceDetailsButtonsProps) {
 	const { setIsDeleteOpen, setShowEditInvoice, setInvoices, invoices } =
 		useContext(InvoiceContext);
 
@@ -12,13 +17,35 @@ export default function InvoiceDetailsButtons() {
 
 	console.log(invoices);
 
-	function handleMarkPaid() {
-		const readIndex = invoices.findIndex((invoice) => invoice.id === id);
-		invoices[readIndex].status = "paid";
-		setInvoices([...invoices]);
-		navigate("/");
+	// function handleMarkPaid() {
+	// 	const readIndex = invoices.findIndex((invoice) => invoice.id === id);
+	// 	invoices[readIndex].status?.name = "paid";
+	// 	setInvoices([...invoices]);
+	// 	navigate("/");
+	// }
+
+	async function handleMarkPaid() {
+		try {
+			const response = await fetch(
+				`https://invoice-project-team-5.onrender.com/api/invoice/${id}`,
+				{
+					method: "PUT",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(choosenInvoice),
+				},
+			);
+			if (!response.ok) {
+				throw new Error("Failed to fetch data from the server");
+			}
+			const data = await response.json();
+
+			console.log(data);
+		} catch (error) {
+			console.log((error as Error).message);
+		}
 	}
 
+	console.log(invoices);
 	return (
 		<div className=" pt-[21px] px-[24px] pb-[22px] bg-[#FFFFFF] dark:bg-[#1E2139] flex items-center justify-center gap-[8px] mt-[56px] md:p-0 md:m-0 ">
 			<button

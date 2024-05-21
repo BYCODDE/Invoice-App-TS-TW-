@@ -57,12 +57,12 @@ export default function InvoiceDetails() {
 	return (
 		<div className="w-full max-w-[500px] m-auto md:max-w-[688px] md:w-[688px] md:m-auto xl:w-[730px] xl:max-w-[730px] relative md:mt-[100px] xl:m-0">
 			<div className=" pt-[33px] px-[24px]">
-				<div className="flex items-center gap-[23px] xl:cursor-pointer">
+				<div
+					onClick={() => navigate(-1)}
+					className="flex items-center gap-[23px] xl:cursor-pointer"
+				>
 					<img src={arrowLeft} alt="left-arrow" className="xl:mb-[2px]" />
-					<p
-						className="font-bold text-[15px] leading-[15px] tracking-[-0.25px] text-[#0C0E16] dark:text-[#FFFFFF] xl:hover:text-[#7E88C3]"
-						onClick={() => navigate(-1)}
-					>
+					<p className="font-bold text-[15px] leading-[15px] tracking-[-0.25px] text-[#0C0E16] dark:text-[#FFFFFF] xl:hover:text-[#7E88C3]">
 						Go back
 					</p>
 				</div>
@@ -71,7 +71,7 @@ export default function InvoiceDetails() {
 				<SingleInvoiceInformation choosenInvoice={choosenInvoice} />
 			</div>
 			<div className="md:hidden">
-				<InvoiceDetailsButtons />
+				<InvoiceDetailsButtons choosenInvoice={choosenInvoice} />
 			</div>
 		</div>
 	);

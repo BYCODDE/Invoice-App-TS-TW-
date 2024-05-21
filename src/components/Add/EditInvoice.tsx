@@ -12,11 +12,16 @@ import DateTerms from "./Date_Terms";
 import { IInvoices } from "../../types/types";
 import { useParams } from "react-router-dom";
 
-// import AddInvoicesButtons from "./AddInvoicesButtons";
+import AddInvoicesButtons from "./AddInvoicesButtons";
 
 export default function EditInvoice() {
-	const { invoices, setInvoices, setShowEditInvoice, showAddInvoice } =
-		useContext(InvoiceContext);
+	const {
+		invoices,
+		setInvoices,
+		setShowEditInvoice,
+		showAddInvoice,
+		setShowAddInvoice,
+	} = useContext(InvoiceContext);
 	const { id } = useParams();
 
 	const find = invoices.find((item) => item.id === id);
@@ -102,7 +107,7 @@ export default function EditInvoice() {
 					total: 0,
 				},
 			],
-			total: 0, // Add default total here if needed
+			total: 0,
 		});
 	};
 
@@ -116,14 +121,15 @@ export default function EditInvoice() {
 				</span>
 			</div>
 			<div
-				onClick={() => setShowEditInvoice(false)}
+				onClick={() => {
+					setShowEditInvoice(false);
+					setShowAddInvoice(false);
+				}}
 				className=" sm:flex-none  md:w-full md:right-0 md:top-0 md:left-0 md:h-[100vh] bg-[#000]  md:fixed  opacity-[0.4984]"
 			></div>
 
 			<form
-				className="flex xl:top-[0px]  h-modal md:overflow-y-scroll md:overflow-x-hidden  xl:w-[719px] xl:pl-[70px] md:top-[80px]  md:rounded-r-3xl  md:left-0 flex-col md:w-[616px]  md:absolute  md:z-20 bg-[white] items-center justify-center box-border p-3 dark:bg-[#141625]
-                
-                "
+				className="h-modal xl:h-screen xl:left-[80px] px-[24px] md:px-[56px]  md:overflow-y-scroll md:overflow-x-hidden     xl:top-[0px]  md:top-[80px]  md:rounded-r-3xl  md:left-0 flex-col  md:absolute  md:z-20 bg-[white]   box-border  dark:bg-[#141625]"
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<div className="h-[32px] md:w-[504px] w-full     text-[24px] font-bold my-[20px] dark:text-white ">{`Edit # ${find?.id || ""}`}</div>
@@ -276,12 +282,9 @@ export default function EditInvoice() {
 						<span>Total</span>
 					</div>
 				</div>
-				<div className="flex flex-col gap-[50px] md:px-[35px] md:self-start md:gap-[0px] pb-[50px] box-border">
+				<div className="flex flex-col gap-[50px]  md:self-start md:gap-[0px] pb-[50px] box-border">
 					{fields.map((item, index) => (
-						<div
-							className="md:flex gap-[20px] md:items-baseline xl:pl-[20px] "
-							key={index}
-						>
+						<div className="md:flex gap-[20px] md:items-baseline " key={index}>
 							<div className="flex flex-col  items-start justify-center gap-[20px] w-[327px] md:w-[214px]  box-border py-[10px] ">
 								<label
 									className="text-[#7E88C3] md:hidden  
@@ -372,8 +375,8 @@ export default function EditInvoice() {
 						</p>
 					)}
 				</div>
-				{/* <AddInvoicesButtons /> */}
-				<EditInvoicesButtons />
+				{showAddInvoice && <AddInvoicesButtons />}
+				{!showAddInvoice && <EditInvoicesButtons />}
 			</form>
 		</div>
 	);

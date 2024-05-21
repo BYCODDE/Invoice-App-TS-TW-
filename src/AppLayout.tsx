@@ -16,7 +16,7 @@ export default function AppLayout() {
 			} flex flex-col items-center xl:flex-row xl:items-start relative`}
 		>
 			<Header />
-			<main className="  xl:flex xl:justify-center w-full ">
+			<main className=" h-[100vh]  xl:flex xl:justify-center w-full ">
 				<Outlet />
 			</main>
 			{isDeleteOpen && <DeleteModal />}
