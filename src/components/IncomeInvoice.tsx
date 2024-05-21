@@ -2,7 +2,7 @@ import dateFormat from "dateformat";
 import { IInvoices } from "../types/types";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import IncomeInvoiceStatus from "./IncomeInvoiceStatus";
-
+import arrowRight from "/public/assets/icon-arrow-right.svg";
 interface IncomeInvoiceProps {
 	item: IInvoices;
 }
@@ -21,7 +21,7 @@ const IncomeInvoice: React.FC<IncomeInvoiceProps> = ({ item }) => {
 
 	return (
 		<div
-			className={`md:flex-row dark:bg-[#1E2139] flex flex-col p-[24px] w-[100%] h-[100%] rounded-[8px] mt-[32px] bg-whiteTwo`}
+			className={`md:flex-row md:justify-between md:items-center	md:max-h-[72px]md:flex-row dark:bg-[#1E2139] 	text-[15px]		flex flex-col p-[24px] w-[100%] h-[100%] rounded-[8px] mt-[32px] bg-whiteTwo`}
 		>
 			{!isMd ? (
 				<>
@@ -34,7 +34,7 @@ const IncomeInvoice: React.FC<IncomeInvoiceProps> = ({ item }) => {
 							{item.clientName}
 						</span>
 					</div>
-					<div className="flex justify-between">
+					<div className="flex justify-between ">
 						<div>
 							<span className="dark:text-[#DFE3FA] text-skyTwo font-[500]">
 								{" "}
@@ -50,20 +50,24 @@ const IncomeInvoice: React.FC<IncomeInvoiceProps> = ({ item }) => {
 				</>
 			) : (
 				<>
-					<span className="text-sky">#</span>
-					{item.id}
-					<span className="dark:text-whiteTwo text-skyTwo font-[500]">
-						{item.clientName}
-					</span>
+					<div className="font-bold dark:text-whiteTwo">
+						<span className="text-sky dark:text-grey">#</span>
+						{item.id}
+					</div>
 					<span className="dark:text-[#DFE3FA] text-skyTwo font-[500]">
 						{" "}
 						{formattedDate}
 					</span>
-					<h3 className="dark:text-whiteTwo font-bold text-black mt-[9px]">
+					<span className="dark:text-whiteTwo text-skyTwo font-[500]">
+						{item.clientName}
+					</span>
+					<h3 className="dark:text-whiteTwo font-bold text-black ">
 						{formattedAmount}
 					</h3>
-
-					<IncomeInvoiceStatus item={item} />
+					<div className="flex justify-center items-center gap-[20px]">
+						<IncomeInvoiceStatus item={item} />
+						<img src={arrowRight} alt="arrow-right" />
+					</div>
 				</>
 			)}
 		</div>
