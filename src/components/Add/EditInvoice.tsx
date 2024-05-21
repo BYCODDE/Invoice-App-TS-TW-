@@ -57,14 +57,23 @@ export default function EditInvoice() {
 	// };
 
 	const onSubmit: SubmitHandler<IInvoices> = async (data) => {
-		// data.status?.id=111
 		data.id = "kkjmn";
-
 		data.status = {
 			id: 111,
 			name: "Draft",
 		};
 		console.log(data, "დატააა");
+
+		// Check if createdAt is valid
+		const createdAt = find?.createdAt ? new Date(find.createdAt) : new Date();
+		if (isNaN(createdAt.getTime())) {
+			console.error("Invalid date value for createdAt");
+			return;
+		}
+
+		data.createdAt = format(createdAt, "yyyy-MM-dd");
+		data.paymentDue = format(createdAt, "yyyy-MM-dd");
+
 		try {
 			const response = await fetch(
 				"https://invoice-project-team-5.onrender.com/api/invoice/draft/",
@@ -106,7 +115,7 @@ export default function EditInvoice() {
 	const handleAddNewItem = () => {
 		reset({
 			createdAt: "", // Add default date here if needed
-			paymentDue: "", // Add default paymentDue here if needed
+			paymentDue: "2021-11-12", // Add default paymentDue here if needed
 			description: "", // Add default description here if needed
 			paymentTerms: 0, // Add default paymentTerms here if needed
 			clientName: "",
