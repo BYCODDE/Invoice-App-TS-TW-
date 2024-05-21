@@ -16,11 +16,14 @@ const Invoices: React.FC = () => {
 	return (
 		<div className="w-[100%] dark:bg-[#141625] flex flex-col justify-center items-center p-[20px] mt-[32px] bg-white">
 			<Filter invoices={invoices} setInfo={setInfo} />
+      <div className="w-[100%] max-w-[375px] md:max-w-[672px]">
+
 			{filteredInvoices.map((item) => (
-				<Link to={`${item.id}/invoiceDetails`}>
-					<IncomeInvoice key={item.id} item={item} />
+        <Link key={item.id} to={`${item.id}/invoiceDetails`}>
+					<IncomeInvoice  item={item} />
 				</Link>
 			))}
+      </div>
 		</div>
 	);
 };
