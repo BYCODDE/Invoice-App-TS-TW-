@@ -40,14 +40,16 @@ function Filter({ invoices, setInfo }: FilterProps) {
 					{invoices.length} invoices
 				</span>
 				<span className="md:block   text-grey text-[13px] dark:text-[#DFE3FA] hidden font-medium">
-					There are {invoices.length} total invoices
+					{invoices.length > 0
+						? `There are ${invoices.length} total invoices`
+						: `No invoices`}
 				</span>
 			</div>
 			<div className="flex">
 				<div className="cursor-pointer flex justify-center items-center relative">
 					<span
 						onClick={handleFilter}
-						className= "block md:hidden dark:text-whiteTwo"
+						className="block md:hidden dark:text-whiteTwo"
 					>
 						Filter
 					</span>
