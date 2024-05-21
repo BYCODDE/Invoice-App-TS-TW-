@@ -21,7 +21,7 @@ const IncomeInvoice: React.FC<IncomeInvoiceProps> = ({ item }) => {
 
 	return (
 		<div
-			className={`md:flex-row md:justify-between md:items-center	md:max-h-[72px]md:flex-row dark:bg-[#1E2139] 	text-[15px]		flex flex-col p-[24px] w-[100%] h-[100%] rounded-[8px] mt-[32px] bg-whiteTwo`}
+			className={`	xl:max-w-[720px]	ml:max-h-[72px]	md:justify-between md:items-center	md:max-h-[72px] md:flex-row dark:bg-[#1E2139] 	text-[15px]		flex flex-col p-[24px] w-[100%] h-[100%] rounded-[8px] mt-[32px] bg-whiteTwo`}
 		>
 			{!isMd ? (
 				<>

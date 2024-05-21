@@ -31,7 +31,7 @@ function Filter({ invoices, setInfo }: FilterProps) {
 	};
 
 	return (
-		<div className="w-[100%] justify-between  mt-[60px] text-black font-bold  text-[15px] flex  items-center ">
+		<div className="xl:p-[20px]	xl:max-w-[720px] w-[100%] justify-between  mt-[60px] text-black font-bold  text-[15px] flex  items-center ">
 			<div className="flex justify-center flex-col ">
 				<span className="     md:text-[35px]    dark:text-whiteTwo text-[32px] font-bold">
 					Invoices
