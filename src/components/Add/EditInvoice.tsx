@@ -46,18 +46,43 @@ export default function EditInvoice() {
 		name: "items",
 	});
 
-	const onSubmit: SubmitHandler<IInvoices> = (data) => {
-		console.log(data);
-		// const editedData = data;
-		console.log("ki");
-		data.id = find?.id;
-		const index = invoices.findIndex((item) => item.id === id);
-		invoices[index] = data;
-		setInvoices([...invoices]);
+	// const onSubmit: SubmitHandler<IInvoices> = (data) => {
+	// 	console.log(data);
+	// 	// const editedData = data;
+	// 	console.log("ki");
+	// 	data.id = find?.id;
+	// 	const index = invoices.findIndex((item) => item.id === id);
+	// 	invoices[index] = data;
+	// 	setInvoices([...invoices]);
+	// };
+
+	const onSubmit: SubmitHandler<IInvoices> = async (data) => {
+		// data.status?.id=111
+		data.id = "kkjmn";
+
+		data.status = {
+			id: 111,
+			name: "Draft",
+		};
+		console.log(data, "დატააა");
+		try {
+			const response = await fetch(
+				"https://invoice-project-team-5.onrender.com/api/invoice/draft/",
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(data),
+				},
+			);
+			const responseData = await response.json();
+			console.log(responseData, "რესფონს დატა ");
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const formattedDate = find
-		? format(new Date(find?.createdAt || ""), "dd MMM yyyy")
+		? format(new Date(find?.createdAt || ""), "yyyy MM dd ")
 		: "";
 
 	console.log(formattedDate);
