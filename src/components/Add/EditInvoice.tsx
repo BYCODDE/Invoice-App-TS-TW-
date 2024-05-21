@@ -56,7 +56,7 @@ export default function EditInvoice() {
 		return true;
 	};
 	const [selectedDate, setSelectedDate] = useState<Date | null | string>(null);
-
+	console.log("errors", errors);
 	return (
 		<div>
 			<div
@@ -99,18 +99,18 @@ export default function EditInvoice() {
 						) : null}
 					</div>
 					<InputsComponent
-						error1={errors.senderAddress?.city}
-						// senderPostCodeError={errors.senderAddress?.postCode}
-						// senderCountryError={errors.senderAddress?.country}
+						cityError={errors.senderAddress?.city}
+						postCodeError={errors.senderAddress?.postCode}
+						CountryError={errors.senderAddress?.country}
 						inputTitle1="city"
 						inputTitle2="Post Code"
 						id1="senderAddress.city"
 						defaultValue1={find?.senderAddress?.postCode || ""}
 						register1={register("senderAddress.city", {
-							required: "Please Fill City graph",
+							required: "can't be empty",
 						})}
 						register2={register("senderAddress.postCode", {
-							required: " Please Fill Post Code",
+							required: "can't be empty",
 							minLength: {
 								value: 5,
 								message: "Length must be 5",
@@ -122,7 +122,7 @@ export default function EditInvoice() {
 						id3="SenderCountry"
 						defaultValue3={find?.senderAddress?.country || ""}
 						register3={register("senderAddress.country", {
-							required: true,
+							required: "can't be empty",
 						})}
 					/>
 
@@ -140,7 +140,7 @@ export default function EditInvoice() {
 					inputTitle="Client’s Name"
 					id="ClientName"
 					defaultValue={find?.clientName || ""}
-					register={register("clientName", { required: true })}
+					register={register("clientName", { required: "can't be empty" })}
 				/>
 				{errors.clientName ? (
 					<div className="flex justify-between md:w-[500px]  w-full">
@@ -158,7 +158,7 @@ export default function EditInvoice() {
 					id="ClientEmail"
 					defaultValue={find?.clientEmail || ""}
 					register={register("clientEmail", {
-						required: "Client's Email is required",
+						required: "can't be empty",
 						validate: validateGmail,
 					})}
 				/>
@@ -171,7 +171,9 @@ export default function EditInvoice() {
 					inputTitle="Street Address"
 					id="ClientStreetAddress"
 					defaultValue={find?.clientAddress?.street || ""}
-					register={register("clientAddress.street", { required: true })}
+					register={register("clientAddress.street", {
+						required: "can't be empty",
+					})}
 				/>
 				{errors.clientAddress?.street ? (
 					<p className="text-[red]  md:pl-[50px]  font-league-spartan text-[10px]  leading-4 tracking-tight w-full text-left  py-2">
@@ -191,19 +193,22 @@ export default function EditInvoice() {
 					) : null}
 				</div>
 				<InputsComponent
-					error1={errors.clientAddress?.city}
+					cityError={errors.clientAddress?.city}
+					postCodeError={errors.clientAddress?.postCode}
+					CountryError={errors.clientAddress?.country}
 					// clientPostCodeError={errors.clientAddress?.postCode}
 					// clientCountryError={errors.clientAddress?.country}
 					// errors={errors}
+
 					inputTitle1="city"
 					inputTitle2="Post Code"
 					id1="clientAddressCity"
 					defaultValue1={find?.clientAddress?.city || ""}
 					register1={register("clientAddress.city", {
-						required: "Please Fill City graph",
+						required: "can't be empty",
 					})}
 					register2={register("clientAddress.postCode", {
-						required: " Please Fill Zip Code",
+						required: "can't be empty",
 						minLength: {
 							value: 5,
 							message: "Length must be 5",
@@ -214,7 +219,9 @@ export default function EditInvoice() {
 					inputTitle="Country"
 					id3="ClientCountry"
 					defaultValue3={find?.clientAddress?.country || ""}
-					register3={register("clientAddress.country", { required: true })}
+					register3={register("clientAddress.country", {
+						required: "can't be empty",
+					})}
 				/>
 
 				<InputComponent
@@ -228,10 +235,10 @@ export default function EditInvoice() {
 					inputTitle1="Payment Terms"
 					id1="PaymentTerms"
 					defaultValue1={`Net ${find?.paymentTerms} Days` || ""}
-					register1={register("paymentTerms", { required: true })}
+					register1={register("paymentTerms", { required: "can't be empty" })}
 					inputTitle2="Invoice Date"
 					id2="InvoiceDate"
-					register2={register("createdAt", { required: false })}
+					register2={register("createdAt", { required: "must be chosen" })}
 					selectedDate={selectedDate}
 					setSelectedDate={setSelectedDate}
 					setValue={setValue}
@@ -279,7 +286,9 @@ export default function EditInvoice() {
 									className={`w-[327px] md:w-[214px] h-[48px] rounded-md border-[1px] border-solid border-[#DFE3FA] bg-white   font-league-spartan text-[13px] font-bold leading-4 tracking-tight px-[20px] dark:bg-[#1E2139] dark:text-white dark:border-none`}
 									id={item.name}
 									defaultValue={item.name || ""}
-									{...register(`items.${index}.name`, { required: true })}
+									{...register(`items.${index}.name`, {
+										required: "can't be empty",
+									})}
 								/>
 							</div>
 							<div className="flex  items-start  gap-[20px]  w-[64px] h-[48px] pt-[30px] pb-[50px] ">
@@ -296,7 +305,7 @@ export default function EditInvoice() {
 										id={`items.${index}.quantity`}
 										defaultValue={item.quantity || ""}
 										{...register(`items.${index}.quantity`, {
-											required: true,
+											required: "can't be empty",
 										})}
 									/>
 								</div>
@@ -313,7 +322,7 @@ export default function EditInvoice() {
 										id="SenderZipCode"
 										defaultValue={item.price || ""}
 										{...register(`items.${index}.price`, {
-											required: true,
+											required: "can't be empty",
 										})}
 									/>
 								</div>
@@ -327,7 +336,7 @@ export default function EditInvoice() {
 											item.quantity > 0 ? item.price * item.quantity : 0
 										}
 										{...register(`items.${index}.total`, {
-											required: true,
+											required: "can't be empty",
 										})}
 									></input>
 								</div>
