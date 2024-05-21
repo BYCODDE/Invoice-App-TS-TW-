@@ -27,17 +27,28 @@ const useIsMobile = () => {
 export default function InvoiceDetails() {
 	const [choosenInvoice, setChoosenInvoice] = useState<IInvoices | null>(null);
 	const { id } = useParams();
-	const { invoices, showEditInvoice } = useContext(InvoiceContext);
+	const { showEditInvoice } = useContext(InvoiceContext);
 	const isMobile = useIsMobile();
 
 	const navigate = useNavigate();
-
 	useEffect(() => {
-		const foundInvoice = invoices.find((invoice) => invoice.id === id);
-		if (foundInvoice) {
-			setChoosenInvoice(foundInvoice);
+		async function getData() {
+			try {
+				const response = await fetch(
+					`https://invoice-project-team-5.onrender.com/api/invoice/${id}`,
+				);
+				if (!response.ok) {
+					throw new Error("Failed to fetch data from the server");
+				}
+				const data = await response.json();
+				setChoosenInvoice(data);
+				console.log(data);
+			} catch (error) {
+				console.log((error as Error).message);
+			}
 		}
-	}, [id, invoices]);
+		getData();
+	}, [id]);
 
 	if (showEditInvoice && isMobile) {
 		return null;

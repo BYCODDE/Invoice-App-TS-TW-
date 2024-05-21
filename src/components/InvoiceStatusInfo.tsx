@@ -9,20 +9,20 @@ export default function InvoiceStatusInfo({
 	choosenInvoice,
 }: InvoiseStatusInfoProps) {
 	const statusColorBackground =
-		choosenInvoice?.status === "paid"
+		choosenInvoice?.status?.name === "Paid"
 			? "rgba(51,	214, 159, 0.0571)"
-			: choosenInvoice?.status === "pending"
+			: choosenInvoice?.status?.name === "Pending"
 				? "rgba(255, 145, 0, 0.0571)"
-				: choosenInvoice?.status === "draft"
+				: choosenInvoice?.status?.name === "Draft"
 					? "rgba(55,	59,	83, 0.0571)"
 					: "";
 
 	const statusColorText =
-		choosenInvoice?.status === "paid"
+		choosenInvoice?.status?.name === "Paid"
 			? "rgb(51,	214, 159)"
-			: choosenInvoice?.status === "pending"
+			: choosenInvoice?.status?.name === "Pending"
 				? "rgb(255, 145, 0)"
-				: choosenInvoice?.status === "draft"
+				: choosenInvoice?.status?.name === "Draft"
 					? "rgb(55,	59,	83)"
 					: "";
 
@@ -44,7 +44,7 @@ export default function InvoiceStatusInfo({
 						className="font-bold text-[15px] leading-[15px] tracking-[-0.25px]"
 						style={{ color: statusColorText }}
 					>
-						{choosenInvoice?.status}
+						{choosenInvoice?.status?.name}
 					</p>
 				</div>
 			</div>

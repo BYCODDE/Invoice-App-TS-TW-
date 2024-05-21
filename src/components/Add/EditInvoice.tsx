@@ -121,7 +121,9 @@ export default function EditInvoice() {
 			></div>
 
 			<form
-				className="h-modal xl:h-screen xl:left-[80px] px-[24px] md:px-[56px]  md:overflow-y-scroll md:overflow-x-hidden     xl:top-[0px]  md:top-[80px]  md:rounded-r-3xl  md:left-0 flex-col  md:absolute  md:z-20 bg-[white]   box-border  dark:bg-[#141625]"
+				className="flex xl:top-[0px]  h-modal md:overflow-y-scroll md:overflow-x-hidden  xl:w-[719px] xl:pl-[70px] md:top-[80px]  md:rounded-r-3xl  md:left-0 flex-col md:w-[616px]  md:absolute  md:z-20 bg-[white] items-center justify-center box-border p-3 dark:bg-[#141625]
+                
+                "
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<div className="h-[32px] md:w-[504px] w-full     text-[24px] font-bold my-[20px] dark:text-white ">{`Edit # ${find?.id || ""}`}</div>
