@@ -130,23 +130,16 @@ function Filter({ invoices, setInfo }: FilterProps) {
 						</div>
 					</div>
 				</div>
-				<div className="   md:w-[150px]     cursor-pointer   flex justify-center items-center w-[90px]  h-[44px] rounded-[24px] bg-blue gap-[9px]">
+				<div
+					className="   md:w-[150px]     cursor-pointer   flex justify-center items-center w-[90px]  h-[44px] rounded-[24px] bg-blue gap-[9px]"
+					onClick={() => setShowAddInvoice(true)}
+				>
 					<div className="w-[32px] h-[32px] rounded-[50%] bg-white flex justify-center items-center">
 						<img className="w-[10px] h-[10px]" src={plus} alt="plus" />
 					</div>
 
-					<span
-						onClick={() => setShowAddInvoice(true)}
-						className="text-white md:hidden block"
-					>
-						New
-					</span>
-					<span
-						onClick={() => setShowAddInvoice(true)}
-						className="text-white  md:block    hidden"
-					>
-						New Invoice
-					</span>
+					<span className="text-white md:hidden block">New</span>
+					<span className="text-white  md:block    hidden">New Invoice</span>
 				</div>
 			</div>
 		</div>

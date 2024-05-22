@@ -16,7 +16,7 @@ export default function AppLayout() {
 			}   ${showAddInvoice && "overflow-hidden max-h-[100vh]"}  ${showEditInvoice && "overflow-hidden max-h-[100vh]"} ${isDeleteOpen && "overflow-hidden max-h-[100vh]"}  flex flex-col items-center xl:flex-row xl:items-start relative`}
 		>
 			<Header />
-			<main className={` h-[100vh] xl:flex xl:justify-center w-full`}>
+			<main className={` xl:flex xl:justify-center w-full`}>
 				<Outlet />
 			</main>
 			{isDeleteOpen && <DeleteModal />}
