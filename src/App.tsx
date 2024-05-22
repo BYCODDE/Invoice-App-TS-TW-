@@ -65,7 +65,7 @@ function App() {
 	const [showEditInvoice, setShowEditInvoice] = useState(false);
 	const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
 	const [statusClick, setStatusClick] = useState<boolean>(false);
-
+	const [totalPrice, setTotalPrice] = useState(0);
 	const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
 	const [showInvoiceDetails, setShowInvoiceDetails] =

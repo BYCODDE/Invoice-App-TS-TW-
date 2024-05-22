@@ -3,6 +3,7 @@ import { IInvoices } from "../types/types";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import IncomeInvoiceStatus from "./IncomeInvoiceStatus";
 import arrowRight from "/public/assets/icon-arrow-right.svg";
+import { useEffect, useState } from "react";
 interface IncomeInvoiceProps {
 	item: IInvoices;
 }
@@ -11,12 +12,21 @@ const IncomeInvoice: React.FC<IncomeInvoiceProps> = ({ item }) => {
 	const inputDate = item.paymentDue;
 	const dateObject = inputDate ? new Date(inputDate) : new Date();
 	const formattedDate = dateFormat(dateObject, "Due d mmm yyyy");
-
+	const [finalAmount, setFinalAmount] = useState(0);
 	const formattedAmount = new Intl.NumberFormat("en-GB", {
 		style: "currency",
 		currency: "GBP",
-	}).format(item.total);
+	}).format(finalAmount);
 
+	useEffect(() => {
+		let calculatedTotalPrice = 0;
+		if (item?.items) {
+			for (let i = 0; i < item.items.length; i++) {
+				calculatedTotalPrice += item.items[i].total;
+			}
+		}
+		setFinalAmount(calculatedTotalPrice);
+	}, [item]);
 	const isMd = useMediaQuery("(min-width: 768px)");
 
 	return (
