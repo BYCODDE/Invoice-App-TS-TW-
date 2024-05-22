@@ -31,11 +31,11 @@ export default function InvoicePaymentInfo({
 									{item.name}
 								</p>
 								<p className="text-[#7E88C3] dark:text-[#DFE3FA] font-medium text-[15px] leading-[18px] tracking-[-0.1px]">
-									{item.quantity} x £ {item.price.toFixed(2)}
+									{item.quantity} x £ {item.price}
 								</p>
 							</div>
 							<p className="text-[#0C0E16] dark:text-[#fff] font-bold text-[15px] leading-[20px] tracking-[-0.25px]">
-								£ {item.total.toFixed(2)}
+								£ {item.total}
 							</p>
 						</div>
 					);
@@ -47,7 +47,7 @@ export default function InvoicePaymentInfo({
 					Amount Due
 				</p>
 				<h2 className="font-bold text-[24px] leading-[32px] tracking-[-0.5px]  text-[#FFFFFF]">
-					£ {totalPrice.toFixed(2)}
+					£ {totalPrice}
 				</h2>
 			</div>
 		</div>

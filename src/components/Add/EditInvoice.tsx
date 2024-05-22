@@ -15,6 +15,8 @@ import { useParams } from "react-router-dom";
 import AddInvoicesButtons from "./AddInvoicesButtons";
 
 export default function EditInvoice() {
+	const [countTotal, setCountTotal] = useState(0);
+
 	const {
 		invoices,
 		setInvoices,
@@ -46,28 +48,45 @@ export default function EditInvoice() {
 		name: "items",
 	});
 
-	// const onSubmit: SubmitHandler<IInvoices> = (data) => {
-	// 	console.log(data);
-	// 	// const editedData = data;
-	// 	console.log("ki");
-	// 	data.id = find?.id;
-	// 	const index = invoices.findIndex((item) => item.id === id);
-	// 	invoices[index] = data;
-	// 	setInvoices([...invoices]);
-	// };
+	const generateString = () => {
+		const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		const randomChars = "0123456789";
+		let randomId = "";
+
+		for (let i = 0; i < 2; i++) {
+			randomId += chars.charAt(Math.floor(Math.random() * chars.length));
+		}
+		for (let i = 0; i < 4; i++) {
+			randomId += randomChars.charAt(
+				Math.floor(Math.random() * randomChars.length),
+			);
+		}
+
+		return randomId;
+	};
 
 	const onSubmit: SubmitHandler<IInvoices> = async (data) => {
-		// data.status?.id=111
-		data.id = "kkjmn";
-
+		data.id = generateString();
 		data.status = {
-			id: 111,
-			name: "Draft",
+			id: Math.random() * Math.random(),
+			name: "Pending", // droebitia. unda iyos Draft
 		};
+
 		console.log(data, "დატააა");
+
+		// Check if createdAt is valid
+		const createdAt = find?.createdAt ? new Date(find.createdAt) : new Date();
+		if (isNaN(createdAt.getTime())) {
+			console.error("Invalid date value for createdAt");
+			return;
+		}
+
+		data.createdAt = format(createdAt, "yyyy-MM-dd");
+		data.paymentDue = format(createdAt, "yyyy-MM-dd");
+
 		try {
 			const response = await fetch(
-				"https://invoice-project-team-5.onrender.com/api/invoice/draft/",
+				"https://invoice-project-team-5.onrender.com/api/invoice/",
 				{
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
@@ -78,6 +97,8 @@ export default function EditInvoice() {
 			console.log(responseData, "რესფონს დატა ");
 		} catch (error) {
 			console.log(error);
+		} finally {
+			setShowAddInvoice(false);
 		}
 	};
 
@@ -106,7 +127,7 @@ export default function EditInvoice() {
 	const handleAddNewItem = () => {
 		reset({
 			createdAt: "", // Add default date here if needed
-			paymentDue: "", // Add default paymentDue here if needed
+			paymentDue: "2021-11-12", // Add default paymentDue here if needed
 			description: "", // Add default description here if needed
 			paymentTerms: 0, // Add default paymentTerms here if needed
 			clientName: "",
@@ -129,12 +150,21 @@ export default function EditInvoice() {
 					name: "",
 					quantity: 0,
 					price: 0,
-					total: 0,
+					total: countTotal,
 				},
 			],
-			total: 0,
+			total: countTotal,
 		});
 	};
+
+	useEffect(() => {
+		const foundItem = fields.find(
+			(item) => item.quantity > 0 && item.price > 0,
+		);
+		if (foundItem) {
+			setCountTotal(foundItem.quantity * foundItem.price);
+		}
+	}, [fields]);
 
 	console.log(showAddInvoice);
 	return (
@@ -157,7 +187,13 @@ export default function EditInvoice() {
 				className="h-modal xl:h-screen xl:left-[80px] px-[24px] md:px-[56px]  md:overflow-y-scroll md:overflow-x-hidden     xl:top-[0px]  md:top-[80px]  md:rounded-r-3xl  md:left-0 flex-col  md:absolute  md:z-20 bg-[white]   box-border  dark:bg-[#141625]"
 				onSubmit={handleSubmit(onSubmit)}
 			>
-				<div className="h-[32px] md:w-[504px] w-full     text-[24px] font-bold my-[20px] dark:text-white ">{`Edit # ${find?.id || ""}`}</div>
+				{!showAddInvoice ? (
+					<div className="h-[32px] md:w-[504px] w-full     text-[24px] font-bold my-[20px] dark:text-white ">{`Edit # ${find?.id || ""}`}</div>
+				) : (
+					<div className="h-[32px] md:w-[504px] w-full text-[24px] font-bold my-[20px] dark:text-white ">
+						New Invoice
+					</div>
+				)}
 				<h3 className="text-[#7C5DFA] py-[20px] md:pl-[0]  pl-[15px] font-league-spartan text-[15px] font-bold leading-4 tracking-tight w-full md:w-[504px] text-left  ">
 					Bill From
 				</h3>
@@ -339,8 +375,10 @@ export default function EditInvoice() {
 									<input
 										className="  w-[64px] h-[48px] flex-shrink-0 rounded-md border-[1px] border-solid border-[#DFE3FA] bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none"
 										id={`items.${index}.quantity`}
-										defaultValue={item.quantity || ""}
+										type="number"
+										defaultValue={item.quantity || 0}
 										{...register(`items.${index}.quantity`, {
+											valueAsNumber: true,
 											required: "can't be empty",
 										})}
 									/>
@@ -356,8 +394,10 @@ export default function EditInvoice() {
 										className=" w-[100px] h-[48px] flex-shrink-0 rounded-md border-[1px] border-solid border-[#DFE3FA] bg-white text-custom-color font-league-spartan text-[13px] 
                                         cursor-pointer font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none"
 										id="SenderZipCode"
-										defaultValue={item.price || ""}
+										type="number"
+										defaultValue={item.price || 0}
 										{...register(`items.${index}.price`, {
+											valueAsNumber: true,
 											required: "can't be empty",
 										})}
 									/>
@@ -368,10 +408,14 @@ export default function EditInvoice() {
 									</label>
 									<input
 										className=" w-[60px] h-[48px] flex  items-center  flex-shrink-0 rounded-md  bg-white text-custom-color font-league-spartan text-[13px] font-bold leading-4 tracking-tight pl-3 dark:bg-[#1E2139]  dark:text-white dark:border-none"
-										defaultValue={
-											item.quantity > 0 ? item.price * item.quantity : 0
+										value={
+											item.quantity > 0 && item.price > 0
+												? item.quantity * item.price
+												: 0
 										}
+										type="number"
 										{...register(`items.${index}.total`, {
+											valueAsNumber: true,
 											required: "can't be empty",
 										})}
 									></input>

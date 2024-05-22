@@ -8,8 +8,13 @@ interface InvoiceDetailsButtonsProps {
 export default function InvoiceDetailsButtons({
 	choosenInvoice,
 }: InvoiceDetailsButtonsProps) {
-	const { setIsDeleteOpen, setShowEditInvoice, setInvoices, invoices } =
-		useContext(InvoiceContext);
+	const {
+		setIsDeleteOpen,
+		setShowEditInvoice,
+		setInvoices,
+		invoices,
+		setStatusClick,
+	} = useContext(InvoiceContext);
 
 	const { id } = useParams();
 
@@ -27,21 +32,21 @@ export default function InvoiceDetailsButtons({
 	async function handleMarkPaid() {
 		try {
 			const response = await fetch(
-				`https://invoice-project-team-5.onrender.com/api/invoice/${id}`,
+				`https://invoice-project-team-5.onrender.com/api/invoice/mark_as_paid/${id}`,
 				{
-					method: "PUT",
+					method: "PATCH",
 					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(choosenInvoice),
+					body: JSON.stringify(choosenInvoice?.status?.name),
 				},
 			);
 			if (!response.ok) {
-				throw new Error("Failed to fetch data from the server");
+				throw new Error("Failed to status changed as paid");
 			}
-			const data = await response.json();
-
-			console.log(data);
+			setStatusClick((click) => !click);
 		} catch (error) {
 			console.log((error as Error).message);
+		} finally {
+			navigate("/");
 		}
 	}
 
