@@ -72,7 +72,6 @@ export default function EditInvoice() {
 
 	const onSubmit: SubmitHandler<IInvoices> = async (data) => {
 		setIsLoading(true);
-		data.id = generateString();
 
 		const createdAt = find?.createdAt ? new Date(find.createdAt) : new Date();
 		if (isNaN(createdAt.getTime())) {
@@ -93,6 +92,7 @@ export default function EditInvoice() {
 		data.paymentTerms = term;
 
 		if (buttonType === "draft") {
+			data.id = generateString();
 			data.status = {
 				id: Math.random() * Math.random(),
 				name: "Draft",
@@ -113,7 +113,9 @@ export default function EditInvoice() {
 				setRender((render) => !render);
 				setShowAddInvoice(false);
 			}
-		} else if (buttonType === "pending") {
+		}
+		if (buttonType === "pending") {
+			data.id = generateString();
 			data.status = {
 				id: Math.random() * Math.random(),
 				name: "Pending",
@@ -136,6 +138,26 @@ export default function EditInvoice() {
 				setIsLoading(false);
 			}
 		}
+		if (buttonType === "edit") {
+			console.log(data);
+			try {
+				const response = await fetch(
+					`https://invoice-project-team-5.onrender.com/api/invoice/${id}`,
+					{
+						method: "PUT",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(data),
+					},
+				);
+				if (!response.ok) throw new Error("Something went wrong");
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setRender((render) => !render);
+				setShowEditInvoice(false);
+				setIsLoading(false);
+			}
+		}
 	};
 
 	const formattedDate = find
@@ -148,7 +170,7 @@ export default function EditInvoice() {
 		}
 		return true;
 	};
-	const [selectedDate, setSelectedDate] = useState<Date | null | string>(null);
+	const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
 	useEffect(() => {
 		if (showAddInvoice) {
@@ -379,7 +401,7 @@ export default function EditInvoice() {
 					inputTitle2="Invoice Date"
 					id2="InvoiceDate"
 					register2={register("createdAt", { required: "must be chosen" })}
-					selectedDate={selectedDate}
+					selectedDate={selectedDate instanceof Date ? selectedDate : null}
 					setSelectedDate={setSelectedDate}
 					setValue={setValue}
 					control={control}
