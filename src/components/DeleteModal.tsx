@@ -9,10 +9,20 @@ export default function DeleteModal() {
 
 	const navigate = useNavigate();
 
-	function handleDelete() {
-		setInvoices((invoice) => invoice.filter((item) => item.id !== id));
-		setIsDeleteOpen(false);
-		navigate("/");
+	async function handleDelete() {
+		try {
+			const res = await fetch(
+				`https://invoice-project-team-5.onrender.com/api/invoice/${id}
+				`,
+				{ method: "DELETE" },
+			);
+			if (!res.ok) throw new Error("Failed to delete the invoice.");
+			setInvoices((invoice) => invoice.filter((item) => item.id !== id));
+			setIsDeleteOpen(false);
+			navigate("/");
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	return (

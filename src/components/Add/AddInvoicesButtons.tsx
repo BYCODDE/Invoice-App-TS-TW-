@@ -1,6 +1,7 @@
-function AddInvoicesButtons() {
-	// const { invoices } = useContext(InvoiceContext);
+import { useContext } from "react";
+import { InvoiceContext } from "../../App";
 
+function AddInvoicesButtons() {
 	return (
 		<div>
 			{" "}
