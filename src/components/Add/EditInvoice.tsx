@@ -23,7 +23,8 @@ export default function EditInvoice() {
 		setShowEditInvoice,
 		showAddInvoice,
 		term,
-
+		buttonType,
+		setRender,
 		setShowAddInvoice,
 	} = useContext(InvoiceContext);
 	const { id } = useParams();
@@ -69,10 +70,6 @@ export default function EditInvoice() {
 
 	const onSubmit: SubmitHandler<IInvoices> = async (data) => {
 		data.id = generateString();
-		data.status = {
-			id: Math.random() * Math.random(),
-			name: "Pending", // droebitia. unda iyos Draft
-		};
 
 		console.log(data, "დატააა");
 
@@ -92,35 +89,57 @@ export default function EditInvoice() {
 
 		const paymentTerms = find?.paymentTerms ?? 0;
 
-		const formatter = new Intl.DateTimeFormat("en-US", {
-			day: "2-digit",
-			month: "long",
-			year: "numeric",
-		});
-
-		// const formattedPaymentDue = formatter.format(paymentDueDate);
-
 		data.paymentDue = paymentDueDate;
 
 		console.log(data.createdAt);
 		console.log(paymentTerms);
 
 		data.paymentTerms = term;
-		try {
-			const response = await fetch(
-				"https://invoice-project-team-5.onrender.com/api/invoice/",
-				{
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(data),
-				},
-			);
-			const responseData = await response.json();
-			console.log(responseData, "რესფონს დატა ");
-		} catch (error) {
-			console.log(error);
-		} finally {
-			setShowAddInvoice(false);
+
+		if (buttonType === "draft") {
+			data.status = {
+				id: Math.random() * Math.random(),
+				name: "Draft",
+			};
+			try {
+				const response = await fetch(
+					"https://invoice-project-team-5.onrender.com/api/invoice/draft/",
+					{
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(data),
+					},
+				);
+				const responseData = await response.json();
+				console.log(responseData, "რესფონს დატა ");
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setRender((render) => !render);
+				setShowAddInvoice(false);
+			}
+		} else if (buttonType === "pending") {
+			data.status = {
+				id: Math.random() * Math.random(),
+				name: "Pending",
+			};
+			try {
+				const response = await fetch(
+					"https://invoice-project-team-5.onrender.com/api/invoice/",
+					{
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(data),
+					},
+				);
+				const responseData = await response.json();
+				console.log(responseData, "რესფონს დატა ");
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setRender((render) => !render);
+				setShowAddInvoice(false);
+			}
 		}
 	};
 

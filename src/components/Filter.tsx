@@ -33,7 +33,7 @@ function Filter({ invoices, setInfo }: FilterProps) {
 
 	const { setShowAddInvoice } = useContext(InvoiceContext);
 	return (
-		<div className="xl:p-[20px]	xl:max-w-[720px] w-[100%] justify-between  xl:mt-[0px] md:mt-[60px] text-black font-bold  text-[15px] flex  items-center ">
+		<div className="xl:p-[20px]	xl:max-w-[720px] md:w-[672px] w-[375px] justify-between  xl:mt-[0px] md:mt-[60px] text-black font-bold  text-[15px] flex  items-center ">
 			<div className="flex justify-center flex-col ">
 				<span className="     md:text-[35px]    dark:text-whiteTwo text-[32px] font-bold">
 					Invoices

@@ -1,4 +1,8 @@
+import { useContext } from "react";
+import { InvoiceContext } from "../../App";
+
 function AddInvoicesButtons() {
+	const { setButtonType } = useContext(InvoiceContext);
 	return (
 		<div>
 			{" "}
@@ -10,8 +14,8 @@ function AddInvoicesButtons() {
 					Discard
 				</button>
 				<button
-					type="button"
 					className="w-[96px] md:w-[133px] h-[48px] dark:bg-[#373B53]  dark:text-white cursor-pointer flex-shrink-0 rounded-full bg-[#373B53] text-[#888EB0] text-center font-league-spartan text-[13px] font-bold leading-15 tracking-tighter"
+					onClick={() => setButtonType("draft")}
 				>
 					Save As Draft
 				</button>
@@ -19,6 +23,7 @@ function AddInvoicesButtons() {
 					type="submit"
 					className="w-[138px] h-[48px] cursor-pointer flex-shrink-0 rounded-full bg-[#9277FF] text-white font-league-spartan text-[15px] font-bold leading-15 tracking-tighter"
 					value="Save & Send"
+					onClick={() => setButtonType("pending")}
 				/>
 			</div>
 		</div>

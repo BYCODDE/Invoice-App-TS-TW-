@@ -22,10 +22,12 @@ export const InvoiceContext = createContext<{
 	isSmallDevice: boolean;
 	showInvoiceDetails: boolean;
 	setShowInvoiceDetails: React.Dispatch<React.SetStateAction<boolean>>;
-	statusClick: boolean;
-	setStatusClick: React.Dispatch<React.SetStateAction<boolean>>;
+	render: boolean;
+	setRender: React.Dispatch<React.SetStateAction<boolean>>;
 	term: number;
 	setTerm: React.Dispatch<React.SetStateAction<number>>;
+	buttonType: string;
+	setButtonType: React.Dispatch<React.SetStateAction<string>>;
 }>({
 	isDarkMode: false,
 	setIsDarkMode: () => {},
@@ -40,10 +42,12 @@ export const InvoiceContext = createContext<{
 	isSmallDevice: false,
 	showInvoiceDetails: false,
 	setShowInvoiceDetails: () => {},
-	statusClick: false,
-	setStatusClick: () => {},
+	render: false,
+	setRender: () => {},
 	term: 0,
 	setTerm: () => {},
+	buttonType: "",
+	setButtonType: () => {},
 });
 
 const router = createBrowserRouter([
@@ -68,8 +72,8 @@ function App() {
 	const [showAddInvoice, setShowAddInvoice] = useState(false);
 	const [showEditInvoice, setShowEditInvoice] = useState(false);
 	const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
-	const [statusClick, setStatusClick] = useState<boolean>(false);
-	const [totalPrice, setTotalPrice] = useState(0);
+	const [render, setRender] = useState<boolean>(false);
+	const [buttonType, setButtonType] = useState<string>("");
 	const [term, setTerm] = useState(0);
 
 	const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
@@ -101,7 +105,7 @@ function App() {
 			}
 		}
 		getData();
-	}, [statusClick]);
+	}, [render]);
 	console.log(showAddInvoice);
 	return (
 		<InvoiceContext.Provider
@@ -119,10 +123,12 @@ function App() {
 				isSmallDevice,
 				showInvoiceDetails,
 				setShowInvoiceDetails,
-				statusClick,
-				setStatusClick,
+				render,
+				setRender,
 				term,
 				setTerm,
+				buttonType,
+				setButtonType,
 			}}
 		>
 			<RouterProvider router={router} />

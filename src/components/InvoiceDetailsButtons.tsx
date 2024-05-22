@@ -13,7 +13,7 @@ export default function InvoiceDetailsButtons({
 		setShowEditInvoice,
 
 		invoices,
-		setStatusClick,
+		setRender,
 	} = useContext(InvoiceContext);
 
 	const { id } = useParams();
@@ -42,7 +42,7 @@ export default function InvoiceDetailsButtons({
 			if (!response.ok) {
 				throw new Error("Failed to status changed as paid");
 			}
-			setStatusClick((click) => !click);
+			setRender((click) => !click);
 		} catch (error) {
 			console.log((error as Error).message);
 		} finally {
