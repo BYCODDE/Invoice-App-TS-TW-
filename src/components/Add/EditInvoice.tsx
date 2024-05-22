@@ -84,6 +84,21 @@ export default function EditInvoice() {
 		data.createdAt = format(createdAt, "yyyy-MM-dd");
 		data.paymentDue = format(createdAt, "yyyy-MM-dd");
 
+		const paymentDueDate = new Date("2024-05-31");
+		const paymentTerms = find?.paymentTerms ?? 0;
+		paymentDueDate.setDate(paymentDueDate.getDate() + paymentTerms);
+
+		const formatter = new Intl.DateTimeFormat("en-US", {
+			day: "2-digit",
+			month: "long",
+			year: "numeric",
+		});
+		const formattedPaymentDue = formatter.format(paymentDueDate);
+
+		data.paymentDue = format(formattedPaymentDue, "yyyy-MM-dd");
+
+		console.log(formattedPaymentDue);
+
 		try {
 			const response = await fetch(
 				"https://invoice-project-team-5.onrender.com/api/invoice/",
@@ -127,7 +142,7 @@ export default function EditInvoice() {
 	const handleAddNewItem = () => {
 		reset({
 			createdAt: "", // Add default date here if needed
-			paymentDue: "2021-11-12", // Add default paymentDue here if needed
+			paymentDue: "", // Add default paymentDue here if needed
 			description: "", // Add default description here if needed
 			paymentTerms: 0, // Add default paymentTerms here if needed
 			clientName: "",
