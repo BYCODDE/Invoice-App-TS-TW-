@@ -22,6 +22,8 @@ export default function EditInvoice() {
 
 		setShowEditInvoice,
 		showAddInvoice,
+		term,
+
 		setShowAddInvoice,
 	} = useContext(InvoiceContext);
 	const { id } = useParams();
@@ -74,7 +76,6 @@ export default function EditInvoice() {
 
 		console.log(data, "დატააა");
 
-		// Check if createdAt is valid
 		const createdAt = find?.createdAt ? new Date(find.createdAt) : new Date();
 		if (isNaN(createdAt.getTime())) {
 			console.error("Invalid date value for createdAt");
@@ -84,21 +85,27 @@ export default function EditInvoice() {
 		data.createdAt = format(createdAt, "yyyy-MM-dd");
 		data.paymentDue = format(createdAt, "yyyy-MM-dd");
 
-		const paymentDueDate = new Date("2024-05-31");
+		const paymentDueDate = format(
+			new Date(new Date(data.createdAt).getTime() + term).toISOString(),
+			"yyyy-MM-dd",
+		);
+
 		const paymentTerms = find?.paymentTerms ?? 0;
-		paymentDueDate.setDate(paymentDueDate.getDate() + paymentTerms);
 
 		const formatter = new Intl.DateTimeFormat("en-US", {
 			day: "2-digit",
 			month: "long",
 			year: "numeric",
 		});
-		const formattedPaymentDue = formatter.format(paymentDueDate);
 
-		data.paymentDue = format(formattedPaymentDue, "yyyy-MM-dd");
+		// const formattedPaymentDue = formatter.format(paymentDueDate);
 
-		console.log(formattedPaymentDue);
+		data.paymentDue = paymentDueDate;
 
+		console.log(data.createdAt);
+		console.log(paymentTerms);
+
+		data.paymentTerms = term;
 		try {
 			const response = await fetch(
 				"https://invoice-project-team-5.onrender.com/api/invoice/",

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // import { format } from "date-fns";
@@ -9,6 +9,7 @@ import {
 	Control,
 } from "react-hook-form";
 import { IInvoices } from "../../types/types";
+import { InvoiceContext } from "../../App";
 
 interface CustomInputProps {
 	id1: string;
@@ -38,8 +39,14 @@ const DateTerms: React.FC<CustomInputProps> = ({
 	setValue,
 	control,
 }) => {
-	const termsArray = ["Net 1 Day", "Net 7 Days", "Net 14 Days", "Net 30 Days"];
-	const [term, setTerm] = useState("Net 30 Days");
+	const termsArray = [
+		{ label: "Net 1 Day", value: 1 * 24 * 60 * 60 * 1000 },
+		{ label: "Net 7 Day", value: 7 * 24 * 60 * 60 * 1000 },
+		{ label: "Net 14 Day", value: 14 * 24 * 60 * 60 * 1000 },
+		{ label: "Net 30 Day", value: 30 * 24 * 60 * 60 * 1000 },
+	];
+
+	const { term, setTerm } = useContext(InvoiceContext);
 	const [showTerms, setShowTerms] = useState(false);
 	console.log(term);
 	const datePickerRef = useRef<DatePicker | null>(null);
@@ -122,7 +129,7 @@ const DateTerms: React.FC<CustomInputProps> = ({
 						<input
 							className="w-[327px] cursor-pointer md:w-[240px] h-[48px] flex-shrink-0 rounded-md border-[1px] border-solid border-[#DFE3FA] bg-white text-custom-color  font-league-spartan text-[15px] font-bold leading-4 tracking-tight pl-[20px] dark:bg-[#1E2139]  dark:text-white dark:border-none"
 							id={id1}
-							value={term || ""}
+							value={termsArray.find((item) => item.value == term)?.label}
 							{...register1}
 						/>
 					</div>
@@ -130,11 +137,11 @@ const DateTerms: React.FC<CustomInputProps> = ({
 						<div className=" absolute top-[70px] w-[240px] bg-white rounded-lg shadow-[0px_10px_20px_0px_rgba(72,84,159,0.25)]">
 							{termsArray.map((item, index) => (
 								<div
-									onClick={() => setTerm(item)}
+									onClick={() => setTerm(item.value)}
 									key={index}
 									className=" h-[48px] hover:text-[#7C5DFA]  dark:text-white text-[15px] py-[18px] pl-[20px] tracking-[-0.25px] font-bold leading-[15px] cursor-pointer border-b-[1px] border-b-[#DFE3FA]  dark:border-b-[#1E2139] dark:bg-[#252945]"
 								>
-									{item}
+									{item.label}
 								</div>
 							))}
 						</div>

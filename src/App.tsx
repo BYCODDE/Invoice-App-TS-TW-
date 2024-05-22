@@ -24,6 +24,8 @@ export const InvoiceContext = createContext<{
 	setShowInvoiceDetails: React.Dispatch<React.SetStateAction<boolean>>;
 	statusClick: boolean;
 	setStatusClick: React.Dispatch<React.SetStateAction<boolean>>;
+	term: number;
+	setTerm: React.Dispatch<React.SetStateAction<number>>;
 }>({
 	isDarkMode: false,
 	setIsDarkMode: () => {},
@@ -40,6 +42,8 @@ export const InvoiceContext = createContext<{
 	setShowInvoiceDetails: () => {},
 	statusClick: false,
 	setStatusClick: () => {},
+	term: 0,
+	setTerm: () => {},
 });
 
 const router = createBrowserRouter([
@@ -66,6 +70,8 @@ function App() {
 	const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
 	const [statusClick, setStatusClick] = useState<boolean>(false);
 	const [totalPrice, setTotalPrice] = useState(0);
+	const [term, setTerm] = useState(0);
+
 	const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
 	const [showInvoiceDetails, setShowInvoiceDetails] =
@@ -115,6 +121,8 @@ function App() {
 				setShowInvoiceDetails,
 				statusClick,
 				setStatusClick,
+				term,
+				setTerm,
 			}}
 		>
 			<RouterProvider router={router} />
