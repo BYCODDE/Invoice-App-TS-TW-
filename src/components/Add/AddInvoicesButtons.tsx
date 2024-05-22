@@ -1,6 +1,3 @@
-import { useContext } from "react";
-import { InvoiceContext } from "../../App";
-
 function AddInvoicesButtons() {
 	return (
 		<div>

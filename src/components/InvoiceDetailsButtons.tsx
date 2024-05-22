@@ -11,7 +11,7 @@ export default function InvoiceDetailsButtons({
 	const {
 		setIsDeleteOpen,
 		setShowEditInvoice,
-		setInvoices,
+
 		invoices,
 		setStatusClick,
 	} = useContext(InvoiceContext);

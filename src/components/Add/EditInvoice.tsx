@@ -19,7 +19,7 @@ export default function EditInvoice() {
 
 	const {
 		invoices,
-		setInvoices,
+
 		setShowEditInvoice,
 		showAddInvoice,
 		setShowAddInvoice,
@@ -165,6 +165,31 @@ export default function EditInvoice() {
 			setCountTotal(foundItem.quantity * foundItem.price);
 		}
 	}, [fields]);
+
+	const handleQuantityChange = (index: number, quantity: number) => {
+		const newItems = [...fields];
+		newItems[index].quantity = quantity;
+		newItems[index].total = quantity * newItems[index].price;
+		setValue(
+			`items[${index}].quantity` as `items.${number}.quantity`,
+			quantity,
+		);
+		setValue(
+			`items[${index}].total` as `items.${number}.total`,
+			newItems[index].total,
+		);
+	};
+
+	const handlePriceChange = (index: number, price: number) => {
+		const newItems = [...fields];
+		newItems[index].price = price;
+		newItems[index].total = price * newItems[index].quantity;
+		setValue(`items[${index}].price` as `items.${number}.price`, price);
+		setValue(
+			`items[${index}].total` as `items.${number}.total`,
+			newItems[index].total,
+		);
+	};
 
 	console.log(showAddInvoice);
 	return (
@@ -381,6 +406,9 @@ export default function EditInvoice() {
 											valueAsNumber: true,
 											required: "can't be empty",
 										})}
+										onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+											handleQuantityChange(index, +e.target.value)
+										}
 									/>
 								</div>
 								<div className="flex flex-col items-start justify-center gap-[10px] w-[100px] h-[48px] box-border">
@@ -400,6 +428,9 @@ export default function EditInvoice() {
 											valueAsNumber: true,
 											required: "can't be empty",
 										})}
+										onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+											handlePriceChange(index, +e.target.value)
+										}
 									/>
 								</div>
 								<div className="flex flex-col items-start justify-center gap-[10px] w-[80px] h-[48px] box-border">
