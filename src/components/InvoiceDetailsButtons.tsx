@@ -20,14 +20,7 @@ export default function InvoiceDetailsButtons({
 
 	const navigate = useNavigate();
 
-	console.log(invoices);
-
-	// function handleMarkPaid() {
-	// 	const readIndex = invoices.findIndex((invoice) => invoice.id === id);
-	// 	invoices[readIndex].status?.name = "paid";
-	// 	setInvoices([...invoices]);
-	// 	navigate("/");
-	// }
+	invoices;
 
 	async function handleMarkPaid() {
 		try {
@@ -44,13 +37,13 @@ export default function InvoiceDetailsButtons({
 			}
 			setRender((click) => !click);
 		} catch (error) {
-			console.log((error as Error).message);
+			(error as Error).message;
 		} finally {
 			navigate("/");
 		}
 	}
 
-	console.log(invoices);
+	invoices;
 	return (
 		<div className=" pt-[21px]  px-[24px] pb-[22px] bg-[#FFFFFF] dark:bg-[#1E2139] flex items-center justify-center gap-[8px] mt-[56px] md:p-0 md:m-0 ">
 			<button

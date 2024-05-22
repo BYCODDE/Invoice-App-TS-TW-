@@ -30,7 +30,7 @@ export default function EditInvoice() {
 	const { id } = useParams();
 
 	const find = invoices.find((item) => item.id === id);
-	console.log(find);
+
 	const {
 		register,
 		handleSubmit,
@@ -71,8 +71,6 @@ export default function EditInvoice() {
 	const onSubmit: SubmitHandler<IInvoices> = async (data) => {
 		data.id = generateString();
 
-		console.log(data, "დატააა");
-
 		const createdAt = find?.createdAt ? new Date(find.createdAt) : new Date();
 		if (isNaN(createdAt.getTime())) {
 			console.error("Invalid date value for createdAt");
@@ -87,12 +85,7 @@ export default function EditInvoice() {
 			"yyyy-MM-dd",
 		);
 
-		const paymentTerms = find?.paymentTerms ?? 0;
-
 		data.paymentDue = paymentDueDate;
-
-		console.log(data.createdAt);
-		console.log(paymentTerms);
 
 		data.paymentTerms = term;
 
@@ -110,8 +103,7 @@ export default function EditInvoice() {
 						body: JSON.stringify(data),
 					},
 				);
-				const responseData = await response.json();
-				console.log(responseData, "რესფონს დატა ");
+				if (!response.ok) throw new Error("Something went wrong");
 			} catch (error) {
 				console.log(error);
 			} finally {
@@ -132,8 +124,7 @@ export default function EditInvoice() {
 						body: JSON.stringify(data),
 					},
 				);
-				const responseData = await response.json();
-				console.log(responseData, "რესფონს დატა ");
+				if (!response.ok) throw new Error("Something went wrong");
 			} catch (error) {
 				console.log(error);
 			} finally {
@@ -147,8 +138,6 @@ export default function EditInvoice() {
 		? format(new Date(find?.createdAt || ""), "yyyy MM dd ")
 		: "";
 
-	console.log(formattedDate);
-
 	const validateGmail = (value: string) => {
 		if (!value.endsWith("@mail.com")) {
 			return "Email must contain `@mail.com`";
@@ -156,7 +145,6 @@ export default function EditInvoice() {
 		return true;
 	};
 	const [selectedDate, setSelectedDate] = useState<Date | null | string>(null);
-	console.log("errors", errors);
 
 	useEffect(() => {
 		if (showAddInvoice) {
@@ -173,7 +161,10 @@ export default function EditInvoice() {
 			paymentTerms: 0, // Add default paymentTerms here if needed
 			clientName: "",
 			clientEmail: "",
-			status: "", // Add default status here if needed
+			status: {
+				id: 0,
+				name: "",
+			},
 			senderAddress: {
 				street: "",
 				city: "",
@@ -232,7 +223,6 @@ export default function EditInvoice() {
 		);
 	};
 
-	console.log(showAddInvoice);
 	return (
 		<div>
 			<div className="flex mt-[25px] items-center gap-[23px] xl:cursor-pointer  md:hidden">

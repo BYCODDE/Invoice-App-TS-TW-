@@ -81,12 +81,6 @@ function App() {
 	const [showInvoiceDetails, setShowInvoiceDetails] =
 		useState<boolean>(isSmallDevice);
 
-	// useEffect(() => {
-	// 	if (showAddInvoice) {
-	// 		setShowEditInvoice(true);
-	// 	}
-	// }, [showAddInvoice]);
-
 	useEffect(() => {
 		async function getData() {
 			try {
@@ -99,14 +93,14 @@ function App() {
 				}
 				const data = await response.json();
 				setInvoices(data);
-				console.log(data);
+				data;
 			} catch (error) {
-				// console.log(error.message);
+				// (error.message);
 			}
 		}
 		getData();
 	}, [render]);
-	console.log(showAddInvoice);
+	showAddInvoice;
 	return (
 		<InvoiceContext.Provider
 			value={{

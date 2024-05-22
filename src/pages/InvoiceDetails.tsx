@@ -42,9 +42,9 @@ export default function InvoiceDetails() {
 				}
 				const data = await response.json();
 				setChoosenInvoice(data);
-				console.log(data);
+				data;
 			} catch (error) {
-				console.log((error as Error).message);
+				(error as Error).message;
 			}
 		}
 		getData();

@@ -21,7 +21,7 @@ export default function DeleteModal() {
 			setIsDeleteOpen(false);
 			navigate("/");
 		} catch (error) {
-			console.log(error);
+			error;
 		}
 	}
 
