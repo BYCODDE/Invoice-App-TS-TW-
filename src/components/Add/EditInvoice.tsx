@@ -69,7 +69,7 @@ export default function EditInvoice() {
 		data.id = generateString();
 		data.status = {
 			id: Math.random() * Math.random(),
-			name: "Draft",
+			name: "Pending", // droebitia. unda iyos Draft
 		};
 
 		console.log(data, "დატააა");
@@ -86,7 +86,7 @@ export default function EditInvoice() {
 
 		try {
 			const response = await fetch(
-				"https://invoice-project-team-5.onrender.com/api/invoice/draft/",
+				"https://invoice-project-team-5.onrender.com/api/invoice/",
 				{
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
