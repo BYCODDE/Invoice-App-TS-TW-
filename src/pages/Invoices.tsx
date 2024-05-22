@@ -15,7 +15,7 @@ const Invoices: React.FC = () => {
 	});
 
 	return (
-		<div className="w-[100%] dark:bg-[#141625] flex flex-col  items-center p-[20px] mt-[32px] bg-white">
+		<div className="w-[100%] dark:bg-[#141625] flex flex-col min-h-[95.5vh]  items-center p-[20px] mt-[32px] bg-white">
 			<Filter invoices={invoices} setInfo={setInfo} />
 			{invoices.length > 0 ? (
 				<div className="w-[100%] xl:pb-[20px] max-w-[375px] md:max-w-[672px]">

@@ -13,13 +13,15 @@ import { IInvoices } from "../../types/types";
 import { useParams } from "react-router-dom";
 
 import AddInvoicesButtons from "./AddInvoicesButtons";
+import Loading from "../Loading";
 
 export default function EditInvoice() {
 	const [countTotal, setCountTotal] = useState(0);
 
 	const {
 		invoices,
-
+		setIsLoading,
+		isLoading,
 		setShowEditInvoice,
 		showAddInvoice,
 		term,
@@ -69,6 +71,7 @@ export default function EditInvoice() {
 	};
 
 	const onSubmit: SubmitHandler<IInvoices> = async (data) => {
+		setIsLoading(true);
 		data.id = generateString();
 
 		const createdAt = find?.createdAt ? new Date(find.createdAt) : new Date();
@@ -130,6 +133,7 @@ export default function EditInvoice() {
 			} finally {
 				setRender((render) => !render);
 				setShowAddInvoice(false);
+				setIsLoading(false);
 			}
 		}
 	};
@@ -223,9 +227,14 @@ export default function EditInvoice() {
 		);
 	};
 
+	if (isLoading) return <Loading />;
+
 	return (
 		<div>
-			<div className="flex mt-[25px] items-center gap-[23px] xl:cursor-pointer  md:hidden">
+			<div
+				className="flex mt-[25px] items-center gap-[23px] xl:cursor-pointer  md:hidden"
+				onClick={() => setShowEditInvoice(false)}
+			>
 				<img src="/assets/icon-arrow-left.svg" alt="go back" />
 				<span className="font-bold text-[15px] leading-[15px] tracking-[-0.25px] text-[#0C0E16] dark:text-[#FFFFFF] xl:hover:text-[#7E88C3]">
 					Go back

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { InvoiceContext } from "../App";
 import { useNavigate, useParams } from "react-router-dom";
 import { IInvoices } from "../types/types";
+import Loading from "./Loading";
 interface InvoiceDetailsButtonsProps {
 	choosenInvoice: IInvoices | null;
 }
@@ -11,7 +12,8 @@ export default function InvoiceDetailsButtons({
 	const {
 		setIsDeleteOpen,
 		setShowEditInvoice,
-
+		setIsLoading,
+		isLoading,
 		invoices,
 		setRender,
 	} = useContext(InvoiceContext);
@@ -24,6 +26,7 @@ export default function InvoiceDetailsButtons({
 
 	async function handleMarkPaid() {
 		try {
+			setIsLoading(true);
 			const response = await fetch(
 				`https://invoice-project-team-5.onrender.com/api/invoice/mark_as_paid/${id}`,
 				{
@@ -39,11 +42,13 @@ export default function InvoiceDetailsButtons({
 		} catch (error) {
 			(error as Error).message;
 		} finally {
+			setIsLoading(false);
 			navigate("/");
 		}
 	}
 
-	invoices;
+	if (isLoading) return <Loading />;
+
 	return (
 		<div className=" pt-[21px]  px-[24px] pb-[22px] bg-[#FFFFFF] dark:bg-[#1E2139] flex items-center justify-center gap-[8px] mt-[56px] md:p-0 md:m-0 ">
 			<button

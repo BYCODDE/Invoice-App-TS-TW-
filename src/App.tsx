@@ -7,6 +7,7 @@ import { createContext, useEffect, useState } from "react";
 
 import { IInvoices } from "./types/types";
 import { useMediaQuery } from "@uidotdev/usehooks";
+import Loading from "./components/Loading";
 
 export const InvoiceContext = createContext<{
 	isDarkMode: boolean;
@@ -28,6 +29,8 @@ export const InvoiceContext = createContext<{
 	setTerm: React.Dispatch<React.SetStateAction<number>>;
 	buttonType: string;
 	setButtonType: React.Dispatch<React.SetStateAction<string>>;
+	isLoading: boolean;
+	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }>({
 	isDarkMode: false,
 	setIsDarkMode: () => {},
@@ -48,6 +51,8 @@ export const InvoiceContext = createContext<{
 	setTerm: () => {},
 	buttonType: "",
 	setButtonType: () => {},
+	isLoading: true,
+	setIsLoading: () => {},
 });
 
 const router = createBrowserRouter([
@@ -75,6 +80,7 @@ function App() {
 	const [render, setRender] = useState<boolean>(false);
 	const [buttonType, setButtonType] = useState<string>("");
 	const [term, setTerm] = useState(0);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
@@ -84,6 +90,7 @@ function App() {
 	useEffect(() => {
 		async function getData() {
 			try {
+				setIsLoading(true);
 				const response = await fetch(
 					"https://invoice-project-team-5.onrender.com/api/invoice/",
 				);
@@ -96,11 +103,16 @@ function App() {
 				data;
 			} catch (error) {
 				// (error.message);
+			} finally {
+				setIsLoading(false);
 			}
 		}
 		getData();
 	}, [render]);
 	showAddInvoice;
+
+	if (isLoading) return <Loading />;
+
 	return (
 		<InvoiceContext.Provider
 			value={{
@@ -123,6 +135,8 @@ function App() {
 				setTerm,
 				buttonType,
 				setButtonType,
+				isLoading,
+				setIsLoading,
 			}}
 		>
 			<RouterProvider router={router} />

@@ -55,7 +55,7 @@ export default function InvoiceDetails() {
 	}
 
 	return (
-		<div className="w-full md:h-[100vh] max-w-[500px] m-auto md:max-w-[688px] md:w-[688px] md:m-auto xl:w-[730px] xl:max-w-[730px] relative md:mt-[100px] xl:m-0">
+		<div className="w-full  max-w-[500px] m-auto md:max-w-[688px] md:w-[688px] md:m-auto xl:w-[730px] xl:max-w-[730px] relative md:mt-[100px] xl:m-0">
 			<div className=" pt-[33px] px-[24px]">
 				<div
 					onClick={() => navigate(-1)}
