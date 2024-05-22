@@ -517,7 +517,7 @@ export default function EditInvoice() {
 									<div className=" flex w-[12px] h-[16px] items-center md:pt-[0px] pt-[14px]">
 										<img
 											onClick={() => remove(index)}
-											className=" w-[12px] h-[16px] flex cursor-pointer"
+											className=" w-[12px] h-[16px] flex cursor-pointer hover:filter-custom"
 											src="/assets/icon-delete.svg"
 											alt="bin"
 										/>
