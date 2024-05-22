@@ -19,9 +19,11 @@ export default function EditInvoice() {
 
 	const {
 		invoices,
-		setInvoices,
+
 		setShowEditInvoice,
 		showAddInvoice,
+		term,
+
 		setShowAddInvoice,
 	} = useContext(InvoiceContext);
 	const { id } = useParams();
@@ -74,7 +76,6 @@ export default function EditInvoice() {
 
 		console.log(data, "დატააა");
 
-		// Check if createdAt is valid
 		const createdAt = find?.createdAt ? new Date(find.createdAt) : new Date();
 		if (isNaN(createdAt.getTime())) {
 			console.error("Invalid date value for createdAt");
@@ -84,6 +85,27 @@ export default function EditInvoice() {
 		data.createdAt = format(createdAt, "yyyy-MM-dd");
 		data.paymentDue = format(createdAt, "yyyy-MM-dd");
 
+		const paymentDueDate = format(
+			new Date(new Date(data.createdAt).getTime() + term).toISOString(),
+			"yyyy-MM-dd",
+		);
+
+		const paymentTerms = find?.paymentTerms ?? 0;
+
+		const formatter = new Intl.DateTimeFormat("en-US", {
+			day: "2-digit",
+			month: "long",
+			year: "numeric",
+		});
+
+		// const formattedPaymentDue = formatter.format(paymentDueDate);
+
+		data.paymentDue = paymentDueDate;
+
+		console.log(data.createdAt);
+		console.log(paymentTerms);
+
+		data.paymentTerms = term;
 		try {
 			const response = await fetch(
 				"https://invoice-project-team-5.onrender.com/api/invoice/",
@@ -127,7 +149,7 @@ export default function EditInvoice() {
 	const handleAddNewItem = () => {
 		reset({
 			createdAt: "", // Add default date here if needed
-			paymentDue: "2021-11-12", // Add default paymentDue here if needed
+			paymentDue: "", // Add default paymentDue here if needed
 			description: "", // Add default description here if needed
 			paymentTerms: 0, // Add default paymentTerms here if needed
 			clientName: "",
@@ -165,6 +187,31 @@ export default function EditInvoice() {
 			setCountTotal(foundItem.quantity * foundItem.price);
 		}
 	}, [fields]);
+
+	const handleQuantityChange = (index: number, quantity: number) => {
+		const newItems = [...fields];
+		newItems[index].quantity = quantity;
+		newItems[index].total = quantity * newItems[index].price;
+		setValue(
+			`items[${index}].quantity` as `items.${number}.quantity`,
+			quantity,
+		);
+		setValue(
+			`items[${index}].total` as `items.${number}.total`,
+			newItems[index].total,
+		);
+	};
+
+	const handlePriceChange = (index: number, price: number) => {
+		const newItems = [...fields];
+		newItems[index].price = price;
+		newItems[index].total = price * newItems[index].quantity;
+		setValue(`items[${index}].price` as `items.${number}.price`, price);
+		setValue(
+			`items[${index}].total` as `items.${number}.total`,
+			newItems[index].total,
+		);
+	};
 
 	console.log(showAddInvoice);
 	return (
@@ -381,6 +428,9 @@ export default function EditInvoice() {
 											valueAsNumber: true,
 											required: "can't be empty",
 										})}
+										onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+											handleQuantityChange(index, +e.target.value)
+										}
 									/>
 								</div>
 								<div className="flex flex-col items-start justify-center gap-[10px] w-[100px] h-[48px] box-border">
@@ -400,6 +450,9 @@ export default function EditInvoice() {
 											valueAsNumber: true,
 											required: "can't be empty",
 										})}
+										onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+											handlePriceChange(index, +e.target.value)
+										}
 									/>
 								</div>
 								<div className="flex flex-col items-start justify-center gap-[10px] w-[80px] h-[48px] box-border">

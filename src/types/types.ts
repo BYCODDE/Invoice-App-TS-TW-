@@ -3,7 +3,7 @@ export interface IInvoices {
 	createdAt?: string | Date;
 	paymentDue?: string;
 	description?: string;
-	paymentTerms?: number;
+	paymentTerms: number;
 	clientName: string;
 	clientEmail: string;
 	status?: {

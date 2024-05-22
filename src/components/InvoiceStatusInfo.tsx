@@ -49,7 +49,7 @@ export default function InvoiceStatusInfo({
 				</div>
 			</div>
 			<div className="hidden md:block">
-				<InvoiceDetailsButtons />
+				<InvoiceDetailsButtons choosenInvoice={choosenInvoice} />
 			</div>
 		</div>
 	);
