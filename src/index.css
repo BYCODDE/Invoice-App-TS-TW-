@@ -92,3 +92,10 @@ html {
 .error input {
 	background-color: #ffcccc; /* Change to your desired red color */
 }
+
+@layer utilities {
+	.filter-custom {
+		filter: invert(50%) sepia(39%) saturate(7091%) hue-rotate(335deg)
+			brightness(111%) contrast(85%);
+	}
+}

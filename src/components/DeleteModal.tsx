@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { InvoiceContext } from "../App";
 import { useNavigate, useParams } from "react-router-dom";
+import Loading from "./Loading";
 
 export default function DeleteModal() {
-	const { setIsDeleteOpen, setInvoices } = useContext(InvoiceContext);
+	const { setIsDeleteOpen, setInvoices, setIsLoading, isLoading } =
+		useContext(InvoiceContext);
 
 	const { id } = useParams();
 
@@ -11,6 +13,7 @@ export default function DeleteModal() {
 
 	async function handleDelete() {
 		try {
+			setIsLoading(true);
 			const res = await fetch(
 				`https://invoice-project-team-5.onrender.com/api/invoice/${id}
 				`,
@@ -21,9 +24,13 @@ export default function DeleteModal() {
 			setIsDeleteOpen(false);
 			navigate("/");
 		} catch (error) {
-			console.log(error);
+			error;
+		} finally {
+			setIsLoading(false);
 		}
 	}
+
+	if (isLoading) return <Loading />;
 
 	return (
 		<div

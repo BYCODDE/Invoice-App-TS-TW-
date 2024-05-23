@@ -42,9 +42,9 @@ export default function InvoiceDetails() {
 				}
 				const data = await response.json();
 				setChoosenInvoice(data);
-				console.log(data);
+				data;
 			} catch (error) {
-				console.log((error as Error).message);
+				(error as Error).message;
 			}
 		}
 		getData();
@@ -55,7 +55,7 @@ export default function InvoiceDetails() {
 	}
 
 	return (
-		<div className="w-full max-w-[500px] m-auto md:max-w-[688px] md:w-[688px] md:m-auto xl:w-[730px] xl:max-w-[730px] relative md:mt-[100px] xl:m-0">
+		<div className="w-full  max-w-[500px] m-auto md:max-w-[688px] md:w-[688px] md:m-auto xl:w-[730px] xl:min-w-[730px] relative md:mt-[100px] xl:m-0">
 			<div className=" pt-[33px] px-[24px]">
 				<div
 					onClick={() => navigate(-1)}

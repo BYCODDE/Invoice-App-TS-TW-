@@ -33,7 +33,7 @@ function Filter({ invoices, setInfo }: FilterProps) {
 
 	const { setShowAddInvoice } = useContext(InvoiceContext);
 	return (
-		<div className="xl:p-[20px]	xl:max-w-[720px] w-[100%] justify-between  xl:mt-[0px] md:mt-[60px] text-black font-bold  text-[15px] flex  items-center ">
+		<div className="xl:p-[20px]	xl:max-w-[720px] md:w-[672px] w-[375px] justify-between  xl:mt-[0px] md:mt-[60px] text-black font-bold  text-[15px] flex  items-center ">
 			<div className="flex justify-center flex-col ">
 				<span className="     md:text-[35px]    dark:text-whiteTwo text-[32px] font-bold">
 					Invoices
@@ -130,23 +130,16 @@ function Filter({ invoices, setInfo }: FilterProps) {
 						</div>
 					</div>
 				</div>
-				<div className="   md:w-[150px]     cursor-pointer   flex justify-center items-center w-[90px]  h-[44px] rounded-[24px] bg-blue gap-[9px]">
+				<div
+					className="   md:w-[150px]     cursor-pointer   flex justify-center items-center w-[90px]  h-[44px] rounded-[24px] bg-blue gap-[9px]"
+					onClick={() => setShowAddInvoice(true)}
+				>
 					<div className="w-[32px] h-[32px] rounded-[50%] bg-white flex justify-center items-center">
 						<img className="w-[10px] h-[10px]" src={plus} alt="plus" />
 					</div>
 
-					<span
-						onClick={() => setShowAddInvoice(true)}
-						className="text-white md:hidden block"
-					>
-						New
-					</span>
-					<span
-						onClick={() => setShowAddInvoice(true)}
-						className="text-white  md:block    hidden"
-					>
-						New Invoice
-					</span>
+					<span className="text-white md:hidden block">New</span>
+					<span className="text-white  md:block    hidden">New Invoice</span>
 				</div>
 			</div>
 		</div>

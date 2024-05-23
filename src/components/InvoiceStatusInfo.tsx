@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { IInvoices } from "../types/types";
 import InvoiceDetailsButtons from "./InvoiceDetailsButtons";
+import { InvoiceContext } from "../App";
 
 interface InvoiseStatusInfoProps {
 	choosenInvoice: IInvoices | null;
@@ -26,6 +28,17 @@ export default function InvoiceStatusInfo({
 					? "rgb(55,	59,	83)"
 					: "";
 
+	const TextDarkColor =
+		choosenInvoice?.status?.name === "Paid"
+			? "rgb(51,	214, 159)"
+			: choosenInvoice?.status?.name === "Pending"
+				? "rgb(255, 145, 0)"
+				: choosenInvoice?.status?.name === "Draft"
+					? "rgb(223, 227, 250)"
+					: "";
+
+	const { isDarkMode } = useContext(InvoiceContext);
+
 	return (
 		<div className="md:flex md:justify-between md:bg-[#FFFFFF] md:dark:bg-[#1E2139] md:mt-[31px] md:py-[20px] md:px-[32px] md:rounded-[8px]">
 			<div className="bg-[#FFFFFF] dark:bg-[#1E2139] pt-[24px] pb-[27px] px-[24px] mt-[31px] flex justify-between items-center rounded-[8px] md:justify-start md:p-0 md:m-0 md:gap-[20px]">
@@ -38,11 +51,13 @@ export default function InvoiceStatusInfo({
 				>
 					<div
 						className="w-[8px] h-[8px] rounded-full  mb-[2px]"
-						style={{ background: statusColorText }}
+						style={{
+							background: !isDarkMode ? statusColorText : TextDarkColor,
+						}}
 					></div>
 					<p
 						className="font-bold text-[15px] leading-[15px] tracking-[-0.25px]"
-						style={{ color: statusColorText }}
+						style={{ color: !isDarkMode ? statusColorText : TextDarkColor }}
 					>
 						{choosenInvoice?.status?.name}
 					</p>

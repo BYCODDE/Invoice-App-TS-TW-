@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { InvoiceContext } from "../App";
 import { useNavigate, useParams } from "react-router-dom";
 import { IInvoices } from "../types/types";
+import Loading from "./Loading";
 interface InvoiceDetailsButtonsProps {
 	choosenInvoice: IInvoices | null;
 }
@@ -11,26 +12,21 @@ export default function InvoiceDetailsButtons({
 	const {
 		setIsDeleteOpen,
 		setShowEditInvoice,
-
+		setIsLoading,
+		isLoading,
 		invoices,
-		setStatusClick,
+		setRender,
 	} = useContext(InvoiceContext);
 
 	const { id } = useParams();
 
 	const navigate = useNavigate();
 
-	console.log(invoices);
-
-	// function handleMarkPaid() {
-	// 	const readIndex = invoices.findIndex((invoice) => invoice.id === id);
-	// 	invoices[readIndex].status?.name = "paid";
-	// 	setInvoices([...invoices]);
-	// 	navigate("/");
-	// }
+	invoices;
 
 	async function handleMarkPaid() {
 		try {
+			setIsLoading(true);
 			const response = await fetch(
 				`https://invoice-project-team-5.onrender.com/api/invoice/mark_as_paid/${id}`,
 				{
@@ -42,17 +38,19 @@ export default function InvoiceDetailsButtons({
 			if (!response.ok) {
 				throw new Error("Failed to status changed as paid");
 			}
-			setStatusClick((click) => !click);
+			setRender((click) => !click);
 		} catch (error) {
-			console.log((error as Error).message);
+			(error as Error).message;
 		} finally {
+			setIsLoading(false);
 			navigate("/");
 		}
 	}
 
-	console.log(invoices);
+	if (isLoading) return <Loading />;
+
 	return (
-		<div className=" pt-[21px] px-[24px] pb-[22px] bg-[#FFFFFF] dark:bg-[#1E2139] flex items-center justify-center gap-[8px] mt-[56px] md:p-0 md:m-0 ">
+		<div className=" pt-[21px]  px-[24px] pb-[22px] bg-[#FFFFFF] dark:bg-[#1E2139] flex items-center justify-center gap-[8px] mt-[56px] md:p-0 md:m-0 ">
 			<button
 				className="pt-[18px] px-[24px] pb-[15px] bg-[#F9FAFE] dark:bg-[#252945] text-[#7E88C3] dark:text-[#DFE3FA] rounded-[24px] text-[15px] font-bold leading-[15px] tracking-[-0.25px] xl:hover:bg-[#DFE3FA] xl:dark:hover:bg-[#FFFFFF] xl:dark:hover:text-[#7E88C3]"
 				onClick={() => setShowEditInvoice(true)}

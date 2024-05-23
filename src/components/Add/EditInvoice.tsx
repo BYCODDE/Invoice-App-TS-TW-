@@ -13,23 +13,26 @@ import { IInvoices } from "../../types/types";
 import { useParams } from "react-router-dom";
 
 import AddInvoicesButtons from "./AddInvoicesButtons";
+import Loading from "../Loading";
 
 export default function EditInvoice() {
 	const [countTotal, setCountTotal] = useState(0);
 
 	const {
 		invoices,
-
+		setIsLoading,
+		isLoading,
 		setShowEditInvoice,
 		showAddInvoice,
 		term,
-
+		buttonType,
+		setRender,
 		setShowAddInvoice,
 	} = useContext(InvoiceContext);
 	const { id } = useParams();
 
 	const find = invoices.find((item) => item.id === id);
-	console.log(find);
+
 	const {
 		register,
 		handleSubmit,
@@ -68,13 +71,7 @@ export default function EditInvoice() {
 	};
 
 	const onSubmit: SubmitHandler<IInvoices> = async (data) => {
-		data.id = generateString();
-		data.status = {
-			id: Math.random() * Math.random(),
-			name: "Pending", // droebitia. unda iyos Draft
-		};
-
-		console.log(data, "დატააა");
+		setIsLoading(true);
 
 		const createdAt = find?.createdAt ? new Date(find.createdAt) : new Date();
 		if (isNaN(createdAt.getTime())) {
@@ -90,37 +87,76 @@ export default function EditInvoice() {
 			"yyyy-MM-dd",
 		);
 
-		const paymentTerms = find?.paymentTerms ?? 0;
-
-		const formatter = new Intl.DateTimeFormat("en-US", {
-			day: "2-digit",
-			month: "long",
-			year: "numeric",
-		});
-
-		// const formattedPaymentDue = formatter.format(paymentDueDate);
-
 		data.paymentDue = paymentDueDate;
 
-		console.log(data.createdAt);
-		console.log(paymentTerms);
-
 		data.paymentTerms = term;
-		try {
-			const response = await fetch(
-				"https://invoice-project-team-5.onrender.com/api/invoice/",
-				{
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(data),
-				},
-			);
-			const responseData = await response.json();
-			console.log(responseData, "რესფონს დატა ");
-		} catch (error) {
-			console.log(error);
-		} finally {
-			setShowAddInvoice(false);
+
+		if (buttonType === "draft") {
+			data.id = generateString();
+			data.status = {
+				id: Math.random() * Math.random(),
+				name: "Draft",
+			};
+			try {
+				const response = await fetch(
+					"https://invoice-project-team-5.onrender.com/api/invoice/draft/",
+					{
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(data),
+					},
+				);
+				if (!response.ok) throw new Error("Something went wrong");
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setRender((render) => !render);
+				setShowAddInvoice(false);
+			}
+		}
+		if (buttonType === "pending") {
+			data.id = generateString();
+			data.status = {
+				id: Math.random() * Math.random(),
+				name: "Pending",
+			};
+			try {
+				const response = await fetch(
+					"https://invoice-project-team-5.onrender.com/api/invoice/",
+					{
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(data),
+					},
+				);
+				if (!response.ok) throw new Error("Something went wrong");
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setRender((render) => !render);
+				setShowAddInvoice(false);
+				setIsLoading(false);
+			}
+		}
+		if (buttonType === "edit") {
+			console.log(data);
+			try {
+				const response = await fetch(
+					`https://invoice-project-team-5.onrender.com/api/invoice/${id}`,
+					{
+						method: "PUT",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(data),
+					},
+				);
+				if (!response.ok) throw new Error("Something went wrong");
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setRender((render) => !render);
+				setShowEditInvoice(false);
+				setIsLoading(false);
+			}
 		}
 	};
 
@@ -128,16 +164,13 @@ export default function EditInvoice() {
 		? format(new Date(find?.createdAt || ""), "yyyy MM dd ")
 		: "";
 
-	console.log(formattedDate);
-
 	const validateGmail = (value: string) => {
 		if (!value.endsWith("@mail.com")) {
 			return "Email must contain `@mail.com`";
 		}
 		return true;
 	};
-	const [selectedDate, setSelectedDate] = useState<Date | null | string>(null);
-	console.log("errors", errors);
+	const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
 	useEffect(() => {
 		if (showAddInvoice) {
@@ -154,7 +187,10 @@ export default function EditInvoice() {
 			paymentTerms: 0, // Add default paymentTerms here if needed
 			clientName: "",
 			clientEmail: "",
-			status: "", // Add default status here if needed
+			status: {
+				id: 0,
+				name: "",
+			},
 			senderAddress: {
 				street: "",
 				city: "",
@@ -213,10 +249,14 @@ export default function EditInvoice() {
 		);
 	};
 
-	console.log(showAddInvoice);
+	if (isLoading) return <Loading />;
+
 	return (
 		<div>
-			<div className="flex mt-[25px] items-center gap-[23px] xl:cursor-pointer  md:hidden">
+			<div
+				className="flex mt-[25px] items-center gap-[23px] xl:cursor-pointer  md:hidden"
+				onClick={() => setShowEditInvoice(false)}
+			>
 				<img src="/assets/icon-arrow-left.svg" alt="go back" />
 				<span className="font-bold text-[15px] leading-[15px] tracking-[-0.25px] text-[#0C0E16] dark:text-[#FFFFFF] xl:hover:text-[#7E88C3]">
 					Go back
@@ -361,7 +401,7 @@ export default function EditInvoice() {
 					inputTitle2="Invoice Date"
 					id2="InvoiceDate"
 					register2={register("createdAt", { required: "must be chosen" })}
-					selectedDate={selectedDate}
+					selectedDate={selectedDate instanceof Date ? selectedDate : null}
 					setSelectedDate={setSelectedDate}
 					setValue={setValue}
 					control={control}
@@ -477,7 +517,7 @@ export default function EditInvoice() {
 									<div className=" flex w-[12px] h-[16px] items-center md:pt-[0px] pt-[14px]">
 										<img
 											onClick={() => remove(index)}
-											className=" w-[12px] h-[16px] flex cursor-pointer"
+											className=" w-[12px] h-[16px] flex cursor-pointer hover:filter-custom"
 											src="/assets/icon-delete.svg"
 											alt="bin"
 										/>

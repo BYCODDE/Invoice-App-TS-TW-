@@ -7,6 +7,7 @@ import { createContext, useEffect, useState } from "react";
 
 import { IInvoices } from "./types/types";
 import { useMediaQuery } from "@uidotdev/usehooks";
+import Loading from "./components/Loading";
 
 export const InvoiceContext = createContext<{
 	isDarkMode: boolean;
@@ -22,10 +23,14 @@ export const InvoiceContext = createContext<{
 	isSmallDevice: boolean;
 	showInvoiceDetails: boolean;
 	setShowInvoiceDetails: React.Dispatch<React.SetStateAction<boolean>>;
-	statusClick: boolean;
-	setStatusClick: React.Dispatch<React.SetStateAction<boolean>>;
+	render: boolean;
+	setRender: React.Dispatch<React.SetStateAction<boolean>>;
 	term: number;
 	setTerm: React.Dispatch<React.SetStateAction<number>>;
+	buttonType: string;
+	setButtonType: React.Dispatch<React.SetStateAction<string>>;
+	isLoading: boolean;
+	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }>({
 	isDarkMode: false,
 	setIsDarkMode: () => {},
@@ -40,10 +45,14 @@ export const InvoiceContext = createContext<{
 	isSmallDevice: false,
 	showInvoiceDetails: false,
 	setShowInvoiceDetails: () => {},
-	statusClick: false,
-	setStatusClick: () => {},
+	render: false,
+	setRender: () => {},
 	term: 0,
 	setTerm: () => {},
+	buttonType: "",
+	setButtonType: () => {},
+	isLoading: true,
+	setIsLoading: () => {},
 });
 
 const router = createBrowserRouter([
@@ -68,24 +77,20 @@ function App() {
 	const [showAddInvoice, setShowAddInvoice] = useState(false);
 	const [showEditInvoice, setShowEditInvoice] = useState(false);
 	const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
-	const [statusClick, setStatusClick] = useState<boolean>(false);
-	const [totalPrice, setTotalPrice] = useState(0);
+	const [render, setRender] = useState<boolean>(false);
+	const [buttonType, setButtonType] = useState<string>("");
 	const [term, setTerm] = useState(0);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
 	const [showInvoiceDetails, setShowInvoiceDetails] =
 		useState<boolean>(isSmallDevice);
 
-	// useEffect(() => {
-	// 	if (showAddInvoice) {
-	// 		setShowEditInvoice(true);
-	// 	}
-	// }, [showAddInvoice]);
-
 	useEffect(() => {
 		async function getData() {
 			try {
+				setIsLoading(true);
 				const response = await fetch(
 					"https://invoice-project-team-5.onrender.com/api/invoice/",
 				);
@@ -95,14 +100,19 @@ function App() {
 				}
 				const data = await response.json();
 				setInvoices(data);
-				console.log(data);
+				data;
 			} catch (error) {
-				// console.log(error.message);
+				// (error.message);
+			} finally {
+				setIsLoading(false);
 			}
 		}
 		getData();
-	}, [statusClick]);
-	console.log(showAddInvoice);
+	}, [render]);
+	showAddInvoice;
+
+	if (isLoading) return <Loading />;
+
 	return (
 		<InvoiceContext.Provider
 			value={{
@@ -119,10 +129,14 @@ function App() {
 				isSmallDevice,
 				showInvoiceDetails,
 				setShowInvoiceDetails,
-				statusClick,
-				setStatusClick,
+				render,
+				setRender,
 				term,
 				setTerm,
+				buttonType,
+				setButtonType,
+				isLoading,
+				setIsLoading,
 			}}
 		>
 			<RouterProvider router={router} />
