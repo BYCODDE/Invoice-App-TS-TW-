@@ -39,7 +39,7 @@ const InputsComponent: React.FC<CustomInputProps> = ({
 	CountryError,
 }) => {
 	return (
-		<div className="md:flex items-center gap-[20px]  box-border">
+		<div className="   md:flex items-center gap-[20px]  box-border">
 			<div className={`flex gap-[20px] py-[30px] box-border`}>
 				<div
 					className={`flex  flex-col items-start justify-center gap-[10px] w-[152px] h-[48px]`}

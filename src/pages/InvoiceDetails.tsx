@@ -27,7 +27,7 @@ const useIsMobile = () => {
 export default function InvoiceDetails() {
 	const [choosenInvoice, setChoosenInvoice] = useState<IInvoices | null>(null);
 	const { id } = useParams();
-	const { showEditInvoice } = useContext(InvoiceContext);
+	const { showEditInvoice, showAddInvoice } = useContext(InvoiceContext)
 	const isMobile = useIsMobile();
 
 	const navigate = useNavigate();
@@ -53,13 +53,15 @@ export default function InvoiceDetails() {
 	if (showEditInvoice && isMobile) {
 		return null;
 	}
-
+	if (showAddInvoice && isMobile) {
+        return null;
+    }
 	return (
 		<div className="w-full  max-w-[500px] m-auto md:max-w-[688px] md:w-[688px] md:m-auto xl:w-[730px] xl:min-w-[730px] relative md:mt-[100px] xl:m-0">
 			<div className=" pt-[33px] px-[24px]">
 				<div
 					onClick={() => navigate(-1)}
-					className="flex items-center gap-[23px] xl:cursor-pointer"
+					className="		flex items-center gap-[23px] xl:cursor-pointer"
 				>
 					<img src={arrowLeft} alt="left-arrow" className="xl:mb-[2px]" />
 					<p className="font-bold text-[15px] leading-[15px] tracking-[-0.25px] text-[#0C0E16] dark:text-[#FFFFFF] xl:hover:text-[#7E88C3]">

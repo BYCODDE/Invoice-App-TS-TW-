@@ -64,7 +64,7 @@ const DateTerms: React.FC<CustomInputProps> = ({
 
 	return (
 		<div>
-			<div className="flex md:flex-row flex-col gap-[40px] py-[30px] box-border w-full">
+			<div className=" 		flex md:flex-row flex-col gap-[40px] py-[30px] box-border w-full">
 				<div className="flex flex-col items-start justify-center gap-[10px] w-[327px] md:w-[240px] h-[48px]">
 					<label
 						className="text-[#7E88C3] cursor-pointer font-league-spartan text-[13px] py-3 font-medium leading-4 tracking-tight px-3"

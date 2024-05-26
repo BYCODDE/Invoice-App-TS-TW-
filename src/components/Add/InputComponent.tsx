@@ -21,7 +21,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
 	optimalError,
 }) => {
 	return (
-		<div className="flex flex-col cursor-pointer  items-start justify-center gap-[20px] w-[327px] md:w-[504px]  box-border py-[10px] ">
+		<div className="  flex flex-col cursor-pointer  items-start justify-center gap-[20px] w-[327px] md:w-[504px]  box-border py-[10px] ">
 			<div className="flex w-full justify-between">
 				<label
 					className={`text-[#7E88C3] ${optimalError && "text-[red]"} cursor-pointer font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3`}

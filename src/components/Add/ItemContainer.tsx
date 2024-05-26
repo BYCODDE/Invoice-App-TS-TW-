@@ -24,7 +24,7 @@ const ItemContainer: React.FC<CustomInputProps> = ({
 }) => {
 	defaultValue1;
 	return (
-		<div className="flex gap-[20px] py-[30px] box-border">
+		<div className="		flex gap-[20px] py-[30px] box-border">
 			<div className="flex flex-col items-start justify-center gap-[10px]  w-[64px] h-[48px] ">
 				<label
 					className="text-[#7E88C3] cursor-pointer font-league-spartan text-[13px] font-medium leading-4 tracking-tight px-3"
