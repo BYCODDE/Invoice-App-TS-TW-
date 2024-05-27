@@ -274,7 +274,7 @@ export default function EditInvoice() {
 			></div>
 
 			<form
-				className="h-modal xl:h-screen xl:left-[80px] px-[24px] md:px-[56px]  md:overflow-y-scroll md:overflow-x-hidden     xl:top-[0px]  md:top-[80px]  md:rounded-r-3xl  md:left-0 flex-col  md:absolute  md:z-20 bg-[white]   box-border  dark:bg-[#141625]"
+				className="md:h-modal xl:h-[100vh] xl:left-[80px] px-[24px] md:px-[56px]  md:overflow-y-scroll md:overflow-x-hidden     xl:top-[0px]  md:top-[80px]  md:rounded-r-3xl  md:left-0 flex-col  md:absolute  md:z-20 bg-[white]   box-border  dark:bg-[#141625]"
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				{!showAddInvoice ? (
