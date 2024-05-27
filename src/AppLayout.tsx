@@ -13,7 +13,7 @@ export default function AppLayout() {
 		<div
 			className={`${
 				isDarkMode ? "dark" : ""
-			}   ${showAddInvoice && "xl:overflow-hidden xl:h-[100vh]"}  ${showEditInvoice && "xl:overflow-hidden xl:h-[100vh]"} ${isDeleteOpen && "xl:overflow-hidden xl:h-[100vh]"}  flex flex-col items-center xl:flex-row xl:items-start relative min-h-[100vh]`}
+			}   ${showAddInvoice && "md:overflow-hidden md:h-[100vh]"}  ${showEditInvoice && "md:overflow-hidden md:h-[100vh]"} ${isDeleteOpen && "md:overflow-hidden md:h-[100vh]"}  flex flex-col items-center xl:flex-row xl:items-start relative min-h-[100vh]`}
 		>
 			<Header />
 			<main className={`xl:flex xl:justify-center w-full`}>

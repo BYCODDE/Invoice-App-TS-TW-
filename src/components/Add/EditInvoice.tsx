@@ -250,7 +250,7 @@ export default function EditInvoice() {
 
 	return (
 		<div
-			className={`${showAddInvoice && "sm:absolute sm:top-[60px] md:static sm:h-screen "}`}
+			className={`${showAddInvoice && " sm:top-[60px] md:static"}`}
 		>
 			<div
 				className="flex sm:px-30 mt-[25px]  items-center gap-[23px] xl:cursor-pointer  md:hidden"
